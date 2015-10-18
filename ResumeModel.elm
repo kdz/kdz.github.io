@@ -18,7 +18,8 @@ education = [ {
     location = "New York, NY",
     dates = "Fall 2014 - present",
     role = "Full-time student",
-    details = [ "BS in Computer Science, Minor in Applied Math: Expected May 2018" ]
+    details = [ "BS in Computer Science, Minor in Applied Math: Expected May 2018",
+                "Dean's List 2014-2015, GPA 3.5"]
   }
  ]
 
