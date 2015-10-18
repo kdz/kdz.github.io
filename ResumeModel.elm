@@ -144,6 +144,7 @@ publications = [
 activities = [
   ("Society of Women Engineers", "Family member and house member", "2014-present"),
   ("Women in Computer Science", "Member", "2014-present"),
+  ("Girls who Code", "Teaching Assistant", "Fall 2015-present"),
   ("Application Development Initiative (ADI)", "Member", "2014-present"),
   ("Engineers Without Borders: Uganda Chapter", "Board Financial Chair, Engineering team", "2014-2015"),
   ("Varsity Tennis", "Captain, player, assistant coach of middle school team", "2011-2014"),
