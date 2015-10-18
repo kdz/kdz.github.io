@@ -3,7 +3,11 @@ module Resume where
 import ResumeData as RD
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Basics exposing (toString)
+import Signal exposing (Address)
+import StartApp.Simple as StartApp
+import Debug
 
 -- ------ MODEL ----
 
@@ -36,12 +40,42 @@ init =
     traits = r.traits
   }
 
+-- UPDATE
 
-viewItem : Expando -> Html
-viewItem ({name, role, location, dates, details}, expanded) = 
+type Action
+    = ToggleEducation Int
+    | ToggleWork Int
+    | ToggleProject Int
+    | TogglePub Int
+
+toggleExpando : Action -> Model -> Model
+toggleExpando action model =
+  let toggle_i i list = case list of 
+        [] -> []
+        (item, expanded) :: rest -> 
+          if i==0 
+            then (item, (not expanded)) :: rest
+            else (item, expanded) :: (toggle_i (i-1) rest)
+      _ = Debug.log "Update" action
+  in
+  case action of
+    ToggleEducation i -> { model | education <- toggle_i i model.education }
+    ToggleWork i -> { model | work <- toggle_i i model.work }
+    ToggleProject i -> { model | projects <- toggle_i i model.projects }
+    TogglePub i -> { model | publications <- toggle_i i model.publications }
+
+
+-- ----- VIEW ---
+
+viewItem : Address Action -> Action -> Expando -> Html
+viewItem addr callback (item, expanded) = 
+  let {name, role, location, dates, details} = item 
+      prompt = if expanded then "Less" else "More"
+  in
   div [class "item"] [
     div [class "itemLeft"] [
       h3 [class "itemName"] [text name],
+      a [onClick addr callback] [text prompt],
       ul [class "itemDetails"] (List.map (\x -> li [] [text x]) details)
     ],
     div [class "itemAttrs"] [
@@ -78,18 +112,15 @@ viewHeader header =
     ]
   ]
 
-model = init
 
-main : Html
-main = 
+view : Address Action -> Model -> Html
+view addr model = 
   let 
-    listing : List a -> Html
-    listing list = 
-      ul [] (List.map (\x -> li [] [text (toString x)]) list)
-
-    items : List Expando -> List Html
-    items list =
-      List.map viewItem list
+    items : (Int -> Action) -> List Expando -> List Html
+    items tagger list =
+      List.indexedMap 
+        (\i expando -> viewItem addr (tagger i) expando)
+        list
   in
   div [id "layout"] [
     node "link" [rel "stylesheet", type' "text/css", href "http://yui.yahooapis.com/pure/0.6.0/pure-min.css"] [],
@@ -97,32 +128,30 @@ main =
 
     --node "style" [type' "text/css"] [text "@import 'css/print-style.css' print;"],
 
-    --leftMenu, 
-
     viewHeader model.header,
 
     section [id "education"] (
       h2 [class "sectionHeader"] [text "Education"]
       ::
-      items model.education
+      items ToggleEducation model.education
     ),
     
     section [id "work"] (
       h2 [class "sectionHeader"] [text "Work Experience"]
       ::
-      items model.work
+      items ToggleWork model.work
     ),
 
     section [id "projects"] (
       h2 [class "sectionHeader"] [text "Project Experience"]
       ::
-      items model.projects
+      items ToggleProject model.projects
     ),
 
     section [id "publications"] (
       h2 [class "sectionHeader"] [text "Publications"]
       ::
-      items model.publications
+      items TogglePub model.publications
     ),
 
     section [id "activities"] [
@@ -156,3 +185,14 @@ main =
         )
     ]
   ]
+
+-- ------- main
+
+
+
+main =
+  StartApp.start
+    { model = init
+    , update = toggleExpando
+    , view = view
+    }
