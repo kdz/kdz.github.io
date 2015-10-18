@@ -1,25 +1,44 @@
 module Resume where
 
-import ResumeModel as M
+import ResumeData as RD
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Basics exposing (toString)
 
-leftMenu : Html
-leftMenu = 
-  div [id "menu"] 
-    [ div [class "pure-menu"]
-      [ span [class "pure-menu-heading"] [text "Browse..."],
-        ul [class "pure-menu-list"]
-          [ li [class "pure-menu-item"] [text "Resume"],
-            li [class "pure-menu-item"] [text "Demos"],
-            li [class "pure-menu-item"] [text "Repos"]
-          ]
-      ]
-    ]
+-- ------ MODEL ----
 
-viewItem : M.Item -> Html
-viewItem {name, role, location, dates, details} = 
+type alias Expando = (RD.Item, Bool)
+
+type alias Model = {
+  header : RD.Header,
+  education : List Expando,
+  work : List Expando,
+  projects : List Expando,
+  publications : List Expando,
+  activities : List RD.Activity,
+  skills : List RD.Skill,
+  traits : List RD.Trait
+}
+
+expandoList : List RD.Item -> List Expando
+expandoList list = List.map (\i -> (i, False)) list
+
+init : Model
+init = 
+  let r = RD.kelseyResume in
+  { header = r.header,
+    education = expandoList r.education,
+    work = expandoList r.work,
+    projects = expandoList r.projects,
+    publications = expandoList r.publications,
+    activities = r.activities,
+    skills = r.skills,
+    traits = r.traits
+  }
+
+
+viewItem : Expando -> Html
+viewItem ({name, role, location, dates, details}, expanded) = 
   div [class "item"] [
     div [class "itemLeft"] [
       h3 [class "itemName"] [text name],
@@ -59,6 +78,8 @@ viewHeader header =
     ]
   ]
 
+model = init
+
 main : Html
 main = 
   let 
@@ -66,7 +87,7 @@ main =
     listing list = 
       ul [] (List.map (\x -> li [] [text (toString x)]) list)
 
-    items : List M.Item -> List Html
+    items : List Expando -> List Html
     items list =
       List.map viewItem list
   in
@@ -78,42 +99,42 @@ main =
 
     --leftMenu, 
 
-    viewHeader M.header,
+    viewHeader model.header,
 
     section [id "education"] (
       h2 [class "sectionHeader"] [text "Education"]
       ::
-      items M.education
+      items model.education
     ),
     
     section [id "work"] (
       h2 [class "sectionHeader"] [text "Work Experience"]
       ::
-      items M.work
+      items model.work
     ),
 
     section [id "projects"] (
       h2 [class "sectionHeader"] [text "Project Experience"]
       ::
-      items M.projects
+      items model.projects
     ),
 
     section [id "publications"] (
       h2 [class "sectionHeader"] [text "Publications"]
       ::
-      items M.publications
+      items model.publications
     ),
 
     section [id "activities"] [
       h2 [class "sectionHeader"] [text "Activities"],
       ul [] 
         (List.map 
-          (\(act, r, d) -> 
+          (\ { name, role, dates } -> 
             li [class "split-l-r"] [
-              span [class "left"] [text act, text ", ", text r],
-              span [class "right"] [text d]
+              span [class "left"] [text name, text ", ", text role],
+              span [class "right"] [text dates]
             ])
-          M.activities
+          model.activities
         )
     ],
 
@@ -121,8 +142,8 @@ main =
       h2 [class "sectionHeader"] [text "Skills"],
       div [class "bulletSep"]
         (List.map 
-          (\ (subj, level) -> span [] [bullet, text subj, text ": ", text level])
-          M.skills
+          (\ { name, level } -> span [] [bullet, text name, text ": ", text level])
+          model.skills
         )
     ],
 
@@ -131,7 +152,7 @@ main =
       div [class "bulletSep"]
         (List.map 
           (\trait -> span [] [bullet, text trait])
-          M.traits
+          model.traits
         )
     ]
   ]

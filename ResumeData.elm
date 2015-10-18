@@ -1,5 +1,51 @@
-module ResumeModel where
+module ResumeData (kelseyResume, Resume, Header, Item, Activity, Skill, Trait) where
 
+-- --------- TYPES ---
+
+type alias Resume = { 
+  header : Header,
+  education : List Item,
+  work : List Item,
+  projects : List Item,
+  publications : List Item,
+  activities : List Activity,
+  skills : List Skill,
+  traits : List Trait
+ }
+
+type alias Header = {name: String, affils: List String, photo: String, address: String,
+  home: String, email: String, phone: String, linkedin: String, github: String, homepage: String}
+
+type alias Item = {
+    role : String,
+    name : String,
+    location : String,
+    dates : String,
+    details : List String
+  }
+
+type alias Activity = {name: String, role: String, dates: String}
+
+type alias Skill = {name: String, level: String}
+
+type alias Trait = String
+
+
+-- ----- DATA ---
+
+kelseyResume : Resume
+kelseyResume = {
+  header = header,
+  education = education,
+  work = work, 
+  projects = projects,
+  publications = publications,
+  activities = activities,
+  skills = skills,
+  traits = traits
+ }
+
+header : Header
 header = {
     name = "Kelsey D'Souza",
     affils = ["Computer Science, Columbia University"],
@@ -13,6 +59,7 @@ header = {
     homepage = "https://kdz.github.io"
   }
 
+education : List Item
 education = [ { 
     name = "Columbia University, School of Engineering and Applied Science",
     location = "New York, NY",
@@ -22,14 +69,6 @@ education = [ {
                 "Dean's List 2014-2015, GPA 3.5"]
   }
  ]
-
-type alias Item = {
-    role : String,
-    name : String,
-    location : String,
-    dates : String,
-    details : List String
-  }
 
 work : List Item
 work = [
@@ -130,6 +169,7 @@ projects = [
   }
  ]
 
+publications: List Item
 publications = [
   { name = "PySTEMM: Executable Concept Modeling for K-12 Learning",
     role = "Sole author",
@@ -142,20 +182,23 @@ publications = [
   }
   ]
 
+activities: List Activity
 activities = [
-  ("Society of Women Engineers", "Family member and house member", "2014-present"),
-  ("Women in Computer Science", "Member", "2014-present"),
-  ("Girls who Code", "Teaching Assistant", "Fall 2015-present"),
-  ("Application Development Initiative (ADI)", "Member", "2014-present"),
-  ("Engineers Without Borders: Uganda Chapter", "Board Financial Chair, Engineering team", "2014-2015"),
-  ("Varsity Tennis", "Captain, player, assistant coach of middle school team", "2011-2014"),
-  ("DECA Business Competition", "Team Leader, International finalist", "May 2014")
+  Activity "Society of Women Engineers" "Family member and house member" "2014-present",
+  Activity "Women in Computer Science" "Member" "2014-present",
+  Activity "Girls who Code" "Teaching Assistant" "Fall 2015-present",
+  Activity "Application Development Initiative (ADI)" "Member" "2014-present",
+  Activity "Engineers Without Borders: Uganda Chapter" "Board Financial Chair, Engineering team" "2014-2015",
+  Activity "Varsity Tennis" "Captain, player, assistant coach of middle school team" "2011-2014",
+  Activity "DECA Business Competition" "Team Leader, International finalist" "May 2014"
   ]
 
+skills: List Skill
 skills = [
-  ("Python", "highly proficient"),
-  ("Elm", "proficient"),
-  ("C, C++, Java, SQL, Matlab, HTML, CSS, Javascript", "basic usage")
+  Skill "Python" "highly proficient",
+  Skill "Elm" "proficient",
+  Skill "C, C++, Java, SQL, Matlab, HTML, CSS, Javascript" "basic usage"
   ]
 
+traits: List Trait
 traits = [ "Love Computing", "Critical Thinking", "Self-starter", "Teamwork", "Communication", "Hard Working" ]
