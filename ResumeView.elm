@@ -1,4 +1,4 @@
-module Resume where
+module ResumeView where
 
 import ResumeData as RD
 import Html exposing (..)
@@ -47,6 +47,7 @@ type Action
     | ToggleWork Int
     | ToggleProject Int
     | TogglePub Int
+    | NoOp Int
 
 toggleExpando : Action -> Model -> Model
 toggleExpando action model =
@@ -107,6 +108,12 @@ viewItem addr callback (item, expanded) =
     ]
   ]
 
+viewItemList : Address Action -> (Int -> Action) -> List Expando -> List Html
+viewItemList addr tagger list =
+  List.indexedMap 
+    (\i expando -> viewItem addr (tagger i) expando)
+    list
+
 bullet : Html
 bullet = span [class "bullet"] []
 
@@ -135,52 +142,55 @@ viewHeader header =
     ]
   ]
 
+purecss = 
+  node "link" [rel "stylesheet", type' "text/css", href "http://yui.yahooapis.com/pure/0.6.0/pure-min.css"] []
+
+localcss =   
+  node "link" [rel "stylesheet", type' "text/css", href "css/style.css"] []
+
+printcss = 
+  node "style" [type' "text/css"] [text "@import 'css/print-style.css';"]
+
+printmediaCss = 
+  node "style" [type' "text/css"] [
+    text "@media print {
+            .link { display: none; }
+          }" ]
+
 
 view : Address Action -> Model -> Html
 view addr model = 
-  let 
-    items : (Int -> Action) -> List Expando -> List Html
-    items tagger list =
-      List.indexedMap 
-        (\i expando -> viewItem addr (tagger i) expando)
-        list
-  in
-  div [id "layout"] [
-    node "link" [rel "stylesheet", type' "text/css", href "http://yui.yahooapis.com/pure/0.6.0/pure-min.css"] [],
-    node "link" [rel "stylesheet", type' "text/css", href "css/style.css"] [],
+  div [] [
 
-    node "style" [type' "text/css"] [text "@import 'css/print-style.css';"],
-
-    -- node "style" [type' "text/css"] [text "@import 'css/print-style.css' print;"],
-    node "style" [type' "text/css"] [
-      text "@media print {
-              .link { display: none; }
-            }" ], 
+    purecss,
+    localcss,
+    printcss,
+    printmediaCss,
 
     viewHeader model.header,
 
     section [id "education"] (
       h2 [class "sectionHeader"] [text "Education"]
       ::
-      items ToggleEducation model.education
+      viewItemList addr ToggleEducation model.education
     ),
     
     section [id "work"] (
       h2 [class "sectionHeader"] [text "Work Experience"]
       ::
-      items ToggleWork model.work
+      viewItemList addr ToggleWork model.work
     ),
 
     section [id "projects"] (
       h2 [class "sectionHeader"] [text "Project Experience"]
       ::
-      items ToggleProject model.projects
+      viewItemList addr ToggleProject model.projects
     ),
 
     section [id "publications"] (
       h2 [class "sectionHeader"] [text "Publications"]
       ::
-      items TogglePub model.publications
+      viewItemList addr TogglePub model.publications
     ),
 
     section [id "activities"] [
