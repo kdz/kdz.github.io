@@ -21,7 +21,10 @@ type alias Item = {
     name : String,
     location : String,
     dates : String,
-    details : List String
+    details : List String,
+    more : Maybe String,
+    repo : Maybe String,
+    demo : Maybe String
   }
 
 type alias Activity = {name: String, role: String, dates: String}
@@ -66,20 +69,26 @@ education = [ {
     dates = "Fall 2014 - present",
     role = "Full-time student",
     details = [ "BS in Computer Science, Minor in Applied Math: Expected May 2018",
-                "Dean's List 2014-2015, GPA 3.5"]
+                "Dean's List 2014-2015, GPA 3.5"],
+    more = Nothing,
+    repo = Nothing,
+    demo = Nothing
   }
  ]
 
 work : List Item
 work = [
-    { role = "Teaching Assistant",  -- "Course Assistant" is Columbia title for pay
+    { role = "Teaching Assistant",
       name = "Columbia University",
       location = "New York, NY",
       dates = "Fall 2015",
       details = [
         "Teaching Assistant for Computer Science course E1006, \"Computation in Python\"",
         "Hold office-hours to assist students one-on-one, work with Dr. Adam Cannon"
-      ]
+      ],
+      more = Nothing,
+      repo = Nothing,
+      demo = Nothing
     },
 
     { role = "Summer intern",
@@ -90,7 +99,10 @@ work = [
         "Built interactive data visualizer feature in Python for Enthought Canopy data platform",
         "Worked in large live GitHub repository on individual feature branch and bug fix branches",
         "Used Python libraries Matplotlib, Pandas, Seaborn, and some Qt for front end tweaks"
-      ]
+      ],
+      more = Nothing,
+      repo = Nothing,
+      demo = Nothing
     },
 
     { role = "Research Intern",
@@ -100,7 +112,10 @@ work = [
       details = [
         "Assisted Dr. Gregory Hatlestad’s in researching coloration enzymes in plant DNA",
         "Performed PCR, gel electrophoresis, bacterial transformations and DNA analysis"
-      ]
+      ],
+      more = Nothing,
+      repo = Nothing,
+      demo = Nothing
     }
   ]
 
@@ -113,7 +128,10 @@ projects = [
     details = [
       "A single-page application for an interactive Assembly Language Simulator",
       "Project implemented in Elm, a pure functional programming language"
-    ]
+    ],
+    more = Nothing,
+    repo = Just "https://github.com/kdz/elmassembly",
+    demo = Just "https://kdz.github.io/demos/elmassembly/build/Main.html"
   },
 
   { role = "Sole Modeler",
@@ -123,7 +141,10 @@ projects = [
     details = [
       "Models of concepts in different domains to improve my own understanding",
       "Models implemented using Elm, a pure functional programming language"
-    ]
+    ],
+    more = Nothing,
+    repo = Nothing,
+    demo = Nothing
   },
 
   { role = "Lead Developer",
@@ -134,7 +155,10 @@ projects = [
       "Led team of 5, built system for mobile healthcare workers doing disease surveillance",
       "Python/Postgresql web service with 2-way SMS-based mobile and web interfaces",
       "Columbia Ebola Design Challenge finalist, worked with Guinea-based NGO"
-    ]
+    ],
+    more = Nothing,
+    repo = Just "https://github.com/kdz/ebohub",
+    demo = Just "http://ebohub.herokuapp.com "
   },
 
   { role = "Lead Developer",
@@ -145,7 +169,10 @@ projects = [
       "Built stroller-attachable baby monitor with 2-way SMS communication with parent",
       "Arduino - sensors, Python/Raspberry-Pi - communication, Python - SMS and web server",
       "Serial port (Arduino-to-Pi), HTTP (Pi-to-server), and SMS (server-to-phones)"
-    ]
+    ],
+    more = Nothing,
+    repo = Just "https://github.com/kdz/BME_monitor_kdz",
+    demo = Nothing
   },
 
   { role = "Personal Project",
@@ -155,7 +182,10 @@ projects = [
     details = [
       "Created and developed Python-based concept modeling tool",
       "Presented work at 6th Annual International SciPy Conference in Brussels, Belgium"
-    ]
+    ],
+    more = Nothing,
+    repo = Just "https://github.com/kdz/pystemm",
+    demo = Nothing
   },
 
   { role = "Project and CS Lead",
@@ -165,7 +195,10 @@ projects = [
     details = [
       "Led 4-student team, built submersible ROV to monitor power plant effluents in river",
       "Designed, built and tested with minimal guidance, on time and within budget"
-    ]
+    ],
+    more = Nothing,
+    repo = Nothing,
+    demo = Nothing
   }
  ]
 
@@ -178,7 +211,10 @@ publications = [
     details = [
       "Proceedings of the 6th European Conference on Python in Science (EuroSciPy 2013)",
       "Independently developed Python-based concept modeling tool to assist STEM learning"
-    ]
+    ],
+    more = Nothing,
+    repo = Nothing,
+    demo = Nothing
   }
   ]
 

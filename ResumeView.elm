@@ -5,7 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Basics exposing (toString)
-import Signal exposing (Address)
+import Signal exposing (Signal, Address)
 import StartApp.Simple as StartApp
 import Debug
 
@@ -67,16 +67,38 @@ toggleExpando action model =
 
 -- ----- VIEW ---
 
+nullHtml : Html
+nullHtml = node "noscript" [] []
+
 viewItem : Address Action -> Action -> Expando -> Html
 viewItem addr callback (item, expanded) = 
-  let {name, role, location, dates, details} = item 
+  let {name, role, location, dates, details, more, repo, demo} = item 
       prompt = if expanded then "Less" else "More"
+      hasMore = not (more==Nothing) -- && repo==Nothing && demo==Nothing)
+      toggler = if False -- hasMore
+        then a  [ class "more-less link", onClick addr callback, href "javascript:void(0)"]
+                [ text prompt]
+        else nullHtml
+      shownMore = if False -- expanded && hasMore
+        then div [class "more"] [text (toString more)]
+        else nullHtml
+      srcLink = case repo of
+              Nothing -> nullHtml
+              Just s -> a [ class "link", href s ] [text "source"]
+      demoLink = case demo of
+              Nothing -> nullHtml
+              Just s -> a [class "link", href s] [text "demo"]
   in
   div [class "item"] [
     div [class "itemLeft"] [
-      h3 [class "itemName"] [text name],
-      a [onClick addr callback] [text prompt],
-      ul [class "itemDetails"] (List.map (\x -> li [] [text x]) details)
+      h3 [class "itemName"] [
+        text name,
+        span [] [ toggler,
+                  srcLink,
+                  demoLink  ]
+      ],
+      ul [class "itemDetails"] (List.map (\x -> li [class "detail"] [text x]) details),
+      shownMore
     ],
     div [class "itemAttrs"] [
       div [class "itemDates"] [text dates],
@@ -85,9 +107,10 @@ viewItem addr callback (item, expanded) =
     ]
   ]
 
+bullet : Html
 bullet = span [class "bullet"] []
 
-
+viewHeader : RD.Header -> Html
 viewHeader header = 
   section [id "header"] [
     div [id "namePhoto"] [
@@ -126,7 +149,13 @@ view addr model =
     node "link" [rel "stylesheet", type' "text/css", href "http://yui.yahooapis.com/pure/0.6.0/pure-min.css"] [],
     node "link" [rel "stylesheet", type' "text/css", href "css/style.css"] [],
 
-    --node "style" [type' "text/css"] [text "@import 'css/print-style.css' print;"],
+    node "style" [type' "text/css"] [text "@import 'css/print-style.css';"],
+
+    -- node "style" [type' "text/css"] [text "@import 'css/print-style.css' print;"],
+    node "style" [type' "text/css"] [
+      text "@media print {
+              .link { display: none; }
+            }" ], 
 
     viewHeader model.header,
 
@@ -188,8 +217,7 @@ view addr model =
 
 -- ------- main
 
-
-
+main : Signal Html
 main =
   StartApp.start
     { model = init

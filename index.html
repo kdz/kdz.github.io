@@ -3535,6 +3535,112 @@ Elm.Html.Attributes.make = function (_elm) {
                                  ,property: property
                                  ,attribute: attribute};
    return _elm.Html.Attributes.values;
+};Elm.Html = Elm.Html || {};
+Elm.Html.Events = Elm.Html.Events || {};
+Elm.Html.Events.make = function (_elm) {
+   "use strict";
+   _elm.Html = _elm.Html || {};
+   _elm.Html.Events = _elm.Html.Events || {};
+   if (_elm.Html.Events.values)
+   return _elm.Html.Events.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Html.Events",
+   $Basics = Elm.Basics.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Json$Decode = Elm.Json.Decode.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $VirtualDom = Elm.VirtualDom.make(_elm);
+   var keyCode = A2($Json$Decode._op[":="],
+   "keyCode",
+   $Json$Decode.$int);
+   var targetChecked = A2($Json$Decode.at,
+   _L.fromArray(["target"
+                ,"checked"]),
+   $Json$Decode.bool);
+   var targetValue = A2($Json$Decode.at,
+   _L.fromArray(["target"
+                ,"value"]),
+   $Json$Decode.string);
+   var defaultOptions = $VirtualDom.defaultOptions;
+   var Options = F2(function (a,
+   b) {
+      return {_: {}
+             ,preventDefault: b
+             ,stopPropagation: a};
+   });
+   var onWithOptions = $VirtualDom.onWithOptions;
+   var on = $VirtualDom.on;
+   var messageOn = F3(function (name,
+   addr,
+   msg) {
+      return A3(on,
+      name,
+      $Json$Decode.value,
+      function (_v0) {
+         return function () {
+            return A2($Signal.message,
+            addr,
+            msg);
+         }();
+      });
+   });
+   var onClick = messageOn("click");
+   var onDoubleClick = messageOn("dblclick");
+   var onMouseMove = messageOn("mousemove");
+   var onMouseDown = messageOn("mousedown");
+   var onMouseUp = messageOn("mouseup");
+   var onMouseEnter = messageOn("mouseenter");
+   var onMouseLeave = messageOn("mouseleave");
+   var onMouseOver = messageOn("mouseover");
+   var onMouseOut = messageOn("mouseout");
+   var onBlur = messageOn("blur");
+   var onFocus = messageOn("focus");
+   var onSubmit = messageOn("submit");
+   var onKey = F3(function (name,
+   addr,
+   handler) {
+      return A3(on,
+      name,
+      keyCode,
+      function (code) {
+         return A2($Signal.message,
+         addr,
+         handler(code));
+      });
+   });
+   var onKeyUp = onKey("keyup");
+   var onKeyDown = onKey("keydown");
+   var onKeyPress = onKey("keypress");
+   _elm.Html.Events.values = {_op: _op
+                             ,onBlur: onBlur
+                             ,onFocus: onFocus
+                             ,onSubmit: onSubmit
+                             ,onKeyUp: onKeyUp
+                             ,onKeyDown: onKeyDown
+                             ,onKeyPress: onKeyPress
+                             ,onClick: onClick
+                             ,onDoubleClick: onDoubleClick
+                             ,onMouseMove: onMouseMove
+                             ,onMouseDown: onMouseDown
+                             ,onMouseUp: onMouseUp
+                             ,onMouseEnter: onMouseEnter
+                             ,onMouseLeave: onMouseLeave
+                             ,onMouseOver: onMouseOver
+                             ,onMouseOut: onMouseOut
+                             ,on: on
+                             ,onWithOptions: onWithOptions
+                             ,defaultOptions: defaultOptions
+                             ,targetValue: targetValue
+                             ,targetChecked: targetChecked
+                             ,keyCode: keyCode
+                             ,Options: Options};
+   return _elm.Html.Events.values;
 };Elm.Json = Elm.Json || {};
 Elm.Json.Decode = Elm.Json.Decode || {};
 Elm.Json.Decode.make = function (_elm) {
@@ -12046,13 +12152,16 @@ Elm.Resume.make = function (_elm) {
    _L = _N.List.make(_elm),
    $moduleName = "Resume",
    $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Html$Events = Elm.Html.Events.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Result = Elm.Result.make(_elm),
-   $ResumeModel = Elm.ResumeModel.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
+   $ResumeData = Elm.ResumeData.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $StartApp$Simple = Elm.StartApp.Simple.make(_elm);
    var bullet = A2($Html.span,
    _L.fromArray([$Html$Attributes.$class("bullet")]),
    _L.fromArray([]));
@@ -12098,199 +12207,377 @@ Elm.Resume.make = function (_elm) {
                                              _L.fromArray([$Html$Attributes.href(header.linkedin)]),
                                              _L.fromArray([$Html.text(header.linkedin)]))]))]))]));
    };
-   var viewItem = function (_v0) {
+   var nullHtml = A3($Html.node,
+   "noscript",
+   _L.fromArray([]),
+   _L.fromArray([]));
+   var viewItem = F3(function (addr,
+   callback,
+   _v0) {
       return function () {
-         return A2($Html.div,
-         _L.fromArray([$Html$Attributes.$class("item")]),
-         _L.fromArray([A2($Html.div,
-                      _L.fromArray([$Html$Attributes.$class("itemLeft")]),
-                      _L.fromArray([A2($Html.h3,
-                                   _L.fromArray([$Html$Attributes.$class("itemName")]),
-                                   _L.fromArray([$Html.text(_v0.name)]))
-                                   ,A2($Html.ul,
-                                   _L.fromArray([$Html$Attributes.$class("itemDetails")]),
-                                   A2($List.map,
-                                   function (x) {
-                                      return A2($Html.li,
-                                      _L.fromArray([]),
-                                      _L.fromArray([$Html.text(x)]));
-                                   },
-                                   _v0.details))]))
-                      ,A2($Html.div,
-                      _L.fromArray([$Html$Attributes.$class("itemAttrs")]),
-                      _L.fromArray([A2($Html.div,
-                                   _L.fromArray([$Html$Attributes.$class("itemDates")]),
-                                   _L.fromArray([$Html.text(_v0.dates)]))
-                                   ,A2($Html.div,
-                                   _L.fromArray([$Html$Attributes.$class("itemRole")]),
-                                   _L.fromArray([$Html.text(_v0.role)]))
-                                   ,A2($Html.div,
-                                   _L.fromArray([$Html$Attributes.$class("itemLocation")]),
-                                   _L.fromArray([$Html.text(_v0.location)]))]))]));
-      }();
-   };
-   var main = function () {
-      var items = function (list) {
-         return A2($List.map,
-         viewItem,
-         list);
-      };
-      var listing = function (list) {
-         return A2($Html.ul,
-         _L.fromArray([]),
-         A2($List.map,
-         function (x) {
-            return A2($Html.li,
-            _L.fromArray([]),
-            _L.fromArray([$Html.text($Basics.toString(x))]));
-         },
-         list));
-      };
-      return A2($Html.div,
-      _L.fromArray([$Html$Attributes.id("layout")]),
-      _L.fromArray([A3($Html.node,
-                   "link",
-                   _L.fromArray([$Html$Attributes.rel("stylesheet")
-                                ,$Html$Attributes.type$("text/css")
-                                ,$Html$Attributes.href("http://yui.yahooapis.com/pure/0.6.0/pure-min.css")]),
-                   _L.fromArray([]))
-                   ,A3($Html.node,
-                   "link",
-                   _L.fromArray([$Html$Attributes.rel("stylesheet")
-                                ,$Html$Attributes.type$("text/css")
-                                ,$Html$Attributes.href("css/style.css")]),
-                   _L.fromArray([]))
-                   ,viewHeader($ResumeModel.header)
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("education")]),
-                   A2($List._op["::"],
-                   A2($Html.h2,
-                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                   _L.fromArray([$Html.text("Education")])),
-                   items($ResumeModel.education)))
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("work")]),
-                   A2($List._op["::"],
-                   A2($Html.h2,
-                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                   _L.fromArray([$Html.text("Work Experience")])),
-                   items($ResumeModel.work)))
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("projects")]),
-                   A2($List._op["::"],
-                   A2($Html.h2,
-                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                   _L.fromArray([$Html.text("Project Experience")])),
-                   items($ResumeModel.projects)))
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("publications")]),
-                   A2($List._op["::"],
-                   A2($Html.h2,
-                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                   _L.fromArray([$Html.text("Publications")])),
-                   items($ResumeModel.publications)))
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("activities")]),
-                   _L.fromArray([A2($Html.h2,
-                                _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                                _L.fromArray([$Html.text("Activities")]))
-                                ,A2($Html.ul,
-                                _L.fromArray([]),
-                                A2($List.map,
-                                function (_v2) {
-                                   return function () {
-                                      switch (_v2.ctor)
-                                      {case "_Tuple3":
-                                         return A2($Html.li,
-                                           _L.fromArray([$Html$Attributes.$class("split-l-r")]),
-                                           _L.fromArray([A2($Html.span,
-                                                        _L.fromArray([$Html$Attributes.$class("left")]),
-                                                        _L.fromArray([$Html.text(_v2._0)
-                                                                     ,$Html.text(", ")
-                                                                     ,$Html.text(_v2._1)]))
+         switch (_v0.ctor)
+         {case "_Tuple2":
+            return function () {
+                 var prompt = _v0._1 ? "Less" : "More";
+                 var toggler = false ? A2($Html.a,
+                 _L.fromArray([$Html$Attributes.$class("more-less link")
+                              ,A2($Html$Events.onClick,
+                              addr,
+                              callback)
+                              ,$Html$Attributes.href("javascript:void(0)")]),
+                 _L.fromArray([$Html.text(prompt)])) : nullHtml;
+                 var $ = _v0._0,
+                 name = $.name,
+                 role = $.role,
+                 location = $.location,
+                 dates = $.dates,
+                 details = $.details,
+                 more = $.more,
+                 repo = $.repo,
+                 demo = $.demo;
+                 var hasMore = $Basics.not(_U.eq(more,
+                 $Maybe.Nothing));
+                 var shownMore = false ? A2($Html.div,
+                 _L.fromArray([$Html$Attributes.$class("more")]),
+                 _L.fromArray([$Html.text($Basics.toString(more))])) : nullHtml;
+                 var srcLink = function () {
+                    switch (repo.ctor)
+                    {case "Just": return A2($Html.a,
+                         _L.fromArray([$Html$Attributes.$class("link")
+                                      ,$Html$Attributes.href(repo._0)]),
+                         _L.fromArray([$Html.text("source")]));
+                       case "Nothing":
+                       return nullHtml;}
+                    _U.badCase($moduleName,
+                    "between lines 85 and 88");
+                 }();
+                 var demoLink = function () {
+                    switch (demo.ctor)
+                    {case "Just": return A2($Html.a,
+                         _L.fromArray([$Html$Attributes.$class("link")
+                                      ,$Html$Attributes.href(demo._0)]),
+                         _L.fromArray([$Html.text("demo")]));
+                       case "Nothing":
+                       return nullHtml;}
+                    _U.badCase($moduleName,
+                    "between lines 88 and 91");
+                 }();
+                 return A2($Html.div,
+                 _L.fromArray([$Html$Attributes.$class("item")]),
+                 _L.fromArray([A2($Html.div,
+                              _L.fromArray([$Html$Attributes.$class("itemLeft")]),
+                              _L.fromArray([A2($Html.h3,
+                                           _L.fromArray([$Html$Attributes.$class("itemName")]),
+                                           _L.fromArray([$Html.text(name)
                                                         ,A2($Html.span,
-                                                        _L.fromArray([$Html$Attributes.$class("right")]),
-                                                        _L.fromArray([$Html.text(_v2._2)]))]));}
-                                      _U.badCase($moduleName,
-                                      "between lines 112 and 115");
-                                   }();
-                                },
-                                $ResumeModel.activities))]))
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("skills")]),
-                   _L.fromArray([A2($Html.h2,
-                                _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                                _L.fromArray([$Html.text("Skills")]))
-                                ,A2($Html.div,
-                                _L.fromArray([$Html$Attributes.$class("bulletSep")]),
-                                A2($List.map,
-                                function (_v7) {
-                                   return function () {
-                                      switch (_v7.ctor)
-                                      {case "_Tuple2":
-                                         return A2($Html.span,
-                                           _L.fromArray([]),
-                                           _L.fromArray([bullet
-                                                        ,$Html.text(_v7._0)
-                                                        ,$Html.text(": ")
-                                                        ,$Html.text(_v7._1)]));}
-                                      _U.badCase($moduleName,
-                                      "on line 124, column 31 to 81");
-                                   }();
-                                },
-                                $ResumeModel.skills))]))
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("traits")]),
-                   _L.fromArray([A2($Html.h2,
-                                _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                                _L.fromArray([$Html.text("Traits")]))
-                                ,A2($Html.div,
-                                _L.fromArray([$Html$Attributes.$class("bulletSep")]),
-                                A2($List.map,
-                                function (trait) {
-                                   return A2($Html.span,
+                                                        _L.fromArray([]),
+                                                        _L.fromArray([toggler
+                                                                     ,srcLink
+                                                                     ,demoLink]))]))
+                                           ,A2($Html.ul,
+                                           _L.fromArray([$Html$Attributes.$class("itemDetails")]),
+                                           A2($List.map,
+                                           function (x) {
+                                              return A2($Html.li,
+                                              _L.fromArray([$Html$Attributes.$class("detail")]),
+                                              _L.fromArray([$Html.text(x)]));
+                                           },
+                                           details))
+                                           ,shownMore]))
+                              ,A2($Html.div,
+                              _L.fromArray([$Html$Attributes.$class("itemAttrs")]),
+                              _L.fromArray([A2($Html.div,
+                                           _L.fromArray([$Html$Attributes.$class("itemDates")]),
+                                           _L.fromArray([$Html.text(dates)]))
+                                           ,A2($Html.div,
+                                           _L.fromArray([$Html$Attributes.$class("itemRole")]),
+                                           _L.fromArray([$Html.text(role)]))
+                                           ,A2($Html.div,
+                                           _L.fromArray([$Html$Attributes.$class("itemLocation")]),
+                                           _L.fromArray([$Html.text(location)]))]))]));
+              }();}
+         _U.badCase($moduleName,
+         "between lines 75 and 108");
+      }();
+   });
+   var toggleExpando = F2(function (action,
+   model) {
+      return function () {
+         var _ = A2($Debug.log,
+         "Update",
+         action);
+         var toggle_i = F2(function (i,
+         list) {
+            return function () {
+               switch (list.ctor)
+               {case "::":
+                  switch (list._0.ctor)
+                    {case "_Tuple2": return _U.eq(i,
+                         0) ? A2($List._op["::"],
+                         {ctor: "_Tuple2"
+                         ,_0: list._0._0
+                         ,_1: $Basics.not(list._0._1)},
+                         list._1) : A2($List._op["::"],
+                         {ctor: "_Tuple2"
+                         ,_0: list._0._0
+                         ,_1: list._0._1},
+                         A2(toggle_i,i - 1,list._1));}
+                    break;
+                  case "[]":
+                  return _L.fromArray([]);}
+               _U.badCase($moduleName,
+               "between lines 53 and 59");
+            }();
+         });
+         return function () {
+            switch (action.ctor)
+            {case "ToggleEducation":
+               return _U.replace([["education"
+                                  ,A2(toggle_i,
+                                  action._0,
+                                  model.education)]],
+                 model);
+               case "ToggleProject":
+               return _U.replace([["projects"
+                                  ,A2(toggle_i,
+                                  action._0,
+                                  model.projects)]],
+                 model);
+               case "TogglePub":
+               return _U.replace([["publications"
+                                  ,A2(toggle_i,
+                                  action._0,
+                                  model.publications)]],
+                 model);
+               case "ToggleWork":
+               return _U.replace([["work"
+                                  ,A2(toggle_i,
+                                  action._0,
+                                  model.work)]],
+                 model);}
+            _U.badCase($moduleName,
+            "between lines 61 and 65");
+         }();
+      }();
+   });
+   var TogglePub = function (a) {
+      return {ctor: "TogglePub"
+             ,_0: a};
+   };
+   var ToggleProject = function (a) {
+      return {ctor: "ToggleProject"
+             ,_0: a};
+   };
+   var ToggleWork = function (a) {
+      return {ctor: "ToggleWork"
+             ,_0: a};
+   };
+   var ToggleEducation = function (a) {
+      return {ctor: "ToggleEducation"
+             ,_0: a};
+   };
+   var view = F2(function (addr,
+   model) {
+      return function () {
+         var items = F2(function (tagger,
+         list) {
+            return A2($List.indexedMap,
+            F2(function (i,expando) {
+               return A3(viewItem,
+               addr,
+               tagger(i),
+               expando);
+            }),
+            list);
+         });
+         return A2($Html.div,
+         _L.fromArray([$Html$Attributes.id("layout")]),
+         _L.fromArray([A3($Html.node,
+                      "link",
+                      _L.fromArray([$Html$Attributes.rel("stylesheet")
+                                   ,$Html$Attributes.type$("text/css")
+                                   ,$Html$Attributes.href("http://yui.yahooapis.com/pure/0.6.0/pure-min.css")]),
+                      _L.fromArray([]))
+                      ,A3($Html.node,
+                      "link",
+                      _L.fromArray([$Html$Attributes.rel("stylesheet")
+                                   ,$Html$Attributes.type$("text/css")
+                                   ,$Html$Attributes.href("css/style.css")]),
+                      _L.fromArray([]))
+                      ,A3($Html.node,
+                      "style",
+                      _L.fromArray([$Html$Attributes.type$("text/css")]),
+                      _L.fromArray([$Html.text("@import \'css/print-style.css\';")]))
+                      ,A3($Html.node,
+                      "style",
+                      _L.fromArray([$Html$Attributes.type$("text/css")]),
+                      _L.fromArray([$Html.text("@media print {\n              .link { display: none; }\n            }")]))
+                      ,viewHeader(model.header)
+                      ,A2($Html.section,
+                      _L.fromArray([$Html$Attributes.id("education")]),
+                      A2($List._op["::"],
+                      A2($Html.h2,
+                      _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                      _L.fromArray([$Html.text("Education")])),
+                      A2(items,
+                      ToggleEducation,
+                      model.education)))
+                      ,A2($Html.section,
+                      _L.fromArray([$Html$Attributes.id("work")]),
+                      A2($List._op["::"],
+                      A2($Html.h2,
+                      _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                      _L.fromArray([$Html.text("Work Experience")])),
+                      A2(items,
+                      ToggleWork,
+                      model.work)))
+                      ,A2($Html.section,
+                      _L.fromArray([$Html$Attributes.id("projects")]),
+                      A2($List._op["::"],
+                      A2($Html.h2,
+                      _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                      _L.fromArray([$Html.text("Project Experience")])),
+                      A2(items,
+                      ToggleProject,
+                      model.projects)))
+                      ,A2($Html.section,
+                      _L.fromArray([$Html$Attributes.id("publications")]),
+                      A2($List._op["::"],
+                      A2($Html.h2,
+                      _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                      _L.fromArray([$Html.text("Publications")])),
+                      A2(items,
+                      TogglePub,
+                      model.publications)))
+                      ,A2($Html.section,
+                      _L.fromArray([$Html$Attributes.id("activities")]),
+                      _L.fromArray([A2($Html.h2,
+                                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                                   _L.fromArray([$Html.text("Activities")]))
+                                   ,A2($Html.ul,
                                    _L.fromArray([]),
-                                   _L.fromArray([bullet
-                                                ,$Html.text(trait)]));
-                                },
-                                $ResumeModel.traits))]))]));
+                                   A2($List.map,
+                                   function (_v18) {
+                                      return function () {
+                                         return A2($Html.li,
+                                         _L.fromArray([$Html$Attributes.$class("split-l-r")]),
+                                         _L.fromArray([A2($Html.span,
+                                                      _L.fromArray([$Html$Attributes.$class("left")]),
+                                                      _L.fromArray([$Html.text(_v18.name)
+                                                                   ,$Html.text(", ")
+                                                                   ,$Html.text(_v18.role)]))
+                                                      ,A2($Html.span,
+                                                      _L.fromArray([$Html$Attributes.$class("right")]),
+                                                      _L.fromArray([$Html.text(_v18.dates)]))]));
+                                      }();
+                                   },
+                                   model.activities))]))
+                      ,A2($Html.section,
+                      _L.fromArray([$Html$Attributes.id("skills")]),
+                      _L.fromArray([A2($Html.h2,
+                                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                                   _L.fromArray([$Html.text("Skills")]))
+                                   ,A2($Html.div,
+                                   _L.fromArray([$Html$Attributes.$class("bulletSep")]),
+                                   A2($List.map,
+                                   function (_v20) {
+                                      return function () {
+                                         return A2($Html.span,
+                                         _L.fromArray([]),
+                                         _L.fromArray([bullet
+                                                      ,$Html.text(_v20.name)
+                                                      ,$Html.text(": ")
+                                                      ,$Html.text(_v20.level)]));
+                                      }();
+                                   },
+                                   model.skills))]))
+                      ,A2($Html.section,
+                      _L.fromArray([$Html$Attributes.id("traits")]),
+                      _L.fromArray([A2($Html.h2,
+                                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                                   _L.fromArray([$Html.text("Traits")]))
+                                   ,A2($Html.div,
+                                   _L.fromArray([$Html$Attributes.$class("bulletSep")]),
+                                   A2($List.map,
+                                   function (trait) {
+                                      return A2($Html.span,
+                                      _L.fromArray([]),
+                                      _L.fromArray([bullet
+                                                   ,$Html.text(trait)]));
+                                   },
+                                   model.traits))]))]));
+      }();
+   });
+   var expandoList = function (list) {
+      return A2($List.map,
+      function (i) {
+         return {ctor: "_Tuple2"
+                ,_0: i
+                ,_1: false};
+      },
+      list);
+   };
+   var init = function () {
+      var r = $ResumeData.kelseyResume;
+      return {_: {}
+             ,activities: r.activities
+             ,education: expandoList(r.education)
+             ,header: r.header
+             ,projects: expandoList(r.projects)
+             ,publications: expandoList(r.publications)
+             ,skills: r.skills
+             ,traits: r.traits
+             ,work: expandoList(r.work)};
    }();
-   var leftMenu = A2($Html.div,
-   _L.fromArray([$Html$Attributes.id("menu")]),
-   _L.fromArray([A2($Html.div,
-   _L.fromArray([$Html$Attributes.$class("pure-menu")]),
-   _L.fromArray([A2($Html.span,
-                _L.fromArray([$Html$Attributes.$class("pure-menu-heading")]),
-                _L.fromArray([$Html.text("Browse...")]))
-                ,A2($Html.ul,
-                _L.fromArray([$Html$Attributes.$class("pure-menu-list")]),
-                _L.fromArray([A2($Html.li,
-                             _L.fromArray([$Html$Attributes.$class("pure-menu-item")]),
-                             _L.fromArray([$Html.text("Resume")]))
-                             ,A2($Html.li,
-                             _L.fromArray([$Html$Attributes.$class("pure-menu-item")]),
-                             _L.fromArray([$Html.text("Demos")]))
-                             ,A2($Html.li,
-                             _L.fromArray([$Html$Attributes.$class("pure-menu-item")]),
-                             _L.fromArray([$Html.text("Repos")]))]))]))]));
+   var main = $StartApp$Simple.start({_: {}
+                                     ,model: init
+                                     ,update: toggleExpando
+                                     ,view: view});
+   var Model = F8(function (a,
+   b,
+   c,
+   d,
+   e,
+   f,
+   g,
+   h) {
+      return {_: {}
+             ,activities: f
+             ,education: b
+             ,header: a
+             ,projects: d
+             ,publications: e
+             ,skills: g
+             ,traits: h
+             ,work: c};
+   });
    _elm.Resume.values = {_op: _op
-                        ,leftMenu: leftMenu
+                        ,Model: Model
+                        ,expandoList: expandoList
+                        ,init: init
+                        ,ToggleEducation: ToggleEducation
+                        ,ToggleWork: ToggleWork
+                        ,ToggleProject: ToggleProject
+                        ,TogglePub: TogglePub
+                        ,toggleExpando: toggleExpando
+                        ,nullHtml: nullHtml
                         ,viewItem: viewItem
                         ,bullet: bullet
                         ,viewHeader: viewHeader
+                        ,view: view
                         ,main: main};
    return _elm.Resume.values;
-};Elm.ResumeModel = Elm.ResumeModel || {};
-Elm.ResumeModel.make = function (_elm) {
+};Elm.ResumeData = Elm.ResumeData || {};
+Elm.ResumeData.make = function (_elm) {
    "use strict";
-   _elm.ResumeModel = _elm.ResumeModel || {};
-   if (_elm.ResumeModel.values)
-   return _elm.ResumeModel.values;
+   _elm.ResumeData = _elm.ResumeData || {};
+   if (_elm.ResumeData.values)
+   return _elm.ResumeData.values;
    var _op = {},
    _N = Elm.Native,
    _U = _N.Utils.make(_elm),
    _L = _N.List.make(_elm),
-   $moduleName = "ResumeModel",
+   $moduleName = "ResumeData",
    $Basics = Elm.Basics.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
@@ -12302,134 +12589,118 @@ Elm.ResumeModel.make = function (_elm) {
                              ,"Teamwork"
                              ,"Communication"
                              ,"Hard Working"]);
-   var skills = _L.fromArray([{ctor: "_Tuple2"
-                              ,_0: "Python"
-                              ,_1: "highly proficient"}
-                             ,{ctor: "_Tuple2"
-                              ,_0: "Elm"
-                              ,_1: "proficient"}
-                             ,{ctor: "_Tuple2"
-                              ,_0: "C, C++, Java, SQL, Matlab, HTML, CSS, Javascript"
-                              ,_1: "basic usage"}]);
-   var activities = _L.fromArray([{ctor: "_Tuple3"
-                                  ,_0: "Society of Women Engineers"
-                                  ,_1: "Family member and house member"
-                                  ,_2: "2014-present"}
-                                 ,{ctor: "_Tuple3"
-                                  ,_0: "Women in Computer Science"
-                                  ,_1: "Member"
-                                  ,_2: "2014-present"}
-                                 ,{ctor: "_Tuple3"
-                                  ,_0: "Girls who Code"
-                                  ,_1: "Teaching Assistant"
-                                  ,_2: "Fall 2015-present"}
-                                 ,{ctor: "_Tuple3"
-                                  ,_0: "Application Development Initiative (ADI)"
-                                  ,_1: "Member"
-                                  ,_2: "2014-present"}
-                                 ,{ctor: "_Tuple3"
-                                  ,_0: "Engineers Without Borders: Uganda Chapter"
-                                  ,_1: "Board Financial Chair, Engineering team"
-                                  ,_2: "2014-2015"}
-                                 ,{ctor: "_Tuple3"
-                                  ,_0: "Varsity Tennis"
-                                  ,_1: "Captain, player, assistant coach of middle school team"
-                                  ,_2: "2011-2014"}
-                                 ,{ctor: "_Tuple3"
-                                  ,_0: "DECA Business Competition"
-                                  ,_1: "Team Leader, International finalist"
-                                  ,_2: "May 2014"}]);
    var publications = _L.fromArray([{_: {}
                                     ,dates: "August 2013"
+                                    ,demo: $Maybe.Nothing
                                     ,details: _L.fromArray(["Proceedings of the 6th European Conference on Python in Science (EuroSciPy 2013)"
                                                            ,"Independently developed Python-based concept modeling tool to assist STEM learning"])
                                     ,location: "Brussels, Belgium"
+                                    ,more: $Maybe.Nothing
                                     ,name: "PySTEMM: Executable Concept Modeling for K-12 Learning"
+                                    ,repo: $Maybe.Nothing
                                     ,role: "Sole author"}]);
    var projects = _L.fromArray([{_: {}
                                 ,dates: "Fall 2015"
+                                ,demo: $Maybe.Just("https://kdz.github.io/demos/elmassembly/build/Main.html")
                                 ,details: _L.fromArray(["A single-page application for an interactive Assembly Language Simulator"
                                                        ,"Project implemented in Elm, a pure functional programming language"])
                                 ,location: "New York, NY"
+                                ,more: $Maybe.Nothing
                                 ,name: "Assembly Language Simulator in Elm"
+                                ,repo: $Maybe.Just("https://github.com/kdz/elmassembly")
                                 ,role: "Sole Developer"}
                                ,{_: {}
                                 ,dates: "Fall 2015"
+                                ,demo: $Maybe.Nothing
                                 ,details: _L.fromArray(["Models of concepts in different domains to improve my own understanding"
                                                        ,"Models implemented using Elm, a pure functional programming language"])
                                 ,location: "New York, NY"
+                                ,more: $Maybe.Nothing
                                 ,name: "Executable domain models"
+                                ,repo: $Maybe.Nothing
                                 ,role: "Sole Modeler"}
                                ,{_: {}
                                 ,dates: "2014 - 2015"
+                                ,demo: $Maybe.Just("http://ebohub.herokuapp.com ")
                                 ,details: _L.fromArray(["Led team of 5, built system for mobile healthcare workers doing disease surveillance"
                                                        ,"Python/Postgresql web service with 2-way SMS-based mobile and web interfaces"
                                                        ,"Columbia Ebola Design Challenge finalist, worked with Guinea-based NGO"])
                                 ,location: "New York, NY"
+                                ,more: $Maybe.Nothing
                                 ,name: "EboHub: Ebola/Infectious Disease Surveillance System"
+                                ,repo: $Maybe.Just("https://github.com/kdz/ebohub")
                                 ,role: "Lead Developer"}
                                ,{_: {}
                                 ,dates: "2014 - 2015"
+                                ,demo: $Maybe.Nothing
                                 ,details: _L.fromArray(["Built stroller-attachable baby monitor with 2-way SMS communication with parent"
                                                        ,"Arduino - sensors, Python/Raspberry-Pi - communication, Python - SMS and web server"
                                                        ,"Serial port (Arduino-to-Pi), HTTP (Pi-to-server), and SMS (server-to-phones)"])
                                 ,location: "New York, NY"
+                                ,more: $Maybe.Nothing
                                 ,name: "Adaptive ‘Smart’ Stroller"
+                                ,repo: $Maybe.Just("https://github.com/kdz/BME_monitor_kdz")
                                 ,role: "Lead Developer"}
                                ,{_: {}
                                 ,dates: "2012 - 2014"
+                                ,demo: $Maybe.Nothing
                                 ,details: _L.fromArray(["Created and developed Python-based concept modeling tool"
                                                        ,"Presented work at 6th Annual International SciPy Conference in Brussels, Belgium"])
                                 ,location: "Austin, TX"
+                                ,more: $Maybe.Nothing
                                 ,name: "PySTEMM: K-12 STEM Education Tool"
+                                ,repo: $Maybe.Just("https://github.com/kdz/pystemm")
                                 ,role: "Personal Project"}
                                ,{_: {}
                                 ,dates: "Summer 2012"
+                                ,demo: $Maybe.Nothing
                                 ,details: _L.fromArray(["Led 4-student team, built submersible ROV to monitor power plant effluents in river"
                                                        ,"Designed, built and tested with minimal guidance, on time and within budget"])
                                 ,location: "Cambridge, MA"
+                                ,more: $Maybe.Nothing
                                 ,name: "MIT/SeaGrant Ocean Engineering Experience"
+                                ,repo: $Maybe.Nothing
                                 ,role: "Project and CS Lead"}]);
    var work = _L.fromArray([{_: {}
                             ,dates: "Fall 2015"
+                            ,demo: $Maybe.Nothing
                             ,details: _L.fromArray(["Teaching Assistant for Computer Science course E1006, \"Computation in Python\""
                                                    ,"Hold office-hours to assist students one-on-one, work with Dr. Adam Cannon"])
                             ,location: "New York, NY"
+                            ,more: $Maybe.Nothing
                             ,name: "Columbia University"
+                            ,repo: $Maybe.Nothing
                             ,role: "Teaching Assistant"}
                            ,{_: {}
                             ,dates: "Summer 2015"
+                            ,demo: $Maybe.Nothing
                             ,details: _L.fromArray(["Built interactive data visualizer feature in Python for Enthought Canopy data platform"
                                                    ,"Worked in large live GitHub repository on individual feature branch and bug fix branches"
                                                    ,"Used Python libraries Matplotlib, Pandas, Seaborn, and some Qt for front end tweaks"])
                             ,location: "Austin, TX"
+                            ,more: $Maybe.Nothing
                             ,name: "Enthought Scientific Computing"
+                            ,repo: $Maybe.Nothing
                             ,role: "Summer intern"}
                            ,{_: {}
                             ,dates: "Summer 2014"
+                            ,demo: $Maybe.Nothing
                             ,details: _L.fromArray(["Assisted Dr. Gregory Hatlestad’s in researching coloration enzymes in plant DNA"
                                                    ,"Performed PCR, gel electrophoresis, bacterial transformations and DNA analysis"])
                             ,location: "Austin, TX"
+                            ,more: $Maybe.Nothing
                             ,name: "UT Austin Iyer Lab, Functional Genomics"
+                            ,repo: $Maybe.Nothing
                             ,role: "Research Intern"}]);
-   var Item = F5(function (a,
-   b,
-   c,
-   d,
-   e) {
-      return {_: {}
-             ,dates: d
-             ,details: e
-             ,location: c
-             ,name: b
-             ,role: a};
-   });
    var education = _L.fromArray([{_: {}
                                  ,dates: "Fall 2014 - present"
+                                 ,demo: $Maybe.Nothing
                                  ,details: _L.fromArray(["BS in Computer Science, Minor in Applied Math: Expected May 2018"
                                                         ,"Dean\'s List 2014-2015, GPA 3.5"])
                                  ,location: "New York, NY"
+                                 ,more: $Maybe.Nothing
                                  ,name: "Columbia University, School of Engineering and Applied Science"
+                                 ,repo: $Maybe.Nothing
                                  ,role: "Full-time student"}]);
    var header = {_: {}
                 ,address: "1954 Lerner Hall, 2920 Broadway, New York NY 10027 (Columbia University)"
@@ -12442,17 +12713,138 @@ Elm.ResumeModel.make = function (_elm) {
                 ,name: "Kelsey D\'Souza"
                 ,phone: "512-363-9556"
                 ,photo: "images/kelsey_resume.png"};
-   _elm.ResumeModel.values = {_op: _op
-                             ,header: header
-                             ,education: education
-                             ,Item: Item
-                             ,work: work
-                             ,projects: projects
-                             ,publications: publications
-                             ,activities: activities
-                             ,skills: skills
-                             ,traits: traits};
-   return _elm.ResumeModel.values;
+   var Skill = F2(function (a,b) {
+      return {_: {}
+             ,level: b
+             ,name: a};
+   });
+   var skills = _L.fromArray([A2(Skill,
+                             "Python",
+                             "highly proficient")
+                             ,A2(Skill,"Elm","proficient")
+                             ,A2(Skill,
+                             "C, C++, Java, SQL, Matlab, HTML, CSS, Javascript",
+                             "basic usage")]);
+   var Activity = F3(function (a,
+   b,
+   c) {
+      return {_: {}
+             ,dates: c
+             ,name: a
+             ,role: b};
+   });
+   var activities = _L.fromArray([A3(Activity,
+                                 "Society of Women Engineers",
+                                 "Family member and house member",
+                                 "2014-present")
+                                 ,A3(Activity,
+                                 "Women in Computer Science",
+                                 "Member",
+                                 "2014-present")
+                                 ,A3(Activity,
+                                 "Girls who Code",
+                                 "Teaching Assistant",
+                                 "Fall 2015-present")
+                                 ,A3(Activity,
+                                 "Application Development Initiative (ADI)",
+                                 "Member",
+                                 "2014-present")
+                                 ,A3(Activity,
+                                 "Engineers Without Borders: Uganda Chapter",
+                                 "Board Financial Chair, Engineering team",
+                                 "2014-2015")
+                                 ,A3(Activity,
+                                 "Varsity Tennis",
+                                 "Captain, player, assistant coach of middle school team",
+                                 "2011-2014")
+                                 ,A3(Activity,
+                                 "DECA Business Competition",
+                                 "Team Leader, International finalist",
+                                 "May 2014")]);
+   var kelseyResume = {_: {}
+                      ,activities: activities
+                      ,education: education
+                      ,header: header
+                      ,projects: projects
+                      ,publications: publications
+                      ,skills: skills
+                      ,traits: traits
+                      ,work: work};
+   var Item = F8(function (a,
+   b,
+   c,
+   d,
+   e,
+   f,
+   g,
+   h) {
+      return {_: {}
+             ,dates: d
+             ,demo: h
+             ,details: e
+             ,location: c
+             ,more: f
+             ,name: b
+             ,repo: g
+             ,role: a};
+   });
+   var Header = function (a) {
+      return function (b) {
+         return function (c) {
+            return function (d) {
+               return function (e) {
+                  return function (f) {
+                     return function (g) {
+                        return function (h) {
+                           return function (i) {
+                              return function (j) {
+                                 return {_: {}
+                                        ,address: d
+                                        ,affils: b
+                                        ,email: f
+                                        ,github: i
+                                        ,home: e
+                                        ,homepage: j
+                                        ,linkedin: h
+                                        ,name: a
+                                        ,phone: g
+                                        ,photo: c};
+                              };
+                           };
+                        };
+                     };
+                  };
+               };
+            };
+         };
+      };
+   };
+   var Resume = F8(function (a,
+   b,
+   c,
+   d,
+   e,
+   f,
+   g,
+   h) {
+      return {_: {}
+             ,activities: f
+             ,education: b
+             ,header: a
+             ,projects: d
+             ,publications: e
+             ,skills: g
+             ,traits: h
+             ,work: c};
+   });
+   _elm.ResumeData.values = {_op: _op
+                            ,kelseyResume: kelseyResume
+                            ,Resume: Resume
+                            ,Header: Header
+                            ,Item: Item
+                            ,Activity: Activity
+                            ,Skill: Skill};
+   return _elm.ResumeData.values;
 };Elm.Signal = Elm.Signal || {};
 Elm.Signal.make = function (_elm) {
    "use strict";
@@ -12596,6 +12988,62 @@ Elm.Signal.make = function (_elm) {
                         ,forwardTo: forwardTo
                         ,Mailbox: Mailbox};
    return _elm.Signal.values;
+};Elm.StartApp = Elm.StartApp || {};
+Elm.StartApp.Simple = Elm.StartApp.Simple || {};
+Elm.StartApp.Simple.make = function (_elm) {
+   "use strict";
+   _elm.StartApp = _elm.StartApp || {};
+   _elm.StartApp.Simple = _elm.StartApp.Simple || {};
+   if (_elm.StartApp.Simple.values)
+   return _elm.StartApp.Simple.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "StartApp.Simple",
+   $Basics = Elm.Basics.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var start = function (config) {
+      return function () {
+         var actions = $Signal.mailbox($Maybe.Nothing);
+         var address = A2($Signal.forwardTo,
+         actions.address,
+         $Maybe.Just);
+         var model = A3($Signal.foldp,
+         F2(function (_v0,model) {
+            return function () {
+               switch (_v0.ctor)
+               {case "Just":
+                  return A2(config.update,
+                    _v0._0,
+                    model);}
+               _U.badCase($moduleName,
+               "on line 91, column 34 to 60");
+            }();
+         }),
+         config.model,
+         actions.signal);
+         return A2($Signal.map,
+         config.view(address),
+         model);
+      }();
+   };
+   var Config = F3(function (a,
+   b,
+   c) {
+      return {_: {}
+             ,model: a
+             ,update: c
+             ,view: b};
+   });
+   _elm.StartApp.Simple.values = {_op: _op
+                                 ,Config: Config
+                                 ,start: start};
+   return _elm.StartApp.Simple.values;
 };Elm.String = Elm.String || {};
 Elm.String.make = function (_elm) {
    "use strict";

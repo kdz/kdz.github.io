@@ -1,3 +1,49 @@
+body {
+	font-size: 10pt;
+}
+
+#header {
+	margin-bottom: 10px;
+}
+
+.itemName {
+	margin-top, margin-bottom: 2px;
+	font-size: 11pt;
+}
+
+.sectionHeader, .itemName {
+	color: black;
+}
+
+.sectionHeader {
+	margin-top, margin-bottom: 2px;
+	font-size: 11pt;
+}
+
+.item {
+	margin-top: -10px;
+}
+
+.itemDetails {
+    margin-top: -6px;
+    margin-bottom: 2px;
+    margin-left: -10px;
+}
+
+.detail {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.affil, .myContactInfo, .itemAttrs, .right {
+    font-size: 9pt;
+}
+
+.link {
+    font-weight: lighter;
+    font-size: 9pt;
+    margin-left: 30px;
+}
 
 /*
 
