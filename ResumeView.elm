@@ -208,7 +208,7 @@ view addr model =
 
     section [id "skills"] [
       h2 [class "sectionHeader"] [text "Skills"],
-      div [class "bulletSep"]
+      div [class "bulletSepList"]
         (List.map 
           (\ { name, level } -> span [] [bullet, text name, text ": ", text level])
           model.skills
@@ -217,7 +217,7 @@ view addr model =
 
     section [id "traits"] [
       h2 [class "sectionHeader"] [text "Traits"],
-      div [class "bulletSep"]
+      div [class "bulletSepList"]
         (List.map 
           (\trait -> span [] [bullet, text trait])
           model.traits
