@@ -12279,10 +12279,10 @@ Elm.ResumeData.make = function (_elm) {
                 ,address: "1954 Lerner Hall, 2920 Broadway, New York NY 10027 (Columbia University)"
                 ,affils: _L.fromArray(["Computer Science, Columbia University"])
                 ,email: "kad2185@columbia.edu"
-                ,github: "github.com/kdz"
+                ,github: "https://github.com/kdz"
                 ,home: "9901 Spicewood Mesa, Austin, TX 78759"
-                ,homepage: "kdz.github.io"
-                ,linkedin: "goo.gl/xcSDtb"
+                ,homepage: "https://kdz.github.io"
+                ,linkedin: "https://goo.gl/xcSDtb"
                 ,name: "Kelsey D\'Souza"
                 ,phone: "512-363-9556"
                 ,photo: "images/kelsey_resume.png"};
@@ -12439,7 +12439,8 @@ Elm.ResumeView.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $ResumeData = Elm.ResumeData.make(_elm),
    $Signal = Elm.Signal.make(_elm),
-   $StartApp$Simple = Elm.StartApp.Simple.make(_elm);
+   $StartApp$Simple = Elm.StartApp.Simple.make(_elm),
+   $String = Elm.String.make(_elm);
    var printmediaCss = A3($Html.node,
    "style",
    _L.fromArray([$Html$Attributes.type$("text/css")]),
@@ -12464,49 +12465,60 @@ Elm.ResumeView.make = function (_elm) {
    _L.fromArray([$Html$Attributes.$class("bullet")]),
    _L.fromArray([]));
    var viewHeader = function (header) {
-      return A2($Html.section,
-      _L.fromArray([$Html$Attributes.id("header")]),
-      _L.fromArray([A2($Html.div,
-                   _L.fromArray([$Html$Attributes.id("namePhoto")]),
-                   _L.fromArray([A2($Html.div,
-                   _L.fromArray([$Html$Attributes.id("nameAffil")]),
-                   A2($List._op["::"],
-                   A2($Html.h1,
-                   _L.fromArray([$Html$Attributes.$class("myName")]),
-                   _L.fromArray([$Html.text(header.name)])),
-                   A2($List.map,
-                   function (affil) {
-                      return A2($Html.div,
-                      _L.fromArray([$Html$Attributes.$class("affil")]),
-                      _L.fromArray([$Html.text(affil)]));
-                   },
-                   header.affils)))]))
-                   ,A2($Html.div,
-                   _L.fromArray([$Html$Attributes.$class("myContactInfo")]),
-                   _L.fromArray([A2($Html.div,
-                                _L.fromArray([]),
-                                _L.fromArray([$Html.text(header.home)]))
-                                ,A2($Html.div,
-                                _L.fromArray([]),
-                                _L.fromArray([$Html.text(header.email)
-                                             ,bullet
-                                             ,$Html.text(header.phone)]))
-                                ,A2($Html.div,
-                                _L.fromArray([$Html$Attributes.id("urls")]),
-                                _L.fromArray([$Html.text("Home")
-                                             ,A2($Html.a,
-                                             _L.fromArray([$Html$Attributes.href(header.homepage)]),
-                                             _L.fromArray([$Html.text(header.homepage)]))
-                                             ,bullet
-                                             ,$Html.text("Github")
-                                             ,A2($Html.a,
-                                             _L.fromArray([$Html$Attributes.href(header.github)]),
-                                             _L.fromArray([$Html.text(header.github)]))
-                                             ,bullet
-                                             ,$Html.text("LinkedIn")
-                                             ,A2($Html.a,
-                                             _L.fromArray([$Html$Attributes.href(header.linkedin)]),
-                                             _L.fromArray([$Html.text(header.linkedin)]))]))]))]));
+      return function () {
+         var $short = function (url) {
+            return A2($String.dropLeft,
+            8,
+            url);
+         };
+         return A2($Html.section,
+         _L.fromArray([$Html$Attributes.id("header")]),
+         _L.fromArray([A2($Html.div,
+                      _L.fromArray([$Html$Attributes.id("namePhoto")]),
+                      _L.fromArray([A2($Html.div,
+                      _L.fromArray([$Html$Attributes.id("nameAffil")]),
+                      A2($List._op["::"],
+                      A2($Html.h1,
+                      _L.fromArray([$Html$Attributes.$class("myName")]),
+                      _L.fromArray([$Html.text(header.name)])),
+                      A2($List.map,
+                      function (affil) {
+                         return A2($Html.div,
+                         _L.fromArray([$Html$Attributes.$class("affil")]),
+                         _L.fromArray([$Html.text(affil)]));
+                      },
+                      header.affils)))]))
+                      ,A2($Html.div,
+                      _L.fromArray([$Html$Attributes.$class("myContactInfo")]),
+                      _L.fromArray([A2($Html.div,
+                                   _L.fromArray([]),
+                                   _L.fromArray([$Html.text(header.home)]))
+                                   ,A2($Html.div,
+                                   _L.fromArray([]),
+                                   _L.fromArray([$Html.text(header.email)
+                                                ,bullet
+                                                ,$Html.text(header.phone)]))
+                                   ,A2($Html.div,
+                                   _L.fromArray([$Html$Attributes.id("urls")]),
+                                   _L.fromArray([bullet
+                                                ,$Html.text("Home")
+                                                ,A2($Html.a,
+                                                _L.fromArray([$Html$Attributes.href(header.homepage)
+                                                             ,$Html$Attributes.target("_blank")]),
+                                                _L.fromArray([$Html.text($short(header.homepage))]))
+                                                ,bullet
+                                                ,$Html.text("Github")
+                                                ,A2($Html.a,
+                                                _L.fromArray([$Html$Attributes.href(header.github)
+                                                             ,$Html$Attributes.target("_blank")]),
+                                                _L.fromArray([$Html.text($short(header.github))]))
+                                                ,bullet
+                                                ,$Html.text("LinkedIn")
+                                                ,A2($Html.a,
+                                                _L.fromArray([$Html$Attributes.href(header.linkedin)
+                                                             ,$Html$Attributes.target("_blank")]),
+                                                _L.fromArray([$Html.text($short(header.linkedin))]))]))]))]));
+      }();
    };
    var nullHtml = A3($Html.node,
    "noscript",
@@ -12545,23 +12557,25 @@ Elm.ResumeView.make = function (_elm) {
                     switch (repo.ctor)
                     {case "Just": return A2($Html.a,
                          _L.fromArray([$Html$Attributes.$class("link")
-                                      ,$Html$Attributes.href(repo._0)]),
+                                      ,$Html$Attributes.href(repo._0)
+                                      ,$Html$Attributes.target("_blank")]),
                          _L.fromArray([$Html.text("source")]));
                        case "Nothing":
                        return nullHtml;}
                     _U.badCase($moduleName,
-                    "between lines 86 and 89");
+                    "between lines 87 and 90");
                  }();
                  var demoLink = function () {
                     switch (demo.ctor)
                     {case "Just": return A2($Html.a,
                          _L.fromArray([$Html$Attributes.$class("link")
-                                      ,$Html$Attributes.href(demo._0)]),
+                                      ,$Html$Attributes.href(demo._0)
+                                      ,$Html$Attributes.target("_blank")]),
                          _L.fromArray([$Html.text("demo")]));
                        case "Nothing":
                        return nullHtml;}
                     _U.badCase($moduleName,
-                    "between lines 89 and 92");
+                    "between lines 90 and 93");
                  }();
                  return A2($Html.div,
                  _L.fromArray([$Html$Attributes.$class("item")]),
@@ -12598,7 +12612,7 @@ Elm.ResumeView.make = function (_elm) {
                                            _L.fromArray([$Html.text(location)]))]))]));
               }();}
          _U.badCase($moduleName,
-         "between lines 76 and 109");
+         "between lines 77 and 110");
       }();
    });
    var viewItemList = F3(function (addr,
@@ -12639,7 +12653,7 @@ Elm.ResumeView.make = function (_elm) {
                   case "[]":
                   return _L.fromArray([]);}
                _U.badCase($moduleName,
-               "between lines 54 and 60");
+               "between lines 55 and 61");
             }();
          });
          return function () {
@@ -12669,7 +12683,7 @@ Elm.ResumeView.make = function (_elm) {
                                   model.work)]],
                  model);}
             _U.badCase($moduleName,
-            "between lines 62 and 66");
+            "between lines 63 and 67");
          }();
       }();
    });
