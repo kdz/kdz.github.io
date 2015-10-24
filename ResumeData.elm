@@ -57,9 +57,9 @@ header = {
     home = "9901 Spicewood Mesa, Austin, TX 78759",
     email = "kad2185@columbia.edu",
     phone = "512-363-9556",
-    linkedin = "goo.gl/xcSDtb", -- "https://www.linkedin.com/in/kelseydsouza",
-    github = "github.com/kdz",
-    homepage = "kdz.github.io"
+    linkedin = "https://goo.gl/xcSDtb", -- "https://www.linkedin.com/in/kelseydsouza",
+    github = "https://github.com/kdz",
+    homepage = "https://kdz.github.io"
   }
 
 education : List Item

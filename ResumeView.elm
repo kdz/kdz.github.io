@@ -7,6 +7,7 @@ import Html.Events exposing (..)
 import Basics exposing (toString)
 import Signal exposing (Signal, Address)
 import StartApp.Simple as StartApp
+import String
 import Debug
 
 -- ------ MODEL ----
@@ -85,10 +86,10 @@ viewItem addr callback (item, expanded) =
         else nullHtml
       srcLink = case repo of
               Nothing -> nullHtml
-              Just s -> a [ class "link", href s ] [text "source"]
+              Just s -> a [ class "link", href s, target "_blank" ] [text "source"]
       demoLink = case demo of
               Nothing -> nullHtml
-              Just s -> a [class "link", href s] [text "demo"]
+              Just s -> a [class "link", href s, target "_blank"] [text "demo"]
   in
   div [class "item"] [
     div [class "itemLeft"] [
@@ -119,6 +120,8 @@ bullet = span [class "bullet"] []
 
 viewHeader : RD.Header -> Html
 viewHeader header = 
+  let short url = String.dropLeft 8 url 
+  in
   section [id "header"] [
     div [id "namePhoto"] [
       --img [src header.photo, id "photo"] [],
@@ -135,9 +138,9 @@ viewHeader header =
       div [] [  text header.email, bullet, 
                 text header.phone ],
       div [id "urls"] [
-        text "Home", a [href header.homepage] [text header.homepage], bullet,
-        text "Github", a [href header.github] [text header.github], bullet,
-        text "LinkedIn", a [href header.linkedin] [text header.linkedin]
+        bullet, text "Home", a [href header.homepage, target "_blank"] [text (short header.homepage)],
+        bullet, text "Github", a [href header.github, target "_blank"] [text (short header.github)],
+        bullet, text "LinkedIn", a [href header.linkedin, target "_blank"] [text (short header.linkedin)]
       ]
     ]
   ]
