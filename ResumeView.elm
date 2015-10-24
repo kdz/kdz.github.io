@@ -135,9 +135,9 @@ viewHeader header =
       div [] [  text header.email, bullet, 
                 text header.phone ],
       div [id "urls"] [
-        a [href header.homepage] [text header.homepage], bullet,
-        a [href header.github] [text header.github], bullet,
-        a [href header.linkedin] [text header.linkedin]
+        text "Home", a [href header.homepage] [text header.homepage], bullet,
+        text "Github", a [href header.github] [text header.github], bullet,
+        text "LinkedIn", a [href header.linkedin] [text header.linkedin]
       ]
     ]
   ]

@@ -57,9 +57,9 @@ header = {
     home = "9901 Spicewood Mesa, Austin, TX 78759",
     email = "kad2185@columbia.edu",
     phone = "512-363-9556",
-    linkedin = "https://goo.gl/xcSDtb", -- "https://www.linkedin.com/in/kelseydsouza",
-    github = "https://github.com/kdz",
-    homepage = "https://kdz.github.io"
+    linkedin = "goo.gl/xcSDtb", -- "https://www.linkedin.com/in/kelseydsouza",
+    github = "github.com/kdz",
+    homepage = "kdz.github.io"
   }
 
 education : List Item
@@ -220,9 +220,9 @@ publications = [
 
 activities: List Activity
 activities = [
+  Activity "Girls who Code" "Teaching Assistant" "Fall 2015-present",
   Activity "Society of Women Engineers" "Family member and house member" "2014-present",
   Activity "Women in Computer Science" "Member" "2014-present",
-  Activity "Girls who Code" "Teaching Assistant" "Fall 2015-present",
   Activity "Application Development Initiative (ADI)" "Member" "2014-present",
   Activity "Engineers Without Borders: Uganda Chapter" "Board Financial Chair, Engineering team" "2014-2015",
   Activity "Varsity Tennis" "Captain, player, assistant coach of middle school team" "2011-2014",

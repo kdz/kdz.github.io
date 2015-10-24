@@ -12279,10 +12279,10 @@ Elm.ResumeData.make = function (_elm) {
                 ,address: "1954 Lerner Hall, 2920 Broadway, New York NY 10027 (Columbia University)"
                 ,affils: _L.fromArray(["Computer Science, Columbia University"])
                 ,email: "kad2185@columbia.edu"
-                ,github: "https://github.com/kdz"
+                ,github: "github.com/kdz"
                 ,home: "9901 Spicewood Mesa, Austin, TX 78759"
-                ,homepage: "https://kdz.github.io"
-                ,linkedin: "https://goo.gl/xcSDtb"
+                ,homepage: "kdz.github.io"
+                ,linkedin: "goo.gl/xcSDtb"
                 ,name: "Kelsey D\'Souza"
                 ,phone: "512-363-9556"
                 ,photo: "images/kelsey_resume.png"};
@@ -12307,6 +12307,10 @@ Elm.ResumeData.make = function (_elm) {
              ,role: b};
    });
    var activities = _L.fromArray([A3(Activity,
+                                 "Girls who Code",
+                                 "Teaching Assistant",
+                                 "Fall 2015-present")
+                                 ,A3(Activity,
                                  "Society of Women Engineers",
                                  "Family member and house member",
                                  "2014-present")
@@ -12314,10 +12318,6 @@ Elm.ResumeData.make = function (_elm) {
                                  "Women in Computer Science",
                                  "Member",
                                  "2014-present")
-                                 ,A3(Activity,
-                                 "Girls who Code",
-                                 "Teaching Assistant",
-                                 "Fall 2015-present")
                                  ,A3(Activity,
                                  "Application Development Initiative (ADI)",
                                  "Member",
@@ -12493,14 +12493,17 @@ Elm.ResumeView.make = function (_elm) {
                                              ,$Html.text(header.phone)]))
                                 ,A2($Html.div,
                                 _L.fromArray([$Html$Attributes.id("urls")]),
-                                _L.fromArray([A2($Html.a,
+                                _L.fromArray([$Html.text("Home")
+                                             ,A2($Html.a,
                                              _L.fromArray([$Html$Attributes.href(header.homepage)]),
                                              _L.fromArray([$Html.text(header.homepage)]))
                                              ,bullet
+                                             ,$Html.text("Github")
                                              ,A2($Html.a,
                                              _L.fromArray([$Html$Attributes.href(header.github)]),
                                              _L.fromArray([$Html.text(header.github)]))
                                              ,bullet
+                                             ,$Html.text("LinkedIn")
                                              ,A2($Html.a,
                                              _L.fromArray([$Html$Attributes.href(header.linkedin)]),
                                              _L.fromArray([$Html.text(header.linkedin)]))]))]))]));
@@ -12767,7 +12770,7 @@ Elm.ResumeView.make = function (_elm) {
                                 _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
                                 _L.fromArray([$Html.text("Skills")]))
                                 ,A2($Html.div,
-                                _L.fromArray([$Html$Attributes.$class("bulletSep")]),
+                                _L.fromArray([$Html$Attributes.$class("bulletSepList")]),
                                 A2($List.map,
                                 function (_v20) {
                                    return function () {
@@ -12786,7 +12789,7 @@ Elm.ResumeView.make = function (_elm) {
                                 _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
                                 _L.fromArray([$Html.text("Traits")]))
                                 ,A2($Html.div,
-                                _L.fromArray([$Html$Attributes.$class("bulletSep")]),
+                                _L.fromArray([$Html$Attributes.$class("bulletSepList")]),
                                 A2($List.map,
                                 function (trait) {
                                    return A2($Html.span,
