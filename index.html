@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>ResumeView</title><style>html,head,body { padding:0; margin:0; }
+<html><head><meta charset="UTF-8"><title>HomePage</title><style>html,head,body { padding:0; margin:0; }
 body { font-family: calibri, helvetica, arial, sans-serif; }</style><script type="text/javascript">var Elm = Elm || { Native: {} };Elm.Array = Elm.Array || {};
 Elm.Array.make = function (_elm) {
    "use strict";
@@ -807,6 +807,52 @@ Elm.Debug.make = function (_elm) {
                        ,watchSummary: watchSummary
                        ,trace: trace};
    return _elm.Debug.values;
+};Elm.Demos = Elm.Demos || {};
+Elm.Demos.make = function (_elm) {
+   "use strict";
+   _elm.Demos = _elm.Demos || {};
+   if (_elm.Demos.values)
+   return _elm.Demos.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Demos",
+   $Basics = Elm.Basics.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Resume = Elm.Resume.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var demos = function (model) {
+      return A2($List.filter,
+      function (item) {
+         return !_U.eq(item.demo,
+         $Maybe.Nothing) || !_U.eq(item.repo,
+         $Maybe.Nothing);
+      },
+      model.projects);
+   };
+   var view = function (model) {
+      return A2($Html.div,
+      _L.fromArray([]),
+      _L.fromArray([$Resume.viewHeader(model.header)
+                   ,A2($Html.section,
+                   _L.fromArray([$Html$Attributes.id("demos_repos")]),
+                   A2($List._op["::"],
+                   A2($Html.h2,
+                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                   _L.fromArray([$Html.text("Demos and Repos")])),
+                   A2($List.map,
+                   $Resume.viewItem,
+                   demos(model))))]));
+   };
+   _elm.Demos.values = {_op: _op
+                       ,demos: demos
+                       ,view: view};
+   return _elm.Demos.values;
 };Elm.Dict = Elm.Dict || {};
 Elm.Dict.make = function (_elm) {
    "use strict";
@@ -2681,6 +2727,123 @@ Elm.Graphics.Element.make = function (_elm) {
                                   ,Element: Element
                                   ,Position: Position};
    return _elm.Graphics.Element.values;
+};Elm.HomePage = Elm.HomePage || {};
+Elm.HomePage.make = function (_elm) {
+   "use strict";
+   _elm.HomePage = _elm.HomePage || {};
+   if (_elm.HomePage.values)
+   return _elm.HomePage.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "HomePage",
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Demos = Elm.Demos.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Menu = Elm.Menu.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Resume = Elm.Resume.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $StartApp$Simple = Elm.StartApp.Simple.make(_elm);
+   var update = F2(function (act,
+   model) {
+      return function () {
+         var _ = A2($Debug.log,
+         "Update",
+         act);
+         return function () {
+            switch (act.ctor)
+            {case "MenuAct":
+               return _U.replace([["mode"
+                                  ,$Menu.update(act._0)]],
+                 model);
+               case "NoOp": return model;}
+            _U.badCase($moduleName,
+            "between lines 39 and 41");
+         }();
+      }();
+   });
+   var NoOp = {ctor: "NoOp"};
+   var MenuAct = function (a) {
+      return {ctor: "MenuAct"
+             ,_0: a};
+   };
+   var Model = F2(function (a,b) {
+      return {_: {}
+             ,mode: a
+             ,resume: b};
+   });
+   var Blog = {ctor: "Blog"};
+   var Demos = {ctor: "Demos"};
+   var CV = {ctor: "CV"};
+   var menu = _L.fromArray([{ctor: "_Tuple2"
+                            ,_0: "Resume"
+                            ,_1: CV}
+                           ,{ctor: "_Tuple2"
+                            ,_0: "Demos and Source"
+                            ,_1: Demos}
+                           ,{ctor: "_Tuple2"
+                            ,_0: "Blog"
+                            ,_1: Blog}]);
+   var view = F2(function (addr,
+   model) {
+      return function () {
+         var fwd = A2($Signal.forwardTo,
+         addr,
+         MenuAct);
+         return A2($Html.div,
+         _L.fromArray([]),
+         _L.fromArray([$Resume.purecss
+                      ,$Resume.localcss
+                      ,$Resume.printcss
+                      ,$Resume.printmediaCss
+                      ,A2($Html.div,
+                      _L.fromArray([$Html$Attributes.id("layout")]),
+                      _L.fromArray([A3($Menu.view,
+                                   fwd,
+                                   menu,
+                                   model.mode)
+                                   ,function () {
+                                      var _v2 = model.mode;
+                                      switch (_v2.ctor)
+                                      {case "Blog":
+                                         return A2($Html.div,
+                                           _L.fromArray([]),
+                                           _L.fromArray([$Html.text("Someday I will have the time to blog ... ")]));
+                                         case "CV":
+                                         return $Resume.view(model.resume);
+                                         case "Demos":
+                                         return $Demos.view(model.resume);}
+                                      _U.badCase($moduleName,
+                                      "between lines 60 and 64");
+                                   }()]))]));
+      }();
+   });
+   var init = {_: {}
+              ,mode: CV
+              ,resume: $Resume.init};
+   var main = $StartApp$Simple.start({_: {}
+                                     ,model: init
+                                     ,update: update
+                                     ,view: view});
+   _elm.HomePage.values = {_op: _op
+                          ,CV: CV
+                          ,Demos: Demos
+                          ,Blog: Blog
+                          ,menu: menu
+                          ,Model: Model
+                          ,init: init
+                          ,MenuAct: MenuAct
+                          ,NoOp: NoOp
+                          ,update: update
+                          ,view: view
+                          ,main: main};
+   return _elm.HomePage.values;
 };Elm.Html = Elm.Html || {};
 Elm.Html.make = function (_elm) {
    "use strict";
@@ -4213,6 +4376,80 @@ Elm.Maybe.make = function (_elm) {
                        ,Just: Just
                        ,Nothing: Nothing};
    return _elm.Maybe.values;
+};Elm.Menu = Elm.Menu || {};
+Elm.Menu.make = function (_elm) {
+   "use strict";
+   _elm.Menu = _elm.Menu || {};
+   if (_elm.Menu.values)
+   return _elm.Menu.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Menu",
+   $Basics = Elm.Basics.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Html$Events = Elm.Html.Events.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var update = function (_v0) {
+      return function () {
+         switch (_v0.ctor)
+         {case "Select": return _v0._0;}
+         _U.badCase($moduleName,
+         "on line 22, column 21 to 22");
+      }();
+   };
+   var Select = function (a) {
+      return {ctor: "Select"
+             ,_0: a};
+   };
+   var view = F3(function (addr,
+   choices,
+   sel) {
+      return function () {
+         var itemClass = F2(function (val,
+         selVal) {
+            return !_U.eq(val,
+            selVal) ? "pure-menu-item" : "pure-menu-item pure-menu-selected";
+         });
+         return A2($Html.div,
+         _L.fromArray([$Html$Attributes.id("menu")]),
+         _L.fromArray([A2($Html.div,
+         _L.fromArray([$Html$Attributes.$class("pure-menu")]),
+         _L.fromArray([A2($Html.span,
+                      _L.fromArray([$Html$Attributes.$class("pure-menu-heading")]),
+                      _L.fromArray([$Html.text("Choose")]))
+                      ,A2($Html.ul,
+                      _L.fromArray([$Html$Attributes.$class("pure-menu-list")]),
+                      A2($List.map,
+                      function (_v3) {
+                         return function () {
+                            switch (_v3.ctor)
+                            {case "_Tuple2":
+                               return A2($Html.li,
+                                 _L.fromArray([$Html$Attributes.$class(A2(itemClass,
+                                              _v3._1,
+                                              sel))
+                                              ,A2($Html$Events.onClick,
+                                              addr,
+                                              Select(_v3._1))]),
+                                 _L.fromArray([$Html.text(_v3._0)]));}
+                            _U.badCase($moduleName,
+                            "between lines 37 and 39");
+                         }();
+                      },
+                      choices))]))]));
+      }();
+   });
+   _elm.Menu.values = {_op: _op
+                      ,Select: Select
+                      ,update: update
+                      ,view: view};
+   return _elm.Menu.values;
 };Elm.Native.Array = {};
 Elm.Native.Array.make = function(localRuntime) {
 
@@ -12140,6 +12377,294 @@ Elm.Result.make = function (_elm) {
                         ,Ok: Ok
                         ,Err: Err};
    return _elm.Result.values;
+};Elm.Resume = Elm.Resume || {};
+Elm.Resume.make = function (_elm) {
+   "use strict";
+   _elm.Resume = _elm.Resume || {};
+   if (_elm.Resume.values)
+   return _elm.Resume.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Resume",
+   $Basics = Elm.Basics.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $ResumeData = Elm.ResumeData.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $String = Elm.String.make(_elm);
+   var printmediaCss = A3($Html.node,
+   "style",
+   _L.fromArray([$Html$Attributes.type$("text/css")]),
+   _L.fromArray([$Html.text("@media print {\n            .link { display: none; }\n          }")]));
+   var printcss = A3($Html.node,
+   "style",
+   _L.fromArray([$Html$Attributes.type$("text/css")]),
+   _L.fromArray([$Html.text("@import \'css/print-style.css\';")]));
+   var localcss = A3($Html.node,
+   "link",
+   _L.fromArray([$Html$Attributes.rel("stylesheet")
+                ,$Html$Attributes.type$("text/css")
+                ,$Html$Attributes.href("css/style.css")]),
+   _L.fromArray([]));
+   var purecss = A3($Html.node,
+   "link",
+   _L.fromArray([$Html$Attributes.rel("stylesheet")
+                ,$Html$Attributes.type$("text/css")
+                ,$Html$Attributes.href("http://yui.yahooapis.com/pure/0.6.0/pure-min.css")]),
+   _L.fromArray([]));
+   var bullet = A2($Html.span,
+   _L.fromArray([$Html$Attributes.$class("bullet")]),
+   _L.fromArray([]));
+   var viewHeader = function (header) {
+      return function () {
+         var $short = function (url) {
+            return A2($String.dropLeft,
+            8,
+            url);
+         };
+         return A2($Html.section,
+         _L.fromArray([$Html$Attributes.id("header")]),
+         _L.fromArray([A2($Html.div,
+                      _L.fromArray([$Html$Attributes.id("namePhoto")]),
+                      _L.fromArray([A2($Html.div,
+                      _L.fromArray([$Html$Attributes.id("nameAffil")]),
+                      A2($List._op["::"],
+                      A2($Html.h1,
+                      _L.fromArray([$Html$Attributes.$class("myName")]),
+                      _L.fromArray([$Html.text(header.name)])),
+                      A2($List.map,
+                      function (affil) {
+                         return A2($Html.div,
+                         _L.fromArray([$Html$Attributes.$class("affil")]),
+                         _L.fromArray([$Html.text(affil)]));
+                      },
+                      header.affils)))]))
+                      ,A2($Html.div,
+                      _L.fromArray([$Html$Attributes.$class("myContactInfo")]),
+                      _L.fromArray([A2($Html.div,
+                                   _L.fromArray([]),
+                                   _L.fromArray([$Html.text(header.home)]))
+                                   ,A2($Html.div,
+                                   _L.fromArray([]),
+                                   _L.fromArray([$Html.text(header.email)
+                                                ,bullet
+                                                ,$Html.text(header.phone)]))
+                                   ,A2($Html.div,
+                                   _L.fromArray([$Html$Attributes.id("urls")]),
+                                   _L.fromArray([bullet
+                                                ,$Html.text("Home")
+                                                ,A2($Html.a,
+                                                _L.fromArray([$Html$Attributes.href(header.homepage)
+                                                             ,$Html$Attributes.target("_blank")]),
+                                                _L.fromArray([$Html.text($short(header.homepage))]))
+                                                ,bullet
+                                                ,$Html.text("Github")
+                                                ,A2($Html.a,
+                                                _L.fromArray([$Html$Attributes.href(header.github)
+                                                             ,$Html$Attributes.target("_blank")]),
+                                                _L.fromArray([$Html.text($short(header.github))]))
+                                                ,bullet
+                                                ,$Html.text("LinkedIn")
+                                                ,A2($Html.a,
+                                                _L.fromArray([$Html$Attributes.href(header.linkedin)
+                                                             ,$Html$Attributes.target("_blank")]),
+                                                _L.fromArray([$Html.text($short(header.linkedin))]))]))]))]));
+      }();
+   };
+   var nullHtml = A3($Html.node,
+   "noscript",
+   _L.fromArray([]),
+   _L.fromArray([]));
+   var viewItem = function (item) {
+      return function () {
+         var $ = item,
+         name = $.name,
+         role = $.role,
+         location = $.location,
+         dates = $.dates,
+         details = $.details,
+         more = $.more,
+         repo = $.repo,
+         demo = $.demo;
+         var srcLink = function () {
+            switch (repo.ctor)
+            {case "Just": return A2($Html.a,
+                 _L.fromArray([$Html$Attributes.$class("link")
+                              ,$Html$Attributes.href(repo._0)
+                              ,$Html$Attributes.target("_blank")]),
+                 _L.fromArray([$Html.text("source")]));
+               case "Nothing":
+               return nullHtml;}
+            _U.badCase($moduleName,
+            "between lines 24 and 27");
+         }();
+         var demoLink = function () {
+            switch (demo.ctor)
+            {case "Just": return A2($Html.a,
+                 _L.fromArray([$Html$Attributes.$class("link")
+                              ,$Html$Attributes.href(demo._0)
+                              ,$Html$Attributes.target("_blank")]),
+                 _L.fromArray([$Html.text("demo")]));
+               case "Nothing":
+               return nullHtml;}
+            _U.badCase($moduleName,
+            "between lines 27 and 30");
+         }();
+         return A2($Html.div,
+         _L.fromArray([$Html$Attributes.$class("item")]),
+         _L.fromArray([A2($Html.div,
+                      _L.fromArray([$Html$Attributes.$class("itemLeft")]),
+                      _L.fromArray([A2($Html.h3,
+                                   _L.fromArray([$Html$Attributes.$class("itemName")]),
+                                   _L.fromArray([$Html.text(name)
+                                                ,A2($Html.span,
+                                                _L.fromArray([]),
+                                                _L.fromArray([srcLink
+                                                             ,demoLink]))]))
+                                   ,A2($Html.ul,
+                                   _L.fromArray([$Html$Attributes.$class("itemDetails")]),
+                                   A2($List.map,
+                                   function (x) {
+                                      return A2($Html.li,
+                                      _L.fromArray([$Html$Attributes.$class("detail")]),
+                                      _L.fromArray([$Html.text(x)]));
+                                   },
+                                   details))]))
+                      ,A2($Html.div,
+                      _L.fromArray([$Html$Attributes.$class("itemAttrs")]),
+                      _L.fromArray([A2($Html.div,
+                                   _L.fromArray([$Html$Attributes.$class("itemDates")]),
+                                   _L.fromArray([$Html.text(dates)]))
+                                   ,A2($Html.div,
+                                   _L.fromArray([$Html$Attributes.$class("itemRole")]),
+                                   _L.fromArray([$Html.text(role)]))
+                                   ,A2($Html.div,
+                                   _L.fromArray([$Html$Attributes.$class("itemLocation")]),
+                                   _L.fromArray([$Html.text(location)]))]))]));
+      }();
+   };
+   var view = function (model) {
+      return A2($Html.div,
+      _L.fromArray([]),
+      _L.fromArray([purecss
+                   ,localcss
+                   ,printcss
+                   ,printmediaCss
+                   ,viewHeader(model.header)
+                   ,A2($Html.section,
+                   _L.fromArray([$Html$Attributes.id("education")]),
+                   A2($List._op["::"],
+                   A2($Html.h2,
+                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                   _L.fromArray([$Html.text("Education")])),
+                   A2($List.map,
+                   viewItem,
+                   model.education)))
+                   ,A2($Html.section,
+                   _L.fromArray([$Html$Attributes.id("work")]),
+                   A2($List._op["::"],
+                   A2($Html.h2,
+                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                   _L.fromArray([$Html.text("Work Experience")])),
+                   A2($List.map,
+                   viewItem,
+                   model.work)))
+                   ,A2($Html.section,
+                   _L.fromArray([$Html$Attributes.id("projects")]),
+                   A2($List._op["::"],
+                   A2($Html.h2,
+                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                   _L.fromArray([$Html.text("Project Experience")])),
+                   A2($List.map,
+                   viewItem,
+                   model.projects)))
+                   ,A2($Html.section,
+                   _L.fromArray([$Html$Attributes.id("publications")]),
+                   A2($List._op["::"],
+                   A2($Html.h2,
+                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                   _L.fromArray([$Html.text("Publications")])),
+                   A2($List.map,
+                   viewItem,
+                   model.publications)))
+                   ,A2($Html.section,
+                   _L.fromArray([$Html$Attributes.id("activities")]),
+                   _L.fromArray([A2($Html.h2,
+                                _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                                _L.fromArray([$Html.text("Activities")]))
+                                ,A2($Html.ul,
+                                _L.fromArray([]),
+                                A2($List.map,
+                                function (_v4) {
+                                   return function () {
+                                      return A2($Html.li,
+                                      _L.fromArray([$Html$Attributes.$class("split-l-r")]),
+                                      _L.fromArray([A2($Html.span,
+                                                   _L.fromArray([$Html$Attributes.$class("left")]),
+                                                   _L.fromArray([$Html.text(_v4.name)
+                                                                ,$Html.text(", ")
+                                                                ,$Html.text(_v4.role)]))
+                                                   ,A2($Html.span,
+                                                   _L.fromArray([$Html$Attributes.$class("right")]),
+                                                   _L.fromArray([$Html.text(_v4.dates)]))]));
+                                   }();
+                                },
+                                model.activities))]))
+                   ,A2($Html.section,
+                   _L.fromArray([$Html$Attributes.id("skills")]),
+                   _L.fromArray([A2($Html.h2,
+                                _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                                _L.fromArray([$Html.text("Skills")]))
+                                ,A2($Html.div,
+                                _L.fromArray([$Html$Attributes.$class("bulletSepList")]),
+                                A2($List.map,
+                                function (_v6) {
+                                   return function () {
+                                      return A2($Html.span,
+                                      _L.fromArray([]),
+                                      _L.fromArray([bullet
+                                                   ,$Html.text(_v6.name)
+                                                   ,$Html.text(": ")
+                                                   ,$Html.text(_v6.level)]));
+                                   }();
+                                },
+                                model.skills))]))
+                   ,A2($Html.section,
+                   _L.fromArray([$Html$Attributes.id("traits")]),
+                   _L.fromArray([A2($Html.h2,
+                                _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                                _L.fromArray([$Html.text("Traits")]))
+                                ,A2($Html.div,
+                                _L.fromArray([$Html$Attributes.$class("bulletSepList")]),
+                                A2($List.map,
+                                function (trait) {
+                                   return A2($Html.span,
+                                   _L.fromArray([]),
+                                   _L.fromArray([bullet
+                                                ,$Html.text(trait)]));
+                                },
+                                model.traits))]))]));
+   };
+   var main = view($ResumeData.kelseyResume);
+   var init = $ResumeData.kelseyResume;
+   _elm.Resume.values = {_op: _op
+                        ,init: init
+                        ,nullHtml: nullHtml
+                        ,viewItem: viewItem
+                        ,bullet: bullet
+                        ,viewHeader: viewHeader
+                        ,purecss: purecss
+                        ,localcss: localcss
+                        ,printcss: printcss
+                        ,printmediaCss: printmediaCss
+                        ,view: view
+                        ,main: main};
+   return _elm.Resume.values;
 };Elm.ResumeData = Elm.ResumeData || {};
 Elm.ResumeData.make = function (_elm) {
    "use strict";
@@ -12418,466 +12943,6 @@ Elm.ResumeData.make = function (_elm) {
                             ,Activity: Activity
                             ,Skill: Skill};
    return _elm.ResumeData.values;
-};Elm.ResumeView = Elm.ResumeView || {};
-Elm.ResumeView.make = function (_elm) {
-   "use strict";
-   _elm.ResumeView = _elm.ResumeView || {};
-   if (_elm.ResumeView.values)
-   return _elm.ResumeView.values;
-   var _op = {},
-   _N = Elm.Native,
-   _U = _N.Utils.make(_elm),
-   _L = _N.List.make(_elm),
-   $moduleName = "ResumeView",
-   $Basics = Elm.Basics.make(_elm),
-   $Debug = Elm.Debug.make(_elm),
-   $Html = Elm.Html.make(_elm),
-   $Html$Attributes = Elm.Html.Attributes.make(_elm),
-   $Html$Events = Elm.Html.Events.make(_elm),
-   $List = Elm.List.make(_elm),
-   $Maybe = Elm.Maybe.make(_elm),
-   $Result = Elm.Result.make(_elm),
-   $ResumeData = Elm.ResumeData.make(_elm),
-   $Signal = Elm.Signal.make(_elm),
-   $StartApp$Simple = Elm.StartApp.Simple.make(_elm),
-   $String = Elm.String.make(_elm);
-   var printmediaCss = A3($Html.node,
-   "style",
-   _L.fromArray([$Html$Attributes.type$("text/css")]),
-   _L.fromArray([$Html.text("@media print {\n            .link { display: none; }\n          }")]));
-   var printcss = A3($Html.node,
-   "style",
-   _L.fromArray([$Html$Attributes.type$("text/css")]),
-   _L.fromArray([$Html.text("@import \'css/print-style.css\';")]));
-   var localcss = A3($Html.node,
-   "link",
-   _L.fromArray([$Html$Attributes.rel("stylesheet")
-                ,$Html$Attributes.type$("text/css")
-                ,$Html$Attributes.href("css/style.css")]),
-   _L.fromArray([]));
-   var purecss = A3($Html.node,
-   "link",
-   _L.fromArray([$Html$Attributes.rel("stylesheet")
-                ,$Html$Attributes.type$("text/css")
-                ,$Html$Attributes.href("http://yui.yahooapis.com/pure/0.6.0/pure-min.css")]),
-   _L.fromArray([]));
-   var bullet = A2($Html.span,
-   _L.fromArray([$Html$Attributes.$class("bullet")]),
-   _L.fromArray([]));
-   var viewHeader = function (header) {
-      return function () {
-         var $short = function (url) {
-            return A2($String.dropLeft,
-            8,
-            url);
-         };
-         return A2($Html.section,
-         _L.fromArray([$Html$Attributes.id("header")]),
-         _L.fromArray([A2($Html.div,
-                      _L.fromArray([$Html$Attributes.id("namePhoto")]),
-                      _L.fromArray([A2($Html.div,
-                      _L.fromArray([$Html$Attributes.id("nameAffil")]),
-                      A2($List._op["::"],
-                      A2($Html.h1,
-                      _L.fromArray([$Html$Attributes.$class("myName")]),
-                      _L.fromArray([$Html.text(header.name)])),
-                      A2($List.map,
-                      function (affil) {
-                         return A2($Html.div,
-                         _L.fromArray([$Html$Attributes.$class("affil")]),
-                         _L.fromArray([$Html.text(affil)]));
-                      },
-                      header.affils)))]))
-                      ,A2($Html.div,
-                      _L.fromArray([$Html$Attributes.$class("myContactInfo")]),
-                      _L.fromArray([A2($Html.div,
-                                   _L.fromArray([]),
-                                   _L.fromArray([$Html.text(header.home)]))
-                                   ,A2($Html.div,
-                                   _L.fromArray([]),
-                                   _L.fromArray([$Html.text(header.email)
-                                                ,bullet
-                                                ,$Html.text(header.phone)]))
-                                   ,A2($Html.div,
-                                   _L.fromArray([$Html$Attributes.id("urls")]),
-                                   _L.fromArray([bullet
-                                                ,$Html.text("Home")
-                                                ,A2($Html.a,
-                                                _L.fromArray([$Html$Attributes.href(header.homepage)
-                                                             ,$Html$Attributes.target("_blank")]),
-                                                _L.fromArray([$Html.text($short(header.homepage))]))
-                                                ,bullet
-                                                ,$Html.text("Github")
-                                                ,A2($Html.a,
-                                                _L.fromArray([$Html$Attributes.href(header.github)
-                                                             ,$Html$Attributes.target("_blank")]),
-                                                _L.fromArray([$Html.text($short(header.github))]))
-                                                ,bullet
-                                                ,$Html.text("LinkedIn")
-                                                ,A2($Html.a,
-                                                _L.fromArray([$Html$Attributes.href(header.linkedin)
-                                                             ,$Html$Attributes.target("_blank")]),
-                                                _L.fromArray([$Html.text($short(header.linkedin))]))]))]))]));
-      }();
-   };
-   var nullHtml = A3($Html.node,
-   "noscript",
-   _L.fromArray([]),
-   _L.fromArray([]));
-   var viewItem = F3(function (addr,
-   callback,
-   _v0) {
-      return function () {
-         switch (_v0.ctor)
-         {case "_Tuple2":
-            return function () {
-                 var prompt = _v0._1 ? "Less" : "More";
-                 var toggler = false ? A2($Html.a,
-                 _L.fromArray([$Html$Attributes.$class("more-less link")
-                              ,A2($Html$Events.onClick,
-                              addr,
-                              callback)
-                              ,$Html$Attributes.href("javascript:void(0)")]),
-                 _L.fromArray([$Html.text(prompt)])) : nullHtml;
-                 var $ = _v0._0,
-                 name = $.name,
-                 role = $.role,
-                 location = $.location,
-                 dates = $.dates,
-                 details = $.details,
-                 more = $.more,
-                 repo = $.repo,
-                 demo = $.demo;
-                 var hasMore = $Basics.not(_U.eq(more,
-                 $Maybe.Nothing));
-                 var shownMore = false ? A2($Html.div,
-                 _L.fromArray([$Html$Attributes.$class("more")]),
-                 _L.fromArray([$Html.text($Basics.toString(more))])) : nullHtml;
-                 var srcLink = function () {
-                    switch (repo.ctor)
-                    {case "Just": return A2($Html.a,
-                         _L.fromArray([$Html$Attributes.$class("link")
-                                      ,$Html$Attributes.href(repo._0)
-                                      ,$Html$Attributes.target("_blank")]),
-                         _L.fromArray([$Html.text("source")]));
-                       case "Nothing":
-                       return nullHtml;}
-                    _U.badCase($moduleName,
-                    "between lines 87 and 90");
-                 }();
-                 var demoLink = function () {
-                    switch (demo.ctor)
-                    {case "Just": return A2($Html.a,
-                         _L.fromArray([$Html$Attributes.$class("link")
-                                      ,$Html$Attributes.href(demo._0)
-                                      ,$Html$Attributes.target("_blank")]),
-                         _L.fromArray([$Html.text("demo")]));
-                       case "Nothing":
-                       return nullHtml;}
-                    _U.badCase($moduleName,
-                    "between lines 90 and 93");
-                 }();
-                 return A2($Html.div,
-                 _L.fromArray([$Html$Attributes.$class("item")]),
-                 _L.fromArray([A2($Html.div,
-                              _L.fromArray([$Html$Attributes.$class("itemLeft")]),
-                              _L.fromArray([A2($Html.h3,
-                                           _L.fromArray([$Html$Attributes.$class("itemName")]),
-                                           _L.fromArray([$Html.text(name)
-                                                        ,A2($Html.span,
-                                                        _L.fromArray([]),
-                                                        _L.fromArray([toggler
-                                                                     ,srcLink
-                                                                     ,demoLink]))]))
-                                           ,A2($Html.ul,
-                                           _L.fromArray([$Html$Attributes.$class("itemDetails")]),
-                                           A2($List.map,
-                                           function (x) {
-                                              return A2($Html.li,
-                                              _L.fromArray([$Html$Attributes.$class("detail")]),
-                                              _L.fromArray([$Html.text(x)]));
-                                           },
-                                           details))
-                                           ,shownMore]))
-                              ,A2($Html.div,
-                              _L.fromArray([$Html$Attributes.$class("itemAttrs")]),
-                              _L.fromArray([A2($Html.div,
-                                           _L.fromArray([$Html$Attributes.$class("itemDates")]),
-                                           _L.fromArray([$Html.text(dates)]))
-                                           ,A2($Html.div,
-                                           _L.fromArray([$Html$Attributes.$class("itemRole")]),
-                                           _L.fromArray([$Html.text(role)]))
-                                           ,A2($Html.div,
-                                           _L.fromArray([$Html$Attributes.$class("itemLocation")]),
-                                           _L.fromArray([$Html.text(location)]))]))]));
-              }();}
-         _U.badCase($moduleName,
-         "between lines 77 and 110");
-      }();
-   });
-   var viewItemList = F3(function (addr,
-   tagger,
-   list) {
-      return A2($List.indexedMap,
-      F2(function (i,expando) {
-         return A3(viewItem,
-         addr,
-         tagger(i),
-         expando);
-      }),
-      list);
-   });
-   var toggleExpando = F2(function (action,
-   model) {
-      return function () {
-         var _ = A2($Debug.log,
-         "Update",
-         action);
-         var toggle_i = F2(function (i,
-         list) {
-            return function () {
-               switch (list.ctor)
-               {case "::":
-                  switch (list._0.ctor)
-                    {case "_Tuple2": return _U.eq(i,
-                         0) ? A2($List._op["::"],
-                         {ctor: "_Tuple2"
-                         ,_0: list._0._0
-                         ,_1: $Basics.not(list._0._1)},
-                         list._1) : A2($List._op["::"],
-                         {ctor: "_Tuple2"
-                         ,_0: list._0._0
-                         ,_1: list._0._1},
-                         A2(toggle_i,i - 1,list._1));}
-                    break;
-                  case "[]":
-                  return _L.fromArray([]);}
-               _U.badCase($moduleName,
-               "between lines 55 and 61");
-            }();
-         });
-         return function () {
-            switch (action.ctor)
-            {case "ToggleEducation":
-               return _U.replace([["education"
-                                  ,A2(toggle_i,
-                                  action._0,
-                                  model.education)]],
-                 model);
-               case "ToggleProject":
-               return _U.replace([["projects"
-                                  ,A2(toggle_i,
-                                  action._0,
-                                  model.projects)]],
-                 model);
-               case "TogglePub":
-               return _U.replace([["publications"
-                                  ,A2(toggle_i,
-                                  action._0,
-                                  model.publications)]],
-                 model);
-               case "ToggleWork":
-               return _U.replace([["work"
-                                  ,A2(toggle_i,
-                                  action._0,
-                                  model.work)]],
-                 model);}
-            _U.badCase($moduleName,
-            "between lines 63 and 67");
-         }();
-      }();
-   });
-   var NoOp = function (a) {
-      return {ctor: "NoOp",_0: a};
-   };
-   var TogglePub = function (a) {
-      return {ctor: "TogglePub"
-             ,_0: a};
-   };
-   var ToggleProject = function (a) {
-      return {ctor: "ToggleProject"
-             ,_0: a};
-   };
-   var ToggleWork = function (a) {
-      return {ctor: "ToggleWork"
-             ,_0: a};
-   };
-   var ToggleEducation = function (a) {
-      return {ctor: "ToggleEducation"
-             ,_0: a};
-   };
-   var view = F2(function (addr,
-   model) {
-      return A2($Html.div,
-      _L.fromArray([]),
-      _L.fromArray([purecss
-                   ,localcss
-                   ,printcss
-                   ,printmediaCss
-                   ,viewHeader(model.header)
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("education")]),
-                   A2($List._op["::"],
-                   A2($Html.h2,
-                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                   _L.fromArray([$Html.text("Education")])),
-                   A3(viewItemList,
-                   addr,
-                   ToggleEducation,
-                   model.education)))
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("work")]),
-                   A2($List._op["::"],
-                   A2($Html.h2,
-                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                   _L.fromArray([$Html.text("Work Experience")])),
-                   A3(viewItemList,
-                   addr,
-                   ToggleWork,
-                   model.work)))
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("projects")]),
-                   A2($List._op["::"],
-                   A2($Html.h2,
-                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                   _L.fromArray([$Html.text("Project Experience")])),
-                   A3(viewItemList,
-                   addr,
-                   ToggleProject,
-                   model.projects)))
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("publications")]),
-                   A2($List._op["::"],
-                   A2($Html.h2,
-                   _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                   _L.fromArray([$Html.text("Publications")])),
-                   A3(viewItemList,
-                   addr,
-                   TogglePub,
-                   model.publications)))
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("activities")]),
-                   _L.fromArray([A2($Html.h2,
-                                _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                                _L.fromArray([$Html.text("Activities")]))
-                                ,A2($Html.ul,
-                                _L.fromArray([]),
-                                A2($List.map,
-                                function (_v18) {
-                                   return function () {
-                                      return A2($Html.li,
-                                      _L.fromArray([$Html$Attributes.$class("split-l-r")]),
-                                      _L.fromArray([A2($Html.span,
-                                                   _L.fromArray([$Html$Attributes.$class("left")]),
-                                                   _L.fromArray([$Html.text(_v18.name)
-                                                                ,$Html.text(", ")
-                                                                ,$Html.text(_v18.role)]))
-                                                   ,A2($Html.span,
-                                                   _L.fromArray([$Html$Attributes.$class("right")]),
-                                                   _L.fromArray([$Html.text(_v18.dates)]))]));
-                                   }();
-                                },
-                                model.activities))]))
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("skills")]),
-                   _L.fromArray([A2($Html.h2,
-                                _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                                _L.fromArray([$Html.text("Skills")]))
-                                ,A2($Html.div,
-                                _L.fromArray([$Html$Attributes.$class("bulletSepList")]),
-                                A2($List.map,
-                                function (_v20) {
-                                   return function () {
-                                      return A2($Html.span,
-                                      _L.fromArray([]),
-                                      _L.fromArray([bullet
-                                                   ,$Html.text(_v20.name)
-                                                   ,$Html.text(": ")
-                                                   ,$Html.text(_v20.level)]));
-                                   }();
-                                },
-                                model.skills))]))
-                   ,A2($Html.section,
-                   _L.fromArray([$Html$Attributes.id("traits")]),
-                   _L.fromArray([A2($Html.h2,
-                                _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
-                                _L.fromArray([$Html.text("Traits")]))
-                                ,A2($Html.div,
-                                _L.fromArray([$Html$Attributes.$class("bulletSepList")]),
-                                A2($List.map,
-                                function (trait) {
-                                   return A2($Html.span,
-                                   _L.fromArray([]),
-                                   _L.fromArray([bullet
-                                                ,$Html.text(trait)]));
-                                },
-                                model.traits))]))]));
-   });
-   var expandoList = function (list) {
-      return A2($List.map,
-      function (i) {
-         return {ctor: "_Tuple2"
-                ,_0: i
-                ,_1: false};
-      },
-      list);
-   };
-   var init = function () {
-      var r = $ResumeData.kelseyResume;
-      return {_: {}
-             ,activities: r.activities
-             ,education: expandoList(r.education)
-             ,header: r.header
-             ,projects: expandoList(r.projects)
-             ,publications: expandoList(r.publications)
-             ,skills: r.skills
-             ,traits: r.traits
-             ,work: expandoList(r.work)};
-   }();
-   var main = $StartApp$Simple.start({_: {}
-                                     ,model: init
-                                     ,update: toggleExpando
-                                     ,view: view});
-   var Model = F8(function (a,
-   b,
-   c,
-   d,
-   e,
-   f,
-   g,
-   h) {
-      return {_: {}
-             ,activities: f
-             ,education: b
-             ,header: a
-             ,projects: d
-             ,publications: e
-             ,skills: g
-             ,traits: h
-             ,work: c};
-   });
-   _elm.ResumeView.values = {_op: _op
-                            ,Model: Model
-                            ,expandoList: expandoList
-                            ,init: init
-                            ,ToggleEducation: ToggleEducation
-                            ,ToggleWork: ToggleWork
-                            ,ToggleProject: ToggleProject
-                            ,TogglePub: TogglePub
-                            ,NoOp: NoOp
-                            ,toggleExpando: toggleExpando
-                            ,nullHtml: nullHtml
-                            ,viewItem: viewItem
-                            ,viewItemList: viewItemList
-                            ,bullet: bullet
-                            ,viewHeader: viewHeader
-                            ,purecss: purecss
-                            ,localcss: localcss
-                            ,printcss: printcss
-                            ,printmediaCss: printmediaCss
-                            ,view: view
-                            ,main: main};
-   return _elm.ResumeView.values;
 };Elm.Signal = Elm.Signal || {};
 Elm.Signal.make = function (_elm) {
    "use strict";
@@ -13616,4 +13681,4 @@ Elm.VirtualDom.make = function (_elm) {
                             ,lazy3: lazy3
                             ,Options: Options};
    return _elm.VirtualDom.values;
-};</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.ResumeView)</script></body></html>
+};</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.HomePage)</script></body></html>

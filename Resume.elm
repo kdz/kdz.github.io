@@ -1,89 +1,26 @@
-module ResumeView where
+module Resume where
 
-import ResumeData as RD
+import ResumeData exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Basics exposing (toString)
-import Signal exposing (Signal, Address)
-import StartApp.Simple as StartApp
 import String
-import Debug
 
 -- ------ MODEL ----
 
-type alias Expando = (RD.Item, Bool)
+type alias Model = Resume 
+type alias Item = ResumeData.Item
 
-type alias Model = {
-  header : RD.Header,
-  education : List Expando,
-  work : List Expando,
-  projects : List Expando,
-  publications : List Expando,
-  activities : List RD.Activity,
-  skills : List RD.Skill,
-  traits : List RD.Trait
-}
-
-expandoList : List RD.Item -> List Expando
-expandoList list = List.map (\i -> (i, False)) list
-
-init : Model
-init = 
-  let r = RD.kelseyResume in
-  { header = r.header,
-    education = expandoList r.education,
-    work = expandoList r.work,
-    projects = expandoList r.projects,
-    publications = expandoList r.publications,
-    activities = r.activities,
-    skills = r.skills,
-    traits = r.traits
-  }
-
--- UPDATE
-
-type Action
-    = ToggleEducation Int
-    | ToggleWork Int
-    | ToggleProject Int
-    | TogglePub Int
-    | NoOp Int
-
-toggleExpando : Action -> Model -> Model
-toggleExpando action model =
-  let toggle_i i list = case list of 
-        [] -> []
-        (item, expanded) :: rest -> 
-          if i==0 
-            then (item, (not expanded)) :: rest
-            else (item, expanded) :: (toggle_i (i-1) rest)
-      _ = Debug.log "Update" action
-  in
-  case action of
-    ToggleEducation i -> { model | education <- toggle_i i model.education }
-    ToggleWork i -> { model | work <- toggle_i i model.work }
-    ToggleProject i -> { model | projects <- toggle_i i model.projects }
-    TogglePub i -> { model | publications <- toggle_i i model.publications }
-
+init : Resume
+init = ResumeData.kelseyResume
 
 -- ----- VIEW ---
 
 nullHtml : Html
 nullHtml = node "noscript" [] []
 
-viewItem : Address Action -> Action -> Expando -> Html
-viewItem addr callback (item, expanded) = 
+viewItem : Item -> Html
+viewItem item = 
   let {name, role, location, dates, details, more, repo, demo} = item 
-      prompt = if expanded then "Less" else "More"
-      hasMore = not (more==Nothing) -- && repo==Nothing && demo==Nothing)
-      toggler = if False -- hasMore
-        then a  [ class "more-less link", onClick addr callback, href "javascript:void(0)"]
-                [ text prompt]
-        else nullHtml
-      shownMore = if False -- expanded && hasMore
-        then div [class "more"] [text (toString more)]
-        else nullHtml
       srcLink = case repo of
               Nothing -> nullHtml
               Just s -> a [ class "link", href s, target "_blank" ] [text "source"]
@@ -95,12 +32,9 @@ viewItem addr callback (item, expanded) =
     div [class "itemLeft"] [
       h3 [class "itemName"] [
         text name,
-        span [] [ toggler,
-                  srcLink,
-                  demoLink  ]
+        span [] [ srcLink, demoLink ]
       ],
-      ul [class "itemDetails"] (List.map (\x -> li [class "detail"] [text x]) details),
-      shownMore
+      ul [class "itemDetails"] (List.map (\x -> li [class "detail"] [text x]) details)
     ],
     div [class "itemAttrs"] [
       div [class "itemDates"] [text dates],
@@ -109,16 +43,10 @@ viewItem addr callback (item, expanded) =
     ]
   ]
 
-viewItemList : Address Action -> (Int -> Action) -> List Expando -> List Html
-viewItemList addr tagger list =
-  List.indexedMap 
-    (\i expando -> viewItem addr (tagger i) expando)
-    list
-
 bullet : Html
 bullet = span [class "bullet"] []
 
-viewHeader : RD.Header -> Html
+viewHeader : Header -> Html
 viewHeader header = 
   let short url = String.dropLeft 8 url 
   in
@@ -145,15 +73,19 @@ viewHeader header =
     ]
   ]
 
+purecss : Html
 purecss = 
   node "link" [rel "stylesheet", type' "text/css", href "http://yui.yahooapis.com/pure/0.6.0/pure-min.css"] []
 
+localcss : Html
 localcss =   
   node "link" [rel "stylesheet", type' "text/css", href "css/style.css"] []
 
+printcss : Html
 printcss = 
   node "style" [type' "text/css"] [text "@import 'css/print-style.css';"]
 
+printmediaCss : Html
 printmediaCss = 
   node "style" [type' "text/css"] [
     text "@media print {
@@ -161,8 +93,8 @@ printmediaCss =
           }" ]
 
 
-view : Address Action -> Model -> Html
-view addr model = 
+view : Model -> Html
+view model = 
   div [] [
 
     purecss,
@@ -175,25 +107,25 @@ view addr model =
     section [id "education"] (
       h2 [class "sectionHeader"] [text "Education"]
       ::
-      viewItemList addr ToggleEducation model.education
+      List.map viewItem model.education
     ),
     
     section [id "work"] (
       h2 [class "sectionHeader"] [text "Work Experience"]
       ::
-      viewItemList addr ToggleWork model.work
+      List.map viewItem model.work
     ),
 
     section [id "projects"] (
       h2 [class "sectionHeader"] [text "Project Experience"]
       ::
-      viewItemList addr ToggleProject model.projects
+      List.map viewItem model.projects
     ),
 
     section [id "publications"] (
       h2 [class "sectionHeader"] [text "Publications"]
       ::
-      viewItemList addr TogglePub model.publications
+      List.map viewItem model.publications
     ),
 
     section [id "activities"] [
@@ -228,12 +160,7 @@ view addr model =
     ]
   ]
 
--- ------- main
+-- ------- MAIN
 
-main : Signal Html
-main =
-  StartApp.start
-    { model = init
-    , update = toggleExpando
-    , view = view
-    }
+main : Html
+main = view kelseyResume

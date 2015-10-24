@@ -110,7 +110,8 @@ body {
 .itemAttrs {
     flex-basis: none;
 }
-/*#layout {
+
+#layout {
     padding-left: 160px;
     left: 0;
 }
@@ -123,8 +124,24 @@ body {
     bottom: 0;
     z-index: 1000;
     background: #191818;
-    color: aqua;
-}*/
+    color: white;
+    font-family: sans-serif;
+    /*margin-left: 10px;*/
+}
+
+.pure-menu-item {
+    font-size: 1.0em;
+    margin-top: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.pure-menu-selected {
+    background-color: darkcyan;
+    padding: 3px;
+    margin-right: -4px;
+    /*text-align: right;*/
+}
 
 /* ***** flexbox ***** */
 
