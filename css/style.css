@@ -142,10 +142,6 @@ body {
     margin-right: -4px;
 }
 
-#header, #myContactInfo {
-    vertical-align: text-bottom;
-}
-
 /* ***** flexbox ***** */
 
 /* *** MINIMIZE EDITS TO THIS SECTION !!! *** */
