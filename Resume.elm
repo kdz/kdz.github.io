@@ -23,7 +23,7 @@ viewItem item =
   let {name, role, location, dates, details, more, repo, demo} = item 
       srcLink = case repo of
               Nothing -> nullHtml
-              Just s -> a [ class "link", href s, target "_blank" ] [text "source"]
+              Just s -> a [ class "link", href s, target "_blank" ] [text "repo"]
       demoLink = case demo of
               Nothing -> nullHtml
               Just s -> a [class "link", href s, target "_blank"] [text "demo"]
@@ -63,8 +63,8 @@ viewHeader header =
     ],
     div [class "myContactInfo"] [
       div [] [  text header.home ],
-      div [] [  text header.email, bullet, 
-                text header.phone ],
+      div [] [  bullet, text header.email, 
+                bullet, text header.phone ],
       div [id "urls"] [
         bullet, text "Home", a [href header.homepage, target "_blank"] [text (short header.homepage)],
         bullet, text "Github", a [href header.github, target "_blank"] [text (short header.github)],

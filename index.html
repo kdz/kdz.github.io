@@ -2739,7 +2739,6 @@ Elm.HomePage.make = function (_elm) {
    _L = _N.List.make(_elm),
    $moduleName = "HomePage",
    $Basics = Elm.Basics.make(_elm),
-   $Debug = Elm.Debug.make(_elm),
    $Demos = Elm.Demos.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
@@ -2753,19 +2752,14 @@ Elm.HomePage.make = function (_elm) {
    var update = F2(function (act,
    model) {
       return function () {
-         var _ = A2($Debug.log,
-         "Update",
-         act);
-         return function () {
-            switch (act.ctor)
-            {case "MenuAct":
-               return _U.replace([["mode"
-                                  ,$Menu.update(act._0)]],
-                 model);
-               case "NoOp": return model;}
-            _U.badCase($moduleName,
-            "between lines 39 and 41");
-         }();
+         switch (act.ctor)
+         {case "MenuAct":
+            return _U.replace([["mode"
+                               ,$Menu.update(act._0)]],
+              model);
+            case "NoOp": return model;}
+         _U.badCase($moduleName,
+         "between lines 34 and 36");
       }();
    });
    var NoOp = {ctor: "NoOp"};
@@ -2778,6 +2772,7 @@ Elm.HomePage.make = function (_elm) {
              ,mode: a
              ,resume: b};
    });
+   var About = {ctor: "About"};
    var Blog = {ctor: "Blog"};
    var Demos = {ctor: "Demos"};
    var CV = {ctor: "CV"};
@@ -2789,7 +2784,10 @@ Elm.HomePage.make = function (_elm) {
                             ,_1: Demos}
                            ,{ctor: "_Tuple2"
                             ,_0: "Blog"
-                            ,_1: Blog}]);
+                            ,_1: Blog}
+                           ,{ctor: "_Tuple2"
+                            ,_0: "About"
+                            ,_1: About}]);
    var view = F2(function (addr,
    model) {
       return function () {
@@ -2811,16 +2809,47 @@ Elm.HomePage.make = function (_elm) {
                                    ,function () {
                                       var _v2 = model.mode;
                                       switch (_v2.ctor)
-                                      {case "Blog":
+                                      {case "About":
                                          return A2($Html.div,
                                            _L.fromArray([]),
-                                           _L.fromArray([$Html.text("Someday I will have the time to blog ... ")]));
+                                           _L.fromArray([A2($Html.div,
+                                           _L.fromArray([]),
+                                           _L.fromArray([$Resume.viewHeader(model.resume.header)
+                                                        ,A2($Html.section,
+                                                        _L.fromArray([$Html$Attributes.id("about")]),
+                                                        _L.fromArray([A2($Html.h2,
+                                                                     _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                                                                     _L.fromArray([$Html.text("About")]))
+                                                                     ,A2($Html.h4,
+                                                                     _L.fromArray([$Html$Attributes.$class("itemName")]),
+                                                                     _L.fromArray([$Html.text("This site is written in ")
+                                                                                  ,A2($Html.a,
+                                                                                  _L.fromArray([$Html$Attributes.href("http://www.elm-lang.org")
+                                                                                               ,$Html$Attributes.target("_blank")]),
+                                                                                  _L.fromArray([$Html.text("Elm")]))
+                                                                                  ,$Html.text(". Here is the ")
+                                                                                  ,A2($Html.a,
+                                                                                  _L.fromArray([$Html$Attributes.href("http://www.github.com/kdz/kdz.github.io.git")
+                                                                                               ,$Html$Attributes.target("_blank")]),
+                                                                                  _L.fromArray([$Html.text("repo")]))]))]))]))]));
+                                         case "Blog":
+                                         return A2($Html.div,
+                                           _L.fromArray([]),
+                                           _L.fromArray([$Resume.viewHeader(model.resume.header)
+                                                        ,A2($Html.section,
+                                                        _L.fromArray([$Html$Attributes.id("blog_repos")]),
+                                                        _L.fromArray([A2($Html.h2,
+                                                                     _L.fromArray([$Html$Attributes.$class("sectionHeader")]),
+                                                                     _L.fromArray([$Html.text("Blog")]))
+                                                                     ,A2($Html.h4,
+                                                                     _L.fromArray([$Html$Attributes.$class("itemName")]),
+                                                                     _L.fromArray([$Html.text("Someday I will find the time to blog ... ")]))]))]));
                                          case "CV":
                                          return $Resume.view(model.resume);
                                          case "Demos":
                                          return $Demos.view(model.resume);}
                                       _U.badCase($moduleName,
-                                      "between lines 60 and 64");
+                                      "between lines 55 and 80");
                                    }()]))]));
       }();
    });
@@ -2835,6 +2864,7 @@ Elm.HomePage.make = function (_elm) {
                           ,CV: CV
                           ,Demos: Demos
                           ,Blog: Blog
+                          ,About: About
                           ,menu: menu
                           ,Model: Model
                           ,init: init
@@ -4400,7 +4430,7 @@ Elm.Menu.make = function (_elm) {
          switch (_v0.ctor)
          {case "Select": return _v0._0;}
          _U.badCase($moduleName,
-         "on line 22, column 21 to 22");
+         "on line 23, column 21 to 22");
       }();
    };
    var Select = function (a) {
@@ -4439,7 +4469,7 @@ Elm.Menu.make = function (_elm) {
                                               Select(_v3._1))]),
                                  _L.fromArray([$Html.text(_v3._0)]));}
                             _U.badCase($moduleName,
-                            "between lines 37 and 39");
+                            "between lines 38 and 40");
                          }();
                       },
                       choices))]))]));
@@ -12451,7 +12481,8 @@ Elm.Resume.make = function (_elm) {
                                    _L.fromArray([$Html.text(header.home)]))
                                    ,A2($Html.div,
                                    _L.fromArray([]),
-                                   _L.fromArray([$Html.text(header.email)
+                                   _L.fromArray([bullet
+                                                ,$Html.text(header.email)
                                                 ,bullet
                                                 ,$Html.text(header.phone)]))
                                    ,A2($Html.div,
@@ -12497,7 +12528,7 @@ Elm.Resume.make = function (_elm) {
                  _L.fromArray([$Html$Attributes.$class("link")
                               ,$Html$Attributes.href(repo._0)
                               ,$Html$Attributes.target("_blank")]),
-                 _L.fromArray([$Html.text("source")]));
+                 _L.fromArray([$Html.text("repo")]));
                case "Nothing":
                return nullHtml;}
             _U.badCase($moduleName,

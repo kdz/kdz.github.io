@@ -124,7 +124,7 @@ body {
     bottom: 0;
     z-index: 1000;
     background: #191818;
-    color: white;
+    color: lightgrey;
     font-family: sans-serif;
     /*margin-left: 10px;*/
 }
@@ -140,7 +140,10 @@ body {
     background-color: darkcyan;
     padding: 3px;
     margin-right: -4px;
-    /*text-align: right;*/
+}
+
+#header, #myContactInfo {
+    vertical-align: text-bottom;
 }
 
 /* ***** flexbox ***** */

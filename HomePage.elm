@@ -8,13 +8,12 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import StartApp.Simple as StartApp
 
-
 -- ----- MODEL
 
-type Mode = CV | Demos | Blog
+type Mode = CV | Demos | Blog | About
 
 menu : List (String, Mode)
-menu = [("Resume", CV), ("Demos and Source", Demos), ("Blog", Blog)]
+menu = [("Resume", CV), ("Demos and Source", Demos), ("Blog", Blog), ("About", About)]
 
 type alias Model = {
   mode : Mode,
@@ -56,9 +55,30 @@ view addr model =
       case model.mode of
         CV -> Resume.view model.resume
         Demos -> Demos.view model.resume
-        Blog -> div [] [text "Someday I will have the time to blog ... "]
+        Blog -> 
+          div [] [
+            Resume.viewHeader model.resume.header,
+            section [id "blog_repos"] [
+              h2 [class "sectionHeader"] [text "Blog"],
+              h4 [class "itemName"] [ text "Someday I will find the time to blog ... " ]
+            ]
+          ]
+        About -> div [] [
+          div [] [
+            Resume.viewHeader model.resume.header,
+            section [id "about"] [
+              h2 [class "sectionHeader"] [text "About"],
+              h4 [class "itemName"] [ 
+                text "This site is written in ",
+                a [href "http://www.elm-lang.org", target "_blank"] [text "Elm"],
+                text ". Here is the ",
+                a [href "http://www.github.com/kdz/kdz.github.io.git", target "_blank"] [text "repo"]
+              ]
+            ]
+          ]
+        ]
+      ]
     ]
-  ]
 
 main : Signal Html
 main = 
