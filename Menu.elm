@@ -1,9 +1,9 @@
-{-  
-    -- Not currently used. 
-    -- Could provide left menu bar like http://purecss.io/  
--}
-
 module Menu where
+
+-- Takes any type 'a' in choices : List (String, a)
+-- Sets up a UI-callback of (Select a) for each choice
+-- Returns the selected 'a' on update
+-- So the Action type is parameterized by 'a'
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -18,7 +18,7 @@ import Signal exposing (Address)
 
 type Action a = Select a
 
--- The return value is an Event that parent can handle
+-- The return value is like an Event that parent can handle
 update : Action a -> a
 update (Select a) = a
 

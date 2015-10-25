@@ -26,9 +26,3 @@ view model =
 
   ]
 
-
---mb = Signal.mailbox (RV.NoOp 0)
-
---main = view mb.address RD.kelseyResume
-
---}
