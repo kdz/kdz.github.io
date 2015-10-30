@@ -72,7 +72,7 @@ view addr model =
                 text "This site is written in ",
                 a [href "http://www.elm-lang.org", target "_blank"] [text "Elm"],
                 text ". Here is the ",
-                a [href "http://www.github.com/kdz/kdz.github.io.git", target "_blank"] [text "repo"]
+                a [href "http://www.github.com/kdz/kdz.github.io.git", target "_blank"] [text "repo."]
               ]
             ]
           ]
