@@ -110,7 +110,7 @@ work = [
       location = "Austin, TX",
       dates = "Summer 2014",
       details = [
-        "Assisted Dr. Gregory Hatlestad’s in researching coloration enzymes in plant DNA",
+        "Assisted Dr. Gregory Hatlestad in researching coloration enzymes in plant DNA",
         "Performed PCR, gel electrophoresis, bacterial transformations and DNA analysis"
       ],
       more = Nothing,
