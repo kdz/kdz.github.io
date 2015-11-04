@@ -130,8 +130,8 @@ projects = [
       "Project implemented in Elm, a pure functional programming language"
     ],
     more = Nothing,
-    repo = Just "https://github.com/kdz/elmassembly",
-    demo = Just "https://kdz.github.io/demos/elmassembly/build/Main.html"
+    repo = Just "http://github.com/kdz/elmassembly",
+    demo = Just "http://kdz.github.io/demos/elmassembly/build/Main.html"
   },
 
   { role = "Sole Modeler",
@@ -157,7 +157,7 @@ projects = [
       "Columbia Ebola Design Challenge finalist, worked with Guinea-based NGO"
     ],
     more = Nothing,
-    repo = Just "https://github.com/kdz/ebohub",
+    repo = Just "http://github.com/kdz/ebohub",
     demo = Just "http://ebohub.herokuapp.com "
   },
 
@@ -171,7 +171,7 @@ projects = [
       "Serial port (Arduino-to-Pi), HTTP (Pi-to-server), and SMS (server-to-phones)"
     ],
     more = Nothing,
-    repo = Just "https://github.com/kdz/BME_monitor_kdz",
+    repo = Just "http://github.com/kdz/BME_monitor_kdz",
     demo = Nothing
   },
 
@@ -184,7 +184,7 @@ projects = [
       "Presented work at 6th Annual International SciPy Conference in Brussels, Belgium"
     ],
     more = Nothing,
-    repo = Just "https://github.com/kdz/pystemm",
+    repo = Just "http://github.com/kdz/pystemm",
     demo = Nothing
   },
 
