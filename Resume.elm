@@ -27,12 +27,15 @@ viewItem item =
       demoLink = case demo of
               Nothing -> nullHtml
               Just s -> a [class "link", href s, target "_blank"] [text "demo"]
+      moreLink = case more of
+              Nothing -> nullHtml
+              Just s -> a [class "link", href s, target "_blank"] [text "more"]
   in
   div [class "item"] [
     div [class "itemLeft"] [
       h3 [class "itemName"] [
         text name,
-        span [] [ srcLink, demoLink ]
+        span [] [ srcLink, demoLink, moreLink ]
       ],
       ul [class "itemDetails"] (List.map (\x -> li [class "detail"] [text x]) details)
     ],

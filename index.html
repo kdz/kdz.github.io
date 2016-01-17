@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>Resume</title><style>html,head,body { padding:0; margin:0; }
+<html><head><meta charset="UTF-8"><title>HomePage</title><style>html,head,body { padding:0; margin:0; }
 body { font-family: calibri, helvetica, arial, sans-serif; }</style><script type="text/javascript">var Elm = Elm || { Native: {} };Elm.Native.Array = {};
 Elm.Native.Array.make = function(localRuntime) {
 
@@ -10182,6 +10182,103 @@ Elm.Html.Attributes.make = function (_elm) {
                                         ,manifest: manifest
                                         ,property: property
                                         ,attribute: attribute};
+};Elm.Html = Elm.Html || {};
+Elm.Html.Events = Elm.Html.Events || {};
+Elm.Html.Events.make = function (_elm) {
+   "use strict";
+   _elm.Html = _elm.Html || {};
+   _elm.Html.Events = _elm.Html.Events || {};
+   if (_elm.Html.Events.values) return _elm.Html.Events.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Json$Decode = Elm.Json.Decode.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $VirtualDom = Elm.VirtualDom.make(_elm);
+   var _op = {};
+   var keyCode = A2($Json$Decode._op[":="],"keyCode",$Json$Decode.$int);
+   var targetChecked = A2($Json$Decode.at,_U.list(["target","checked"]),$Json$Decode.bool);
+   var targetValue = A2($Json$Decode.at,_U.list(["target","value"]),$Json$Decode.string);
+   var defaultOptions = $VirtualDom.defaultOptions;
+   var Options = F2(function (a,b) {    return {stopPropagation: a,preventDefault: b};});
+   var onWithOptions = $VirtualDom.onWithOptions;
+   var on = $VirtualDom.on;
+   var messageOn = F3(function (name,addr,msg) {    return A3(on,name,$Json$Decode.value,function (_p0) {    return A2($Signal.message,addr,msg);});});
+   var onClick = messageOn("click");
+   var onDoubleClick = messageOn("dblclick");
+   var onMouseMove = messageOn("mousemove");
+   var onMouseDown = messageOn("mousedown");
+   var onMouseUp = messageOn("mouseup");
+   var onMouseEnter = messageOn("mouseenter");
+   var onMouseLeave = messageOn("mouseleave");
+   var onMouseOver = messageOn("mouseover");
+   var onMouseOut = messageOn("mouseout");
+   var onBlur = messageOn("blur");
+   var onFocus = messageOn("focus");
+   var onSubmit = messageOn("submit");
+   var onKey = F3(function (name,addr,handler) {    return A3(on,name,keyCode,function (code) {    return A2($Signal.message,addr,handler(code));});});
+   var onKeyUp = onKey("keyup");
+   var onKeyDown = onKey("keydown");
+   var onKeyPress = onKey("keypress");
+   return _elm.Html.Events.values = {_op: _op
+                                    ,onBlur: onBlur
+                                    ,onFocus: onFocus
+                                    ,onSubmit: onSubmit
+                                    ,onKeyUp: onKeyUp
+                                    ,onKeyDown: onKeyDown
+                                    ,onKeyPress: onKeyPress
+                                    ,onClick: onClick
+                                    ,onDoubleClick: onDoubleClick
+                                    ,onMouseMove: onMouseMove
+                                    ,onMouseDown: onMouseDown
+                                    ,onMouseUp: onMouseUp
+                                    ,onMouseEnter: onMouseEnter
+                                    ,onMouseLeave: onMouseLeave
+                                    ,onMouseOver: onMouseOver
+                                    ,onMouseOut: onMouseOut
+                                    ,on: on
+                                    ,onWithOptions: onWithOptions
+                                    ,defaultOptions: defaultOptions
+                                    ,targetValue: targetValue
+                                    ,targetChecked: targetChecked
+                                    ,keyCode: keyCode
+                                    ,Options: Options};
+};Elm.StartApp = Elm.StartApp || {};
+Elm.StartApp.Simple = Elm.StartApp.Simple || {};
+Elm.StartApp.Simple.make = function (_elm) {
+   "use strict";
+   _elm.StartApp = _elm.StartApp || {};
+   _elm.StartApp.Simple = _elm.StartApp.Simple || {};
+   if (_elm.StartApp.Simple.values) return _elm.StartApp.Simple.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var start = function (config) {
+      var update = F2(function (maybeAction,model) {
+         var _p0 = maybeAction;
+         if (_p0.ctor === "Just") {
+               return A2(config.update,_p0._0,model);
+            } else {
+               return _U.crashCase("StartApp.Simple",{start: {line: 91,column: 7},end: {line: 96,column: 52}},_p0)("This should never happen.");
+            }
+      });
+      var actions = $Signal.mailbox($Maybe.Nothing);
+      var address = A2($Signal.forwardTo,actions.address,$Maybe.Just);
+      var model = A3($Signal.foldp,update,config.model,actions.signal);
+      return A2($Signal.map,config.view(address),model);
+   };
+   var Config = F3(function (a,b,c) {    return {model: a,view: b,update: c};});
+   return _elm.StartApp.Simple.values = {_op: _op,Config: Config,start: start};
 };Elm.ResumeData = Elm.ResumeData || {};
 Elm.ResumeData.make = function (_elm) {
    "use strict";
@@ -10458,13 +10555,23 @@ Elm.Resume.make = function (_elm) {
                _U.list([$Html.text("demo")]));
             }
       }();
+      var moreLink = function () {
+         var _p3 = more;
+         if (_p3.ctor === "Nothing") {
+               return nullHtml;
+            } else {
+               return A2($Html.a,
+               _U.list([$Html$Attributes.$class("link"),$Html$Attributes.href(_p3._0),$Html$Attributes.target("_blank")]),
+               _U.list([$Html.text("more")]));
+            }
+      }();
       return A2($Html.div,
       _U.list([$Html$Attributes.$class("item")]),
       _U.list([A2($Html.div,
               _U.list([$Html$Attributes.$class("itemLeft")]),
               _U.list([A2($Html.h3,
                       _U.list([$Html$Attributes.$class("itemName")]),
-                      _U.list([$Html.text(name),A2($Html.span,_U.list([]),_U.list([srcLink,demoLink]))]))
+                      _U.list([$Html.text(name),A2($Html.span,_U.list([]),_U.list([srcLink,demoLink,moreLink]))]))
                       ,A2($Html.ul,
                       _U.list([$Html$Attributes.$class("itemDetails")]),
                       A2($List.map,function (x) {    return A2($Html.li,_U.list([$Html$Attributes.$class("detail")]),_U.list([$Html.text(x)]));},details))]))
@@ -10508,14 +10615,14 @@ Elm.Resume.make = function (_elm) {
                       ,A2($Html.ul,
                       _U.list([]),
                       A2($List.map,
-                      function (_p3) {
-                         var _p4 = _p3;
+                      function (_p4) {
+                         var _p5 = _p4;
                          return A2($Html.li,
                          _U.list([$Html$Attributes.$class("split-l-r")]),
                          _U.list([A2($Html.span,
                                  _U.list([$Html$Attributes.$class("left")]),
-                                 _U.list([$Html.text(_p4.name),$Html.text(", "),$Html.text(_p4.role)]))
-                                 ,A2($Html.span,_U.list([$Html$Attributes.$class("right")]),_U.list([$Html.text(_p4.dates)]))]));
+                                 _U.list([$Html.text(_p5.name),$Html.text(", "),$Html.text(_p5.role)]))
+                                 ,A2($Html.span,_U.list([$Html$Attributes.$class("right")]),_U.list([$Html.text(_p5.dates)]))]));
                       },
                       model.activities))]))
               ,A2($Html.section,
@@ -10524,9 +10631,9 @@ Elm.Resume.make = function (_elm) {
                       ,A2($Html.div,
                       _U.list([$Html$Attributes.$class("bulletSepList")]),
                       A2($List.map,
-                      function (_p5) {
-                         var _p6 = _p5;
-                         return A2($Html.span,_U.list([]),_U.list([bullet,$Html.text(_p6.name),$Html.text(": "),$Html.text(_p6.level)]));
+                      function (_p6) {
+                         var _p7 = _p6;
+                         return A2($Html.span,_U.list([]),_U.list([bullet,$Html.text(_p7.name),$Html.text(": "),$Html.text(_p7.level)]));
                       },
                       model.skills))]))
               ,A2($Html.section,
@@ -10550,4 +10657,171 @@ Elm.Resume.make = function (_elm) {
                                ,printmediaCss: printmediaCss
                                ,view: view
                                ,main: main};
-};</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.Resume)</script></body></html>
+};Elm.Demos = Elm.Demos || {};
+Elm.Demos.make = function (_elm) {
+   "use strict";
+   _elm.Demos = _elm.Demos || {};
+   if (_elm.Demos.values) return _elm.Demos.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Resume = Elm.Resume.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var demos = function (model) {
+      return A2($List.filter,function (item) {    return !_U.eq(item.demo,$Maybe.Nothing) || !_U.eq(item.repo,$Maybe.Nothing);},model.projects);
+   };
+   var view = function (model) {
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([$Resume.viewHeader(model.header)
+              ,A2($Html.section,
+              _U.list([$Html$Attributes.id("demos_repos")]),
+              A2($List._op["::"],
+              A2($Html.h2,_U.list([$Html$Attributes.$class("sectionHeader")]),_U.list([$Html.text("Demos and Repos")])),
+              A2($List.map,$Resume.viewItem,demos(model))))]));
+   };
+   return _elm.Demos.values = {_op: _op,demos: demos,view: view};
+};Elm.Menu = Elm.Menu || {};
+Elm.Menu.make = function (_elm) {
+   "use strict";
+   _elm.Menu = _elm.Menu || {};
+   if (_elm.Menu.values) return _elm.Menu.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Html$Events = Elm.Html.Events.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var update = function (_p0) {    var _p1 = _p0;return _p1._0;};
+   var Select = function (a) {    return {ctor: "Select",_0: a};};
+   var view = F3(function (addr,choices,sel) {
+      var itemClass = F2(function (val,selVal) {    return !_U.eq(val,selVal) ? "pure-menu-item" : "pure-menu-item pure-menu-selected";});
+      return A2($Html.div,
+      _U.list([$Html$Attributes.id("menu")]),
+      _U.list([A2($Html.div,
+      _U.list([$Html$Attributes.$class("pure-menu")]),
+      _U.list([A2($Html.span,_U.list([$Html$Attributes.$class("pure-menu-heading")]),_U.list([$Html.text("Choose")]))
+              ,A2($Html.ul,
+              _U.list([$Html$Attributes.$class("pure-menu-list")]),
+              A2($List.map,
+              function (_p2) {
+                 var _p3 = _p2;
+                 var _p4 = _p3._1;
+                 return A2($Html.li,
+                 _U.list([$Html$Attributes.$class(A2(itemClass,_p4,sel)),A2($Html$Events.onClick,addr,Select(_p4))]),
+                 _U.list([$Html.text(_p3._0)]));
+              },
+              choices))]))]));
+   });
+   return _elm.Menu.values = {_op: _op,Select: Select,update: update,view: view};
+};Elm.HomePage = Elm.HomePage || {};
+Elm.HomePage.make = function (_elm) {
+   "use strict";
+   _elm.HomePage = _elm.HomePage || {};
+   if (_elm.HomePage.values) return _elm.HomePage.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Demos = Elm.Demos.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Menu = Elm.Menu.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Resume = Elm.Resume.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $StartApp$Simple = Elm.StartApp.Simple.make(_elm);
+   var _op = {};
+   var update = F2(function (act,model) {
+      var _p0 = act;
+      if (_p0.ctor === "NoOp") {
+            return model;
+         } else {
+            return _U.update(model,{mode: $Menu.update(_p0._0)});
+         }
+   });
+   var NoOp = {ctor: "NoOp"};
+   var MenuAct = function (a) {    return {ctor: "MenuAct",_0: a};};
+   var Model = F2(function (a,b) {    return {mode: a,resume: b};});
+   var About = {ctor: "About"};
+   var Blog = {ctor: "Blog"};
+   var Demos = {ctor: "Demos"};
+   var CV = {ctor: "CV"};
+   var menu = _U.list([{ctor: "_Tuple2",_0: "Resume",_1: CV}
+                      ,{ctor: "_Tuple2",_0: "Demos and Source",_1: Demos}
+                      ,{ctor: "_Tuple2",_0: "Blog",_1: Blog}
+                      ,{ctor: "_Tuple2",_0: "About",_1: About}]);
+   var view = F2(function (addr,model) {
+      var fwd = A2($Signal.forwardTo,addr,MenuAct);
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([$Resume.purecss
+              ,$Resume.localcss
+              ,$Resume.printcss
+              ,$Resume.printmediaCss
+              ,A2($Html.div,
+              _U.list([$Html$Attributes.id("layout")]),
+              _U.list([A3($Menu.view,fwd,menu,model.mode)
+                      ,function () {
+                         var _p1 = model.mode;
+                         switch (_p1.ctor)
+                         {case "CV": return $Resume.view(model.resume);
+                            case "Demos": return $Demos.view(model.resume);
+                            case "Blog": return A2($Html.div,
+                              _U.list([]),
+                              _U.list([$Resume.viewHeader(model.resume.header)
+                                      ,A2($Html.section,
+                                      _U.list([$Html$Attributes.id("blog_repos")]),
+                                      _U.list([A2($Html.h2,_U.list([$Html$Attributes.$class("sectionHeader")]),_U.list([$Html.text("Blog")]))
+                                              ,A2($Html.h4,
+                                              _U.list([$Html$Attributes.$class("itemName")]),
+                                              _U.list([$Html.text("Someday I will find the time to blog ... ")]))]))]));
+                            default: return A2($Html.div,
+                              _U.list([]),
+                              _U.list([A2($Html.div,
+                              _U.list([]),
+                              _U.list([$Resume.viewHeader(model.resume.header)
+                                      ,A2($Html.section,
+                                      _U.list([$Html$Attributes.id("about")]),
+                                      _U.list([A2($Html.h2,_U.list([$Html$Attributes.$class("sectionHeader")]),_U.list([$Html.text("About")]))
+                                              ,A2($Html.h4,
+                                              _U.list([$Html$Attributes.$class("itemName")]),
+                                              _U.list([$Html.text("This site is written in ")
+                                                      ,A2($Html.a,
+                                                      _U.list([$Html$Attributes.href("http://www.elm-lang.org"),$Html$Attributes.target("_blank")]),
+                                                      _U.list([$Html.text("Elm")]))
+                                                      ,$Html.text(". Here is the ")
+                                                      ,A2($Html.a,
+                                                      _U.list([$Html$Attributes.href("http://www.github.com/kdz/kdz.github.io.git")
+                                                              ,$Html$Attributes.target("_blank")]),
+                                                      _U.list([$Html.text("repo.")]))]))]))]))]));}
+                      }()]))]));
+   });
+   var init = {mode: CV,resume: $Resume.init};
+   var main = $StartApp$Simple.start({model: init,update: update,view: view});
+   return _elm.HomePage.values = {_op: _op
+                                 ,CV: CV
+                                 ,Demos: Demos
+                                 ,Blog: Blog
+                                 ,About: About
+                                 ,menu: menu
+                                 ,Model: Model
+                                 ,init: init
+                                 ,MenuAct: MenuAct
+                                 ,NoOp: NoOp
+                                 ,update: update
+                                 ,view: view
+                                 ,main: main};
+};</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.HomePage)</script></body></html>

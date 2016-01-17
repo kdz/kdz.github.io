@@ -33,7 +33,7 @@ update : Action -> Model -> Model
 update act model =
   case act of
     NoOp -> model
-    MenuAct a -> { model | mode <- Menu.update a } 
+    MenuAct a -> { model | mode = Menu.update a } 
 
 -- ------ VIEW ----
 
