@@ -123,7 +123,7 @@ view model =
     ),
 
     section [id "publications"] (
-      h2 [class "sectionHeader"] [text "Publications"]
+      h2 [class "sectionHeader"] [text "Publications & Awards"]
       ::
       List.map viewItem model.publications
     ),

@@ -215,6 +215,17 @@ publications = [
     more = Nothing,
     repo = Nothing,
     demo = Nothing
+  },
+  { name = "Delphix Technology Scholarship for Women",
+  role = "",
+  location = "USA",
+  dates = "Dec 2015",
+  details = [
+    "Winner of Delphix 2015 Annual Technology Scholarship for Women (for EboHub project)"
+  ],
+  more = Just "http://goo.gl/UFN80c",
+  repo = Nothing,
+  demo = Nothing
   }
   ]
 
