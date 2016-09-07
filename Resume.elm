@@ -1,4 +1,4 @@
-module Resume where
+module Resume exposing (..)
 
 import ResumeData exposing (..)
 import Html exposing (..)
@@ -7,7 +7,7 @@ import String
 
 -- ------ MODEL ----
 
-type alias Model = Resume 
+type alias Model = Resume
 type alias Item = ResumeData.Item
 
 init : Resume
@@ -15,12 +15,12 @@ init = ResumeData.kelseyResume
 
 -- ----- VIEW ---
 
-nullHtml : Html
+nullHtml : Html a
 nullHtml = node "noscript" [] []
 
-viewItem : Item -> Html
-viewItem item = 
-  let {name, role, location, dates, details, more, repo, demo} = item 
+viewItem : Item -> Html a
+viewItem item =
+  let {name, role, location, dates, details, more, repo, demo} = item
       srcLink = case repo of
               Nothing -> nullHtml
               Just s -> a [ class "link", href s, target "_blank" ] [text "repo"]
@@ -46,12 +46,12 @@ viewItem item =
     ]
   ]
 
-bullet : Html
+bullet : Html a
 bullet = span [class "bullet"] []
 
-viewHeader : Header -> Html
-viewHeader header = 
-  let short url = String.dropLeft 8 url 
+viewHeader : Header -> Html a
+viewHeader header =
+  let short url = String.dropLeft 8 url
   in
   section [id "header"] [
     div [id "namePhoto"] [
@@ -59,14 +59,14 @@ viewHeader header =
       div [id "nameAffil"] (
         h1 [class "myName"] [text header.name]
         ::
-        (List.map 
+        (List.map
           (\affil -> div [class "affil"] [text affil])
           header.affils)
       )
     ],
     div [class "myContactInfo"] [
       div [] [  text header.home ],
-      div [] [  bullet, text header.email, 
+      div [] [  bullet, text header.email,
                 bullet, text header.phone ],
       div [id "urls"] [
         bullet, text "Home", a [href header.homepage, target "_blank"] [text (short header.homepage)],
@@ -76,28 +76,28 @@ viewHeader header =
     ]
   ]
 
-purecss : Html
-purecss = 
+purecss : Html a
+purecss =
   node "link" [rel "stylesheet", type' "text/css", href "http://yui.yahooapis.com/pure/0.6.0/pure-min.css"] []
 
-localcss : Html
-localcss =   
+localcss : Html a
+localcss =
   node "link" [rel "stylesheet", type' "text/css", href "css/style.css"] []
 
-printcss : Html
-printcss = 
+printcss : Html a
+printcss =
   node "style" [type' "text/css"] [text "@import 'css/print-style.css';"]
 
-printmediaCss : Html
-printmediaCss = 
+printmediaCss : Html a
+printmediaCss =
   node "style" [type' "text/css"] [
     text "@media print {
             .link { display: none; }
           }" ]
 
 
-view : Model -> Html
-view model = 
+view : Model -> Html a
+view model =
   div [] [
 
     purecss,
@@ -112,7 +112,7 @@ view model =
       ::
       List.map viewItem model.education
     ),
-    
+
     section [id "work"] (
       h2 [class "sectionHeader"] [text "Work Experience"]
       ::
@@ -133,9 +133,9 @@ view model =
 
     section [id "activities"] [
       h2 [class "sectionHeader"] [text "Activities"],
-      ul [] 
-        (List.map 
-          (\ { name, role, dates } -> 
+      ul []
+        (List.map
+          (\ { name, role, dates } ->
             li [class "split-l-r"] [
               span [class "left"] [text name, text ", ", text role],
               span [class "right"] [text dates]
@@ -147,7 +147,7 @@ view model =
     section [id "skills"] [
       h2 [class "sectionHeader"] [text "Skills"],
       div [class "bulletSepList"]
-        (List.map 
+        (List.map
           (\ { name, level } -> span [] [bullet, text name, text ": ", text level])
           model.skills
         )
@@ -156,7 +156,7 @@ view model =
     section [id "traits"] [
       h2 [class "sectionHeader"] [text "Traits"],
       div [class "bulletSepList"]
-        (List.map 
+        (List.map
           (\trait -> span [] [bullet, text trait])
           model.traits
         )
@@ -165,5 +165,5 @@ view model =
 
 -- ------- MAIN
 
-main : Html
+main : Html a
 main = view kelseyResume

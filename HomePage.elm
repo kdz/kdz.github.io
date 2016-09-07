@@ -1,12 +1,11 @@
-module HomePage where
+module HomePage exposing (..)
 
 import Resume
 import Menu
 import Demos
-import Signal exposing (Address, forwardTo)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import StartApp.Simple as StartApp
+import Html.App as Html
 
 -- ----- MODEL
 
@@ -20,29 +19,25 @@ type alias Model = {
   resume : Resume.Model
  }
 
-init : Model
-init = { mode = CV, resume = Resume.init }
+init : (Model, Cmd Msg)
+init = ( { mode = CV, resume = Resume.init }, Cmd.none )
 
 -- ------ UPDATE ----
 
-type Action 
+type Msg
   = MenuAct (Menu.Action Mode)
   | NoOp
 
-update : Action -> Model -> Model
+update : Msg -> Model -> (Model, Cmd Msg)
 update act model =
   case act of
-    NoOp -> model
-    MenuAct a -> { model | mode = Menu.update a } 
+    NoOp -> ( model, Cmd.none )
+    MenuAct a -> ( { model | mode = Menu.update a }, Cmd.none )
 
 -- ------ VIEW ----
 
-view : Address Action -> Model -> Html
-view addr model = 
-  let 
-    fwd : Address (Menu.Action Mode)
-    fwd = Signal.forwardTo addr MenuAct
-  in
+view : Model -> Html Msg
+view model =
   div [] [
 
     Resume.purecss,
@@ -51,11 +46,11 @@ view addr model =
     Resume.printmediaCss,
 
     div [id "layout"] [
-      Menu.view fwd menu model.mode,
+      Html.map MenuAct (Menu.view menu model.mode),
       case model.mode of
         CV -> Resume.view model.resume
         Demos -> Demos.view model.resume
-        Blog -> 
+        Blog ->
           div [] [
             Resume.viewHeader model.resume.header,
             section [id "blog_repos"] [
@@ -68,7 +63,7 @@ view addr model =
             Resume.viewHeader model.resume.header,
             section [id "about"] [
               h2 [class "sectionHeader"] [text "About"],
-              h4 [class "itemName"] [ 
+              h4 [class "itemName"] [
                 text "This site is written in ",
                 a [href "http://www.elm-lang.org", target "_blank"] [text "Elm"],
                 text ". Here is the ",
@@ -80,10 +75,11 @@ view addr model =
       ]
     ]
 
-main : Signal Html
-main = 
-  StartApp.start
-    { model = init
+main : Program Never
+main =
+  Html.program
+    { init = init
     , update = update
     , view = view
+    , subscriptions = \_ -> Sub.none
     }

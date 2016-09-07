@@ -1,4 +1,4 @@
-module Demos where
+module Demos exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -7,13 +7,13 @@ import Resume as Res
 type alias Model = Res.Model
 
 demos : Model -> List Res.Item
-demos model = 
-  List.filter 
+demos model =
+  List.filter
     (\item -> (item.demo /= Nothing) || (item.repo /= Nothing))
     model.projects
 
-view : Model -> Html
-view model = 
+view : Model -> Html a
+view model =
   div [] [
 
     Res.viewHeader model.header,
@@ -25,4 +25,3 @@ view model =
     )
 
   ]
-

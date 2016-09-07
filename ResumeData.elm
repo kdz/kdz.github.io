@@ -1,8 +1,8 @@
-module ResumeData (kelseyResume, Resume, Header, Item, Activity, Skill, Trait) where
+module ResumeData exposing (kelseyResume, Resume, Header, Item, Activity, Skill, Trait)
 
 -- --------- TYPES ---
 
-type alias Resume = { 
+type alias Resume = {
   header : Header,
   education : List Item,
   work : List Item,
@@ -40,7 +40,7 @@ kelseyResume : Resume
 kelseyResume = {
   header = header,
   education = education,
-  work = work, 
+  work = work,
   projects = projects,
   publications = publications,
   activities = activities,
@@ -63,7 +63,7 @@ header = {
   }
 
 education : List Item
-education = [ { 
+education = [ {
     name = "Columbia University, School of Engineering and Applied Science",
     location = "New York, NY",
     dates = "Fall 2014 - present",
