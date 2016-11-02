@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>HomePage</title><style>html,head,body { padding:0; margin:0; }
+<html><head><meta charset="UTF-8"><title>Resume</title><style>html,head,body { padding:0; margin:0; }
 body { font-family: calibri, helvetica, arial, sans-serif; }</style><script type="text/javascript">
 (function() {
 'use strict';
@@ -7380,43 +7380,6 @@ var _elm_lang$html$Html$details = _elm_lang$html$Html$node('details');
 var _elm_lang$html$Html$summary = _elm_lang$html$Html$node('summary');
 var _elm_lang$html$Html$menuitem = _elm_lang$html$Html$node('menuitem');
 var _elm_lang$html$Html$menu = _elm_lang$html$Html$node('menu');
-var _elm_lang$html$Html_App$programWithFlags = _elm_lang$virtual_dom$VirtualDom$programWithFlags;
-var _elm_lang$html$Html_App$program = function (app) {
-	return _elm_lang$html$Html_App$programWithFlags(
-		_elm_lang$core$Native_Utils.update(
-			app,
-			{
-				init: function (_p0) {
-					return app.init;
-				}
-			}));
-};
-var _elm_lang$html$Html_App$beginnerProgram = function (_p1) {
-	var _p2 = _p1;
-	return _elm_lang$html$Html_App$programWithFlags(
-		{
-			init: function (_p3) {
-				return A2(
-					_elm_lang$core$Platform_Cmd_ops['!'],
-					_p2.model,
-					_elm_lang$core$Native_List.fromArray(
-						[]));
-			},
-			update: F2(
-				function (msg, model) {
-					return A2(
-						_elm_lang$core$Platform_Cmd_ops['!'],
-						A2(_p2.update, msg, model),
-						_elm_lang$core$Native_List.fromArray(
-							[]));
-				}),
-			view: _p2.view,
-			subscriptions: function (_p4) {
-				return _elm_lang$core$Platform_Sub$none;
-			}
-		});
-};
-var _elm_lang$html$Html_App$map = _elm_lang$virtual_dom$VirtualDom$map;
 var _elm_lang$html$Html_Attributes$attribute = _elm_lang$virtual_dom$VirtualDom$attribute;
 var _elm_lang$html$Html_Attributes$contextmenu = function (value) {
 	return A2(_elm_lang$html$Html_Attributes$attribute, 'contextmenu', value);
@@ -7768,138 +7731,13 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 				A2(_elm_lang$core$List$filter, _elm_lang$core$Basics$snd, list))));
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
-var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode_ops[':='], 'keyCode', _elm_lang$core$Json_Decode$int);
-var _elm_lang$html$Html_Events$targetChecked = A2(
-	_elm_lang$core$Json_Decode$at,
-	_elm_lang$core$Native_List.fromArray(
-		['target', 'checked']),
-	_elm_lang$core$Json_Decode$bool);
-var _elm_lang$html$Html_Events$targetValue = A2(
-	_elm_lang$core$Json_Decode$at,
-	_elm_lang$core$Native_List.fromArray(
-		['target', 'value']),
-	_elm_lang$core$Json_Decode$string);
-var _elm_lang$html$Html_Events$defaultOptions = _elm_lang$virtual_dom$VirtualDom$defaultOptions;
-var _elm_lang$html$Html_Events$onWithOptions = _elm_lang$virtual_dom$VirtualDom$onWithOptions;
-var _elm_lang$html$Html_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
-var _elm_lang$html$Html_Events$onFocus = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'focus',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onBlur = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'blur',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onSubmitOptions = _elm_lang$core$Native_Utils.update(
-	_elm_lang$html$Html_Events$defaultOptions,
-	{preventDefault: true});
-var _elm_lang$html$Html_Events$onSubmit = function (msg) {
-	return A3(
-		_elm_lang$html$Html_Events$onWithOptions,
-		'submit',
-		_elm_lang$html$Html_Events$onSubmitOptions,
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onCheck = function (tagger) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'change',
-		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetChecked));
-};
-var _elm_lang$html$Html_Events$onInput = function (tagger) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'input',
-		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
-};
-var _elm_lang$html$Html_Events$onMouseOut = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseout',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseOver = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseover',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseLeave = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseleave',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseEnter = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseenter',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseUp = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mouseup',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onMouseDown = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'mousedown',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onDoubleClick = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'dblclick',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$onClick = function (msg) {
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'click',
-		_elm_lang$core$Json_Decode$succeed(msg));
-};
-var _elm_lang$html$Html_Events$Options = F2(
-	function (a, b) {
-		return {stopPropagation: a, preventDefault: b};
-	});
 var _user$project$ResumeData$traits = _elm_lang$core$Native_List.fromArray(
 	['Love Computing', 'Critical Thinking', 'Self-starter', 'Teamwork', 'Communication', 'Hard Working']);
-var _user$project$ResumeData$publications = _elm_lang$core$Native_List.fromArray(
-	[
-		{
-		name: 'PySTEMM: Executable Concept Modeling for K-12 Learning',
-		role: 'Sole author',
-		location: 'Brussels, Belgium',
-		dates: 'August 2013',
-		details: _elm_lang$core$Native_List.fromArray(
-			['Proceedings of the 6th European Conference on Python in Science (EuroSciPy 2013)', 'Independently developed Python-based concept modeling tool to assist STEM learning']),
-		more: _elm_lang$core$Maybe$Nothing,
-		repo: _elm_lang$core$Maybe$Nothing,
-		demo: _elm_lang$core$Maybe$Nothing
-	},
-		{
-		name: 'Delphix Technology Scholarship for Women',
-		role: '',
-		location: 'USA',
-		dates: 'Dec 2015',
-		details: _elm_lang$core$Native_List.fromArray(
-			['Winner of Delphix 2015 Annual Technology Scholarship for Women (for EboHub project)']),
-		more: _elm_lang$core$Maybe$Just('http://goo.gl/UFN80c'),
-		repo: _elm_lang$core$Maybe$Nothing,
-		demo: _elm_lang$core$Maybe$Nothing
-	}
-	]);
 var _user$project$ResumeData$projects = _elm_lang$core$Native_List.fromArray(
 	[
 		{
-		role: 'Sole Developer',
 		name: 'Assembly Language Simulator in Elm',
+		role: 'Sole Developer',
 		location: 'New York, NY',
 		dates: 'Fall 2015',
 		details: _elm_lang$core$Native_List.fromArray(
@@ -7909,8 +7747,8 @@ var _user$project$ResumeData$projects = _elm_lang$core$Native_List.fromArray(
 		demo: _elm_lang$core$Maybe$Just('http://kdz.github.io/demos/elmassembly/build/Main.html')
 	},
 		{
-		role: 'Sole Modeler',
 		name: 'Executable domain models',
+		role: 'Sole Modeler',
 		location: 'New York, NY',
 		dates: 'Fall 2015',
 		details: _elm_lang$core$Native_List.fromArray(
@@ -7920,8 +7758,8 @@ var _user$project$ResumeData$projects = _elm_lang$core$Native_List.fromArray(
 		demo: _elm_lang$core$Maybe$Nothing
 	},
 		{
-		role: 'Lead Developer',
 		name: 'EboHub: Ebola/Infectious Disease Surveillance System',
+		role: 'Lead Developer',
 		location: 'New York, NY',
 		dates: '2014 - 2015',
 		details: _elm_lang$core$Native_List.fromArray(
@@ -7931,8 +7769,8 @@ var _user$project$ResumeData$projects = _elm_lang$core$Native_List.fromArray(
 		demo: _elm_lang$core$Maybe$Just('http://ebohub.herokuapp.com ')
 	},
 		{
-		role: 'Lead Developer',
 		name: 'Adaptive ‘Smart’ Stroller',
+		role: 'Lead Developer',
 		location: 'New York, NY',
 		dates: '2014 - 2015',
 		details: _elm_lang$core$Native_List.fromArray(
@@ -7942,8 +7780,8 @@ var _user$project$ResumeData$projects = _elm_lang$core$Native_List.fromArray(
 		demo: _elm_lang$core$Maybe$Nothing
 	},
 		{
-		role: 'Personal Project',
 		name: 'PySTEMM: K-12 STEM Education Tool',
+		role: 'Personal Project',
 		location: 'Austin, TX',
 		dates: '2012 - 2014',
 		details: _elm_lang$core$Native_List.fromArray(
@@ -7953,8 +7791,8 @@ var _user$project$ResumeData$projects = _elm_lang$core$Native_List.fromArray(
 		demo: _elm_lang$core$Maybe$Nothing
 	},
 		{
-		role: 'Project and CS Lead',
 		name: 'MIT/SeaGrant Ocean Engineering Experience',
+		role: 'Project and CS Lead',
 		location: 'Cambridge, MA',
 		dates: 'Summer 2012',
 		details: _elm_lang$core$Native_List.fromArray(
@@ -7967,30 +7805,52 @@ var _user$project$ResumeData$projects = _elm_lang$core$Native_List.fromArray(
 var _user$project$ResumeData$work = _elm_lang$core$Native_List.fromArray(
 	[
 		{
+		name: 'Google',
+		role: 'Engineering Practicum Intern',
+		location: 'New York, NY',
+		dates: 'Summer 2016',
+		details: _elm_lang$core$Native_List.fromArray(
+			['Worked with Core and Cloud team on streamlined collaborative version control and testing system', 'Developed desktop and browser app for system from scratch in Elm (FP) and Javascript']),
+		more: _elm_lang$core$Maybe$Nothing,
+		repo: _elm_lang$core$Maybe$Nothing,
+		demo: _elm_lang$core$Maybe$Nothing
+	},
+		{
+		name: 'Computation in Python, COMS1006, Columbia University',
 		role: 'Teaching Assistant',
-		name: 'Columbia University',
 		location: 'New York, NY',
 		dates: 'Fall 2015',
 		details: _elm_lang$core$Native_List.fromArray(
-			['Teaching Assistant for Computer Science course E1006, \"Computation in Python\"', 'Hold office-hours to assist students one-on-one, work with Dr. Adam Cannon']),
+			['Weekly office-hours, guide recitations, design problem sets, under Dr. Adam Cannon']),
 		more: _elm_lang$core$Maybe$Nothing,
 		repo: _elm_lang$core$Maybe$Nothing,
 		demo: _elm_lang$core$Maybe$Nothing
 	},
 		{
-		role: 'Summer intern',
+		name: 'Dicrete Mathematics, COMS3203, Columbia University',
+		role: 'Teaching Assistant',
+		location: 'New York, NY',
+		dates: 'Sprint 2016',
+		details: _elm_lang$core$Native_List.fromArray(
+			['Weekly office hours, debug program submissions, and guide recitations under Dr. Salleb-Aouissi']),
+		more: _elm_lang$core$Maybe$Nothing,
+		repo: _elm_lang$core$Maybe$Nothing,
+		demo: _elm_lang$core$Maybe$Nothing
+	},
+		{
 		name: 'Enthought Scientific Computing',
+		role: 'Summer intern',
 		location: 'Austin, TX',
 		dates: 'Summer 2015',
 		details: _elm_lang$core$Native_List.fromArray(
-			['Built interactive data visualizer feature in Python for Enthought Canopy data platform', 'Worked in large live GitHub repository on individual feature branch and bug fix branches', 'Used Python libraries Matplotlib, Pandas, Seaborn, and some Qt for front end tweaks']),
+			['Developed interactive data visualizer for Canopy data-analysis platform (MatPlotLib, Pandas, Seaborn)', 'Worked in large live GitHub repository on individual feature branch and opened bug fix branches']),
 		more: _elm_lang$core$Maybe$Nothing,
 		repo: _elm_lang$core$Maybe$Nothing,
 		demo: _elm_lang$core$Maybe$Nothing
 	},
 		{
-		role: 'Research Intern',
 		name: 'UT Austin Iyer Lab, Functional Genomics',
+		role: 'Research Intern',
 		location: 'Austin, TX',
 		dates: 'Summer 2014',
 		details: _elm_lang$core$Native_List.fromArray(
@@ -8000,15 +7860,42 @@ var _user$project$ResumeData$work = _elm_lang$core$Native_List.fromArray(
 		demo: _elm_lang$core$Maybe$Nothing
 	}
 	]);
+var _user$project$ResumeData$awards = _elm_lang$core$Native_List.fromArray(
+	[
+		{
+		name: 'Delphix Technology Scholarship for Women',
+		role: '',
+		location: 'Menlo Park, CA',
+		dates: 'Dec 2015',
+		details: _elm_lang$core$Native_List.fromArray(
+			['Winner of Delphix 2015 Annual Technology Scholarship for Women (for EboHub project)']),
+		more: _elm_lang$core$Maybe$Just('http://goo.gl/UFN80c'),
+		repo: _elm_lang$core$Maybe$Nothing,
+		demo: _elm_lang$core$Maybe$Nothing
+	},
+		{
+		name: 'PySTEMM: Executable Concept Modeling for K-12 Learning',
+		role: 'Sole author',
+		location: 'Brussels, Belgium',
+		dates: 'August 2013',
+		details: _elm_lang$core$Native_List.fromArray(
+			['Proceedings of the 6th European Conference on Python in Science (EuroSciPy 2013)', 'Independently developed Python-based concept modeling tool to assist STEM learning']),
+		more: _elm_lang$core$Maybe$Nothing,
+		repo: _elm_lang$core$Maybe$Nothing,
+		demo: _elm_lang$core$Maybe$Nothing
+	}
+	]);
+var _user$project$ResumeData$programming = _elm_lang$core$Native_List.fromArray(
+	['Highly proficient: Python, Elm', 'Proficient: Java, Javascript, Ocaml, HTML', 'Basic usage: C, C++, SQL, Matlab']);
 var _user$project$ResumeData$education = _elm_lang$core$Native_List.fromArray(
 	[
 		{
 		name: 'Columbia University, School of Engineering and Applied Science',
 		location: 'New York, NY',
-		dates: 'Fall 2014 - present',
-		role: 'Full-time student',
+		dates: 'Expected May 2018',
+		role: '',
 		details: _elm_lang$core$Native_List.fromArray(
-			['BS in Computer Science, Minor in Applied Math: Expected May 2018', 'Dean\'s List 2014-2015, GPA 3.5']),
+			['BS in Computer Science (Intelligent Systems), Minor in Applied Math', 'Cumulative GPA: 3.6, Major GPA: 3.7']),
 		more: _elm_lang$core$Maybe$Nothing,
 		repo: _elm_lang$core$Maybe$Nothing,
 		demo: _elm_lang$core$Maybe$Nothing
@@ -8017,69 +7904,127 @@ var _user$project$ResumeData$education = _elm_lang$core$Native_List.fromArray(
 var _user$project$ResumeData$header = {
 	name: 'Kelsey D\'Souza',
 	affils: _elm_lang$core$Native_List.fromArray(
-		['Computer Science, Columbia University']),
-	photo: 'images/kelsey_resume.png',
-	address: '1954 Lerner Hall, 2920 Broadway, New York NY 10027 (Columbia University)',
+		[]),
 	home: '9901 Spicewood Mesa, Austin, TX 78759',
 	email: 'kad2185@columbia.edu',
 	phone: '512-363-9556',
-	linkedin: 'https://goo.gl/xcSDtb',
-	github: 'https://github.com/kdz',
-	homepage: 'https://kdz.github.io'
+	links: _elm_lang$core$Native_List.fromArray(
+		[
+			{name: 'Home page:', url: 'https://github.com/kdz'},
+			{name: 'Github:', url: 'https://kdz.github.io'},
+			{name: 'LinkedIn:', url: 'https://goo.gl/xcSDtb'}
+		])
 };
-var _user$project$ResumeData$Resume = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {header: a, education: b, work: c, projects: d, publications: e, activities: f, skills: g, traits: h};
+var _user$project$ResumeData$Resume = F2(
+	function (a, b) {
+		return {header: a, body: b};
 	});
-var _user$project$ResumeData$Header = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return {name: a, affils: b, photo: c, address: d, home: e, email: f, phone: g, linkedin: h, github: i, homepage: j};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
+var _user$project$ResumeData$Header = F6(
+	function (a, b, c, d, e, f) {
+		return {name: a, affils: b, home: c, email: d, phone: e, links: f};
+	});
 var _user$project$ResumeData$Item = F8(
 	function (a, b, c, d, e, f, g, h) {
-		return {role: a, name: b, location: c, dates: d, details: e, more: f, repo: g, demo: h};
+		return {name: a, role: b, location: c, dates: d, details: e, more: f, repo: g, demo: h};
 	});
-var _user$project$ResumeData$Activity = F3(
-	function (a, b, c) {
-		return {name: a, role: b, dates: c};
+var _user$project$ResumeData$FlatItem = F2(
+	function (a, b) {
+		return {name: a, attrs: b};
 	});
 var _user$project$ResumeData$activities = _elm_lang$core$Native_List.fromArray(
 	[
-		A3(_user$project$ResumeData$Activity, 'Girls who Code', 'Teaching Assistant', 'Fall 2015-present'),
-		A3(_user$project$ResumeData$Activity, 'Society of Women Engineers', 'Family member and house member', '2014-present'),
-		A3(_user$project$ResumeData$Activity, 'Women in Computer Science', 'Member', '2014-present'),
-		A3(_user$project$ResumeData$Activity, 'Application Development Initiative (ADI)', 'Member', '2014-present'),
-		A3(_user$project$ResumeData$Activity, 'Engineers Without Borders: Uganda Chapter', 'Board Financial Chair, Engineering team', '2014-2015'),
-		A3(_user$project$ResumeData$Activity, 'Varsity Tennis', 'Captain, player, assistant coach of middle school team', '2011-2014'),
-		A3(_user$project$ResumeData$Activity, 'DECA Business Competition', 'Team Leader, International finalist', 'May 2014')
+		A2(_user$project$ResumeData$FlatItem, 'Girls who Code: Teaching Assistant', 'Fall 2015-present'),
+		A2(_user$project$ResumeData$FlatItem, 'Society of Women Engineers: Family member and house member', '2014-present'),
+		A2(_user$project$ResumeData$FlatItem, 'Women in Computer Science: Member', '2014-present'),
+		A2(_user$project$ResumeData$FlatItem, 'Application Development Initiative (ADI): Member', '2014-present'),
+		A2(_user$project$ResumeData$FlatItem, 'Engineers Without Borders, Uganda Chapter: Board Financial Chair, Engineering team', '2014-2015'),
+		A2(_user$project$ResumeData$FlatItem, 'Varsity Tennis: Captain, player, assistant coach of middle school team', '2011-2014'),
+		A2(_user$project$ResumeData$FlatItem, 'DECA Business Competition: Team Leader, International finalist', 'May 2014')
 	]);
-var _user$project$ResumeData$Skill = F2(
+var _user$project$ResumeData$InlineSection = F2(
 	function (a, b) {
-		return {name: a, level: b};
+		return {ctor: 'InlineSection', _0: a, _1: b};
 	});
-var _user$project$ResumeData$skills = _elm_lang$core$Native_List.fromArray(
-	[
-		A2(_user$project$ResumeData$Skill, 'Python, Elm', 'highly proficient'),
-		A2(_user$project$ResumeData$Skill, 'C, C++, Java, SQL, Matlab, HTML, CSS, Javascript', 'basic usage')
-	]);
-var _user$project$ResumeData$kelseyResume = {header: _user$project$ResumeData$header, education: _user$project$ResumeData$education, work: _user$project$ResumeData$work, projects: _user$project$ResumeData$projects, publications: _user$project$ResumeData$publications, activities: _user$project$ResumeData$activities, skills: _user$project$ResumeData$skills, traits: _user$project$ResumeData$traits};
+var _user$project$ResumeData$FlatSection = F2(
+	function (a, b) {
+		return {ctor: 'FlatSection', _0: a, _1: b};
+	});
+var _user$project$ResumeData$NestedSection = F2(
+	function (a, b) {
+		return {ctor: 'NestedSection', _0: a, _1: b};
+	});
+var _user$project$ResumeData$theResume = {
+	header: _user$project$ResumeData$header,
+	body: _elm_lang$core$Native_List.fromArray(
+		[
+			A2(_user$project$ResumeData$NestedSection, 'Education', _user$project$ResumeData$education),
+			A2(_user$project$ResumeData$InlineSection, 'Programming Languages', _user$project$ResumeData$programming),
+			A2(_user$project$ResumeData$NestedSection, 'Publications & Awards', _user$project$ResumeData$awards),
+			A2(_user$project$ResumeData$NestedSection, 'Work Experience', _user$project$ResumeData$work),
+			A2(_user$project$ResumeData$NestedSection, 'Project Experience', _user$project$ResumeData$projects),
+			A2(_user$project$ResumeData$FlatSection, 'Clubs & Organizations', _user$project$ResumeData$activities),
+			A2(_user$project$ResumeData$InlineSection, 'Personal Traits', _user$project$ResumeData$traits)
+		])
+};
+var _user$project$Resume$viewFlatSection = F2(
+	function (name, items) {
+		return A2(
+			_elm_lang$html$Html$section,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$h2,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('sectionHeader')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(name)
+						])),
+					A2(
+					_elm_lang$html$Html$ul,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					A2(
+						_elm_lang$core$List$map,
+						function (_p0) {
+							var _p1 = _p0;
+							return A2(
+								_elm_lang$html$Html$li,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('split-l-r')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										A2(
+										_elm_lang$html$Html$span,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('left')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html$text(_p1.name)
+											])),
+										A2(
+										_elm_lang$html$Html$span,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('right')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html$text(_p1.attrs)
+											]))
+									]));
+						},
+						items))
+				]));
+	});
 var _user$project$Resume$printmediaCss = A3(
 	_elm_lang$html$Html$node,
 	'style',
@@ -8200,14 +8145,6 @@ var _user$project$Resume$viewHeader = function (header) {
 							[]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html$text(header.home)
-							])),
-						A2(
-						_elm_lang$html$Html$div,
-						_elm_lang$core$Native_List.fromArray(
-							[]),
-						_elm_lang$core$Native_List.fromArray(
-							[
 								_user$project$Resume$bullet,
 								_elm_lang$html$Html$text(header.email),
 								_user$project$Resume$bullet,
@@ -8219,54 +8156,73 @@ var _user$project$Resume$viewHeader = function (header) {
 							[
 								_elm_lang$html$Html_Attributes$id('urls')
 							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_user$project$Resume$bullet,
-								_elm_lang$html$Html$text('Home'),
-								A2(
-								_elm_lang$html$Html$a,
-								_elm_lang$core$Native_List.fromArray(
+						A2(
+							_elm_lang$core$List$concatMap,
+							function (_p2) {
+								var _p3 = _p2;
+								var _p4 = _p3.url;
+								return _elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html_Attributes$href(header.homepage),
-										_elm_lang$html$Html_Attributes$target('_blank')
-									]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html$text(
-										$short(header.homepage))
-									])),
-								_user$project$Resume$bullet,
-								_elm_lang$html$Html$text('Github'),
-								A2(
-								_elm_lang$html$Html$a,
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html_Attributes$href(header.github),
-										_elm_lang$html$Html_Attributes$target('_blank')
-									]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html$text(
-										$short(header.github))
-									])),
-								_user$project$Resume$bullet,
-								_elm_lang$html$Html$text('LinkedIn'),
-								A2(
-								_elm_lang$html$Html$a,
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html_Attributes$href(header.linkedin),
-										_elm_lang$html$Html_Attributes$target('_blank')
-									]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html$text(
-										$short(header.linkedin))
-									]))
-							]))
+										_user$project$Resume$bullet,
+										_elm_lang$html$Html$text(_p3.name),
+										A2(
+										_elm_lang$html$Html$a,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$href(_p4),
+												_elm_lang$html$Html_Attributes$target('_blank')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html$text(
+												$short(_p4))
+											]))
+									]);
+							},
+							header.links))
 					]))
 			]));
 };
+var _user$project$Resume$viewInlineSection = F2(
+	function (name, items) {
+		return A2(
+			_elm_lang$html$Html$section,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$h2,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('sectionHeader')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(name)
+						])),
+					A2(
+					_elm_lang$html$Html$div,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('bulletSepList')
+						]),
+					A2(
+						_elm_lang$core$List$map,
+						function (item) {
+							return A2(
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_user$project$Resume$bullet,
+										_elm_lang$html$Html$text(item)
+									]));
+						},
+						items))
+				]));
+	});
 var _user$project$Resume$nullHtml = A3(
 	_elm_lang$html$Html$node,
 	'noscript',
@@ -8275,72 +8231,38 @@ var _user$project$Resume$nullHtml = A3(
 	_elm_lang$core$Native_List.fromArray(
 		[]));
 var _user$project$Resume$viewItem = function (item) {
-	var _p0 = item;
-	var name = _p0.name;
-	var role = _p0.role;
-	var location = _p0.location;
-	var dates = _p0.dates;
-	var details = _p0.details;
-	var more = _p0.more;
-	var repo = _p0.repo;
-	var demo = _p0.demo;
-	var srcLink = function () {
-		var _p1 = repo;
-		if (_p1.ctor === 'Nothing') {
-			return _user$project$Resume$nullHtml;
-		} else {
-			return A2(
-				_elm_lang$html$Html$a,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$class('link'),
-						_elm_lang$html$Html_Attributes$href(_p1._0),
-						_elm_lang$html$Html_Attributes$target('_blank')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('repo')
-					]));
-		}
-	}();
-	var demoLink = function () {
-		var _p2 = demo;
-		if (_p2.ctor === 'Nothing') {
-			return _user$project$Resume$nullHtml;
-		} else {
-			return A2(
-				_elm_lang$html$Html$a,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$class('link'),
-						_elm_lang$html$Html_Attributes$href(_p2._0),
-						_elm_lang$html$Html_Attributes$target('_blank')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('demo')
-					]));
-		}
-	}();
-	var moreLink = function () {
-		var _p3 = more;
-		if (_p3.ctor === 'Nothing') {
-			return _user$project$Resume$nullHtml;
-		} else {
-			return A2(
-				_elm_lang$html$Html$a,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$class('link'),
-						_elm_lang$html$Html_Attributes$href(_p3._0),
-						_elm_lang$html$Html_Attributes$target('_blank')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('more')
-					]));
-		}
-	}();
+	var linkFor = F2(
+		function (name, url) {
+			var _p5 = url;
+			if (_p5.ctor === 'Nothing') {
+				return _user$project$Resume$nullHtml;
+			} else {
+				return A2(
+					_elm_lang$html$Html$a,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('link'),
+							_elm_lang$html$Html_Attributes$href(_p5._0),
+							_elm_lang$html$Html_Attributes$target('_blank')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(name)
+						]));
+			}
+		});
+	var _p6 = item;
+	var name = _p6.name;
+	var role = _p6.role;
+	var location = _p6.location;
+	var dates = _p6.dates;
+	var details = _p6.details;
+	var more = _p6.more;
+	var repo = _p6.repo;
+	var demo = _p6.demo;
+	var srcLink = A2(linkFor, 'repo', repo);
+	var demoLink = A2(linkFor, 'demo', demo);
+	var moreLink = A2(linkFor, 'more', more);
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
@@ -8416,565 +8338,92 @@ var _user$project$Resume$viewItem = function (item) {
 						A2(
 						_elm_lang$html$Html$div,
 						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('itemRole')
-							]),
+							[]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html$text(role)
-							])),
-						A2(
-						_elm_lang$html$Html$div,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('itemLocation')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text(location)
+								A2(
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('itemLocation')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											location,
+											_elm_lang$core$Native_Utils.eq(role, '') ? '' : ': '))
+									])),
+								A2(
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('itemRole')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(role)
+									]))
 							]))
 					]))
 			]));
+};
+var _user$project$Resume$viewNestedSection = F2(
+	function (name, items) {
+		return A2(
+			_elm_lang$html$Html$section,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			A2(
+				_elm_lang$core$List_ops['::'],
+				A2(
+					_elm_lang$html$Html$h2,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('sectionHeader')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(name)
+						])),
+				A2(_elm_lang$core$List$map, _user$project$Resume$viewItem, items)));
+	});
+var _user$project$Resume$viewSection = function (s) {
+	var _p7 = s;
+	switch (_p7.ctor) {
+		case 'NestedSection':
+			return A2(_user$project$Resume$viewNestedSection, _p7._0, _p7._1);
+		case 'FlatSection':
+			return A2(_user$project$Resume$viewFlatSection, _p7._0, _p7._1);
+		default:
+			return A2(_user$project$Resume$viewInlineSection, _p7._0, _p7._1);
+	}
 };
 var _user$project$Resume$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
 			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_user$project$Resume$purecss,
-				_user$project$Resume$localcss,
-				_user$project$Resume$printcss,
-				_user$project$Resume$printmediaCss,
-				_user$project$Resume$viewHeader(model.header),
-				A2(
-				_elm_lang$html$Html$section,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$id('education')
-					]),
-				A2(
-					_elm_lang$core$List_ops['::'],
-					A2(
-						_elm_lang$html$Html$h2,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('sectionHeader')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Education')
-							])),
-					A2(_elm_lang$core$List$map, _user$project$Resume$viewItem, model.education))),
-				A2(
-				_elm_lang$html$Html$section,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$id('work')
-					]),
-				A2(
-					_elm_lang$core$List_ops['::'],
-					A2(
-						_elm_lang$html$Html$h2,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('sectionHeader')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Work Experience')
-							])),
-					A2(_elm_lang$core$List$map, _user$project$Resume$viewItem, model.work))),
-				A2(
-				_elm_lang$html$Html$section,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$id('projects')
-					]),
-				A2(
-					_elm_lang$core$List_ops['::'],
-					A2(
-						_elm_lang$html$Html$h2,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('sectionHeader')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Project Experience')
-							])),
-					A2(_elm_lang$core$List$map, _user$project$Resume$viewItem, model.projects))),
-				A2(
-				_elm_lang$html$Html$section,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$id('publications')
-					]),
-				A2(
-					_elm_lang$core$List_ops['::'],
-					A2(
-						_elm_lang$html$Html$h2,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('sectionHeader')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Publications & Awards')
-							])),
-					A2(_elm_lang$core$List$map, _user$project$Resume$viewItem, model.publications))),
-				A2(
-				_elm_lang$html$Html$section,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$id('activities')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$html$Html$h2,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('sectionHeader')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Activities')
-							])),
-						A2(
-						_elm_lang$html$Html$ul,
-						_elm_lang$core$Native_List.fromArray(
-							[]),
-						A2(
-							_elm_lang$core$List$map,
-							function (_p4) {
-								var _p5 = _p4;
-								return A2(
-									_elm_lang$html$Html$li,
-									_elm_lang$core$Native_List.fromArray(
-										[
-											_elm_lang$html$Html_Attributes$class('split-l-r')
-										]),
-									_elm_lang$core$Native_List.fromArray(
-										[
-											A2(
-											_elm_lang$html$Html$span,
-											_elm_lang$core$Native_List.fromArray(
-												[
-													_elm_lang$html$Html_Attributes$class('left')
-												]),
-											_elm_lang$core$Native_List.fromArray(
-												[
-													_elm_lang$html$Html$text(_p5.name),
-													_elm_lang$html$Html$text(', '),
-													_elm_lang$html$Html$text(_p5.role)
-												])),
-											A2(
-											_elm_lang$html$Html$span,
-											_elm_lang$core$Native_List.fromArray(
-												[
-													_elm_lang$html$Html_Attributes$class('right')
-												]),
-											_elm_lang$core$Native_List.fromArray(
-												[
-													_elm_lang$html$Html$text(_p5.dates)
-												]))
-										]));
-							},
-							model.activities))
-					])),
-				A2(
-				_elm_lang$html$Html$section,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$id('skills')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$html$Html$h2,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('sectionHeader')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Skills')
-							])),
-						A2(
-						_elm_lang$html$Html$div,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('bulletSepList')
-							]),
-						A2(
-							_elm_lang$core$List$map,
-							function (_p6) {
-								var _p7 = _p6;
-								return A2(
-									_elm_lang$html$Html$span,
-									_elm_lang$core$Native_List.fromArray(
-										[]),
-									_elm_lang$core$Native_List.fromArray(
-										[
-											_user$project$Resume$bullet,
-											_elm_lang$html$Html$text(_p7.name),
-											_elm_lang$html$Html$text(': '),
-											_elm_lang$html$Html$text(_p7.level)
-										]));
-							},
-							model.skills))
-					])),
-				A2(
-				_elm_lang$html$Html$section,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$id('traits')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$html$Html$h2,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('sectionHeader')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Traits')
-							])),
-						A2(
-						_elm_lang$html$Html$div,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('bulletSepList')
-							]),
-						A2(
-							_elm_lang$core$List$map,
-							function (trait) {
-								return A2(
-									_elm_lang$html$Html$span,
-									_elm_lang$core$Native_List.fromArray(
-										[]),
-									_elm_lang$core$Native_List.fromArray(
-										[
-											_user$project$Resume$bullet,
-											_elm_lang$html$Html$text(trait)
-										]));
-							},
-							model.traits))
-					]))
-			]));
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_user$project$Resume$purecss,
+					_user$project$Resume$localcss,
+					_user$project$Resume$printcss,
+					_user$project$Resume$printmediaCss,
+					_user$project$Resume$viewHeader(model.header)
+				]),
+			A2(_elm_lang$core$List$map, _user$project$Resume$viewSection, model.body)));
 };
 var _user$project$Resume$main = {
-	main: _user$project$Resume$view(_user$project$ResumeData$kelseyResume)
+	main: _user$project$Resume$view(_user$project$ResumeData$theResume)
 };
-var _user$project$Resume$init = _user$project$ResumeData$kelseyResume;
-var _user$project$Demos$demos = function (model) {
-	return A2(
-		_elm_lang$core$List$filter,
-		function (item) {
-			return (!_elm_lang$core$Native_Utils.eq(item.demo, _elm_lang$core$Maybe$Nothing)) || (!_elm_lang$core$Native_Utils.eq(item.repo, _elm_lang$core$Maybe$Nothing));
-		},
-		model.projects);
-};
-var _user$project$Demos$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_user$project$Resume$viewHeader(model.header),
-				A2(
-				_elm_lang$html$Html$section,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$id('demos_repos')
-					]),
-				A2(
-					_elm_lang$core$List_ops['::'],
-					A2(
-						_elm_lang$html$Html$h2,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('sectionHeader')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Demos and Repos')
-							])),
-					A2(
-						_elm_lang$core$List$map,
-						_user$project$Resume$viewItem,
-						_user$project$Demos$demos(model))))
-			]));
-};
-var _user$project$Menu$update = function (_p0) {
-	var _p1 = _p0;
-	return _p1._0;
-};
-var _user$project$Menu$Select = function (a) {
-	return {ctor: 'Select', _0: a};
-};
-var _user$project$Menu$view = F2(
-	function (choices, sel) {
-		var itemClass = F2(
-			function (val, selVal) {
-				return (!_elm_lang$core$Native_Utils.eq(val, selVal)) ? 'pure-menu-item' : 'pure-menu-item pure-menu-selected';
-			});
-		return A2(
-			_elm_lang$html$Html$div,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$id('menu')
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A2(
-					_elm_lang$html$Html$div,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$class('pure-menu')
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							A2(
-							_elm_lang$html$Html$span,
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html_Attributes$class('pure-menu-heading')
-								]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html$text('Choose')
-								])),
-							A2(
-							_elm_lang$html$Html$ul,
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html_Attributes$class('pure-menu-list')
-								]),
-							A2(
-								_elm_lang$core$List$map,
-								function (_p2) {
-									var _p3 = _p2;
-									var _p4 = _p3._1;
-									return A2(
-										_elm_lang$html$Html$li,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class(
-												A2(itemClass, _p4, sel)),
-												_elm_lang$html$Html_Events$onClick(
-												_user$project$Menu$Select(_p4))
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text(_p3._0)
-											]));
-								},
-								choices))
-						]))
-				]));
-	});
-var _user$project$HomePage$update = F2(
-	function (act, model) {
-		var _p0 = act;
-		if (_p0.ctor === 'NoOp') {
-			return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-		} else {
-			return {
-				ctor: '_Tuple2',
-				_0: _elm_lang$core$Native_Utils.update(
-					model,
-					{
-						mode: _user$project$Menu$update(_p0._0)
-					}),
-				_1: _elm_lang$core$Platform_Cmd$none
-			};
-		}
-	});
-var _user$project$HomePage$Model = F2(
-	function (a, b) {
-		return {mode: a, resume: b};
-	});
-var _user$project$HomePage$About = {ctor: 'About'};
-var _user$project$HomePage$Blog = {ctor: 'Blog'};
-var _user$project$HomePage$Demos = {ctor: 'Demos'};
-var _user$project$HomePage$CV = {ctor: 'CV'};
-var _user$project$HomePage$menu = _elm_lang$core$Native_List.fromArray(
-	[
-		{ctor: '_Tuple2', _0: 'Resume', _1: _user$project$HomePage$CV},
-		{ctor: '_Tuple2', _0: 'Demos and Source', _1: _user$project$HomePage$Demos},
-		{ctor: '_Tuple2', _0: 'Blog', _1: _user$project$HomePage$Blog},
-		{ctor: '_Tuple2', _0: 'About', _1: _user$project$HomePage$About}
-	]);
-var _user$project$HomePage$init = {
-	ctor: '_Tuple2',
-	_0: {mode: _user$project$HomePage$CV, resume: _user$project$Resume$init},
-	_1: _elm_lang$core$Platform_Cmd$none
-};
-var _user$project$HomePage$NoOp = {ctor: 'NoOp'};
-var _user$project$HomePage$MenuAct = function (a) {
-	return {ctor: 'MenuAct', _0: a};
-};
-var _user$project$HomePage$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_user$project$Resume$purecss,
-				_user$project$Resume$localcss,
-				_user$project$Resume$printcss,
-				_user$project$Resume$printmediaCss,
-				A2(
-				_elm_lang$html$Html$div,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$id('layout')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$html$Html_App$map,
-						_user$project$HomePage$MenuAct,
-						A2(_user$project$Menu$view, _user$project$HomePage$menu, model.mode)),
-						function () {
-						var _p1 = model.mode;
-						switch (_p1.ctor) {
-							case 'CV':
-								return _user$project$Resume$view(model.resume);
-							case 'Demos':
-								return _user$project$Demos$view(model.resume);
-							case 'Blog':
-								return A2(
-									_elm_lang$html$Html$div,
-									_elm_lang$core$Native_List.fromArray(
-										[]),
-									_elm_lang$core$Native_List.fromArray(
-										[
-											_user$project$Resume$viewHeader(model.resume.header),
-											A2(
-											_elm_lang$html$Html$section,
-											_elm_lang$core$Native_List.fromArray(
-												[
-													_elm_lang$html$Html_Attributes$id('blog_repos')
-												]),
-											_elm_lang$core$Native_List.fromArray(
-												[
-													A2(
-													_elm_lang$html$Html$h2,
-													_elm_lang$core$Native_List.fromArray(
-														[
-															_elm_lang$html$Html_Attributes$class('sectionHeader')
-														]),
-													_elm_lang$core$Native_List.fromArray(
-														[
-															_elm_lang$html$Html$text('Blog')
-														])),
-													A2(
-													_elm_lang$html$Html$h4,
-													_elm_lang$core$Native_List.fromArray(
-														[
-															_elm_lang$html$Html_Attributes$class('itemName')
-														]),
-													_elm_lang$core$Native_List.fromArray(
-														[
-															_elm_lang$html$Html$text('Someday I will find the time to blog ... ')
-														]))
-												]))
-										]));
-							default:
-								return A2(
-									_elm_lang$html$Html$div,
-									_elm_lang$core$Native_List.fromArray(
-										[]),
-									_elm_lang$core$Native_List.fromArray(
-										[
-											A2(
-											_elm_lang$html$Html$div,
-											_elm_lang$core$Native_List.fromArray(
-												[]),
-											_elm_lang$core$Native_List.fromArray(
-												[
-													_user$project$Resume$viewHeader(model.resume.header),
-													A2(
-													_elm_lang$html$Html$section,
-													_elm_lang$core$Native_List.fromArray(
-														[
-															_elm_lang$html$Html_Attributes$id('about')
-														]),
-													_elm_lang$core$Native_List.fromArray(
-														[
-															A2(
-															_elm_lang$html$Html$h2,
-															_elm_lang$core$Native_List.fromArray(
-																[
-																	_elm_lang$html$Html_Attributes$class('sectionHeader')
-																]),
-															_elm_lang$core$Native_List.fromArray(
-																[
-																	_elm_lang$html$Html$text('About')
-																])),
-															A2(
-															_elm_lang$html$Html$h4,
-															_elm_lang$core$Native_List.fromArray(
-																[
-																	_elm_lang$html$Html_Attributes$class('itemName')
-																]),
-															_elm_lang$core$Native_List.fromArray(
-																[
-																	_elm_lang$html$Html$text('This site is written in '),
-																	A2(
-																	_elm_lang$html$Html$a,
-																	_elm_lang$core$Native_List.fromArray(
-																		[
-																			_elm_lang$html$Html_Attributes$href('http://www.elm-lang.org'),
-																			_elm_lang$html$Html_Attributes$target('_blank')
-																		]),
-																	_elm_lang$core$Native_List.fromArray(
-																		[
-																			_elm_lang$html$Html$text('Elm')
-																		])),
-																	_elm_lang$html$Html$text('. Here is the '),
-																	A2(
-																	_elm_lang$html$Html$a,
-																	_elm_lang$core$Native_List.fromArray(
-																		[
-																			_elm_lang$html$Html_Attributes$href('http://www.github.com/kdz/kdz.github.io.git'),
-																			_elm_lang$html$Html_Attributes$target('_blank')
-																		]),
-																	_elm_lang$core$Native_List.fromArray(
-																		[
-																			_elm_lang$html$Html$text('repo.')
-																		]))
-																]))
-														]))
-												]))
-										]));
-						}
-					}()
-					]))
-			]));
-};
-var _user$project$HomePage$main = {
-	main: _elm_lang$html$Html_App$program(
-		{
-			init: _user$project$HomePage$init,
-			update: _user$project$HomePage$update,
-			view: _user$project$HomePage$view,
-			subscriptions: function (_p2) {
-				return _elm_lang$core$Platform_Sub$none;
-			}
-		})
-};
+var _user$project$Resume$init = _user$project$ResumeData$theResume;
 var Elm = {};
-Elm['HomePage'] = Elm['HomePage'] || {};
-_elm_lang$core$Native_Platform.addPublicModule(Elm['HomePage'], 'HomePage', typeof _user$project$HomePage$main === 'undefined' ? null : _user$project$HomePage$main);
+Elm['Resume'] = Elm['Resume'] || {};
+_elm_lang$core$Native_Platform.addPublicModule(Elm['Resume'], 'Resume', typeof _user$project$Resume$main === 'undefined' ? null : _user$project$Resume$main);
 
 if (typeof define === "function" && define['amd'])
 {
@@ -9005,4 +8454,4 @@ for (var publicModule in Elm)
 }
 
 }).call(this);
-</script></head><body><script type="text/javascript">Elm.HomePage.fullscreen()</script></body></html>
+</script></head><body><script type="text/javascript">Elm.Resume.fullscreen()</script></body></html>

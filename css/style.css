@@ -82,7 +82,7 @@ body {
 
 .itemRole {
     font-style: italic;
-}   
+}
 
 #urls a {
     padding-left: 5px;
@@ -148,7 +148,7 @@ body {
 
 /* ***** hand-written flexbox styles here **** */
 
-/* 
+/*
 .item {
     display: flex;
     flex-direction: row;

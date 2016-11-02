@@ -1,88 +1,87 @@
-module ResumeData exposing (kelseyResume, Resume, Header, Item, Activity, Skill, Trait)
-
--- --------- TYPES ---
+module ResumeData
+    exposing
+        ( theResume
+        , Resume
+        , Header
+        , Item
+        , Section(..)
+        , FlatItem
+        )
 
 
 type alias Resume =
     { header : Header
-    , education : List Item
-    , work : List Item
-    , projects : List Item
-    , publications : List Item
-    , activities : List Activity
-    , skills : List Skill
-    , traits : List Trait
+    , body : List Section
     }
 
 
 type alias Header =
     { name : String
     , affils : List String
-    , photo : String
-    , address : String
     , home : String
     , email : String
     , phone : String
-    , linkedin : String
-    , github : String
-    , homepage : String
+    , links : List { name : String, url : Url }
     }
+
+
+type Section
+    = NestedSection String (List Item)
+    | FlatSection String (List FlatItem)
+    | InlineSection String (List String)
 
 
 type alias Item =
-    { role : String
-    , name : String
+    { name : String
+    , role : String
     , location : String
     , dates : String
     , details : List String
-    , more : Maybe String
-    , repo : Maybe String
-    , demo : Maybe String
+    , more : Maybe Url
+    , repo : Maybe Url
+    , demo : Maybe Url
     }
 
 
-type alias Activity =
-    { name : String, role : String, dates : String }
-
-
-type alias Skill =
-    { name : String, level : String }
-
-
-type alias Trait =
+type alias Url =
     String
+
+
+type alias FlatItem =
+    { name : String, attrs : String }
 
 
 
 -- ----- DATA ---
 
 
-kelseyResume : Resume
-kelseyResume =
+theResume : Resume
+theResume =
     { header = header
-    , education = education
-    , work = work
-    , projects = projects
-    , publications = publications
-    , activities = activities
-    , skills = skills
-    , traits = traits
+    , body =
+        [ NestedSection "Education" education
+        , InlineSection "Programming Languages" programming
+        , NestedSection "Publications & Awards" awards
+        , NestedSection "Work Experience" work
+        , NestedSection "Project Experience" projects
+        , FlatSection "Clubs & Organizations" activities
+        , InlineSection "Personal Traits" traits
+        ]
     }
 
 
 header : Header
 header =
     { name = "Kelsey D'Souza"
-    , affils = [ "Computer Science, Columbia University" ]
-    , photo = "images/kelsey_resume.png"
-    , address = "1954 Lerner Hall, 2920 Broadway, New York NY 10027 (Columbia University)"
+    , affils = []
     , home = "9901 Spicewood Mesa, Austin, TX 78759"
     , email = "kad2185@columbia.edu"
     , phone = "512-363-9556"
-    , linkedin = "https://goo.gl/xcSDtb"
-    , -- "https://www.linkedin.com/in/kelseydsouza",
-      github = "https://github.com/kdz"
-    , homepage = "https://kdz.github.io"
+    , links =
+        [ { name = "Home page:", url = "https://github.com/kdz" }
+        , { name = "Github:", url = "https://kdz.github.io" }
+        , { name = "LinkedIn:", url = "https://goo.gl/xcSDtb" }
+        ]
     }
 
 
@@ -90,11 +89,47 @@ education : List Item
 education =
     [ { name = "Columbia University, School of Engineering and Applied Science"
       , location = "New York, NY"
-      , dates = "Fall 2014 - present"
-      , role = "Full-time student"
+      , dates = "Expected May 2018"
+      , role = ""
       , details =
-            [ "BS in Computer Science, Minor in Applied Math: Expected May 2018"
-            , "Dean's List 2014-2015, GPA 3.5"
+            [ "BS in Computer Science (Intelligent Systems), Minor in Applied Math"
+            , "Cumulative GPA: 3.6, Major GPA: 3.7"
+            ]
+      , more = Nothing
+      , repo = Nothing
+      , demo = Nothing
+      }
+    ]
+
+
+programming : List String
+programming =
+    [ "Highly proficient: Python, Elm"
+    , "Proficient: Java, Javascript, Ocaml, HTML"
+    , "Basic usage: C, C++, SQL, Matlab"
+    ]
+
+
+awards : List Item
+awards =
+    [ { name = "Delphix Technology Scholarship for Women"
+      , role = ""
+      , location = "Menlo Park, CA"
+      , dates = "Dec 2015"
+      , details =
+            [ "Winner of Delphix 2015 Annual Technology Scholarship for Women (for EboHub project)"
+            ]
+      , more = Just "http://goo.gl/UFN80c"
+      , repo = Nothing
+      , demo = Nothing
+      }
+    , { name = "PySTEMM: Executable Concept Modeling for K-12 Learning"
+      , role = "Sole author"
+      , location = "Brussels, Belgium"
+      , dates = "August 2013"
+      , details =
+            [ "Proceedings of the 6th European Conference on Python in Science (EuroSciPy 2013)"
+            , "Independently developed Python-based concept modeling tool to assist STEM learning"
             ]
       , more = Nothing
       , repo = Nothing
@@ -105,33 +140,54 @@ education =
 
 work : List Item
 work =
-    [ { role = "Teaching Assistant"
-      , name = "Columbia University"
+    [ { name = "Google"
+      , role = "Engineering Practicum Intern"
+      , location = "New York, NY"
+      , dates = "Summer 2016"
+      , details =
+            [ "Worked with Core and Cloud team on streamlined collaborative version control and testing system"
+            , "Developed desktop and browser app for system from scratch in Elm (FP) and Javascript"
+            ]
+      , more = Nothing
+      , repo = Nothing
+      , demo = Nothing
+      }
+    , { name = "Computation in Python, COMS1006, Columbia University"
+      , role = "Teaching Assistant"
       , location = "New York, NY"
       , dates = "Fall 2015"
       , details =
-            [ "Teaching Assistant for Computer Science course E1006, \"Computation in Python\""
-            , "Hold office-hours to assist students one-on-one, work with Dr. Adam Cannon"
+            [ "Weekly office-hours, guide recitations, design problem sets, under Dr. Adam Cannon"
             ]
       , more = Nothing
       , repo = Nothing
       , demo = Nothing
       }
-    , { role = "Summer intern"
-      , name = "Enthought Scientific Computing"
+    , { name = "Dicrete Mathematics, COMS3203, Columbia University"
+      , role = "Teaching Assistant"
+      , location = "New York, NY"
+      , dates = "Sprint 2016"
+      , details =
+            [ "Weekly office hours, debug program submissions, and guide recitations under Dr. Salleb-Aouissi"
+            ]
+      , more = Nothing
+      , repo = Nothing
+      , demo = Nothing
+      }
+    , { name = "Enthought Scientific Computing"
+      , role = "Summer intern"
       , location = "Austin, TX"
       , dates = "Summer 2015"
       , details =
-            [ "Built interactive data visualizer feature in Python for Enthought Canopy data platform"
-            , "Worked in large live GitHub repository on individual feature branch and bug fix branches"
-            , "Used Python libraries Matplotlib, Pandas, Seaborn, and some Qt for front end tweaks"
+            [ "Developed interactive data visualizer for Canopy data-analysis platform (MatPlotLib, Pandas, Seaborn)"
+            , "Worked in large live GitHub repository on individual feature branch and opened bug fix branches"
             ]
       , more = Nothing
       , repo = Nothing
       , demo = Nothing
       }
-    , { role = "Research Intern"
-      , name = "UT Austin Iyer Lab, Functional Genomics"
+    , { name = "UT Austin Iyer Lab, Functional Genomics"
+      , role = "Research Intern"
       , location = "Austin, TX"
       , dates = "Summer 2014"
       , details =
@@ -147,8 +203,8 @@ work =
 
 projects : List Item
 projects =
-    [ { role = "Sole Developer"
-      , name = "Assembly Language Simulator in Elm"
+    [ { name = "Assembly Language Simulator in Elm"
+      , role = "Sole Developer"
       , location = "New York, NY"
       , dates = "Fall 2015"
       , details =
@@ -159,8 +215,8 @@ projects =
       , repo = Just "http://github.com/kdz/elmassembly"
       , demo = Just "http://kdz.github.io/demos/elmassembly/build/Main.html"
       }
-    , { role = "Sole Modeler"
-      , name = "Executable domain models"
+    , { name = "Executable domain models"
+      , role = "Sole Modeler"
       , location = "New York, NY"
       , dates = "Fall 2015"
       , details =
@@ -171,8 +227,8 @@ projects =
       , repo = Nothing
       , demo = Nothing
       }
-    , { role = "Lead Developer"
-      , name = "EboHub: Ebola/Infectious Disease Surveillance System"
+    , { name = "EboHub: Ebola/Infectious Disease Surveillance System"
+      , role = "Lead Developer"
       , location = "New York, NY"
       , dates = "2014 - 2015"
       , details =
@@ -184,8 +240,8 @@ projects =
       , repo = Just "http://github.com/kdz/ebohub"
       , demo = Just "http://ebohub.herokuapp.com "
       }
-    , { role = "Lead Developer"
-      , name = "Adaptive ‘Smart’ Stroller"
+    , { name = "Adaptive ‘Smart’ Stroller"
+      , role = "Lead Developer"
       , location = "New York, NY"
       , dates = "2014 - 2015"
       , details =
@@ -197,8 +253,8 @@ projects =
       , repo = Just "http://github.com/kdz/BME_monitor_kdz"
       , demo = Nothing
       }
-    , { role = "Personal Project"
-      , name = "PySTEMM: K-12 STEM Education Tool"
+    , { name = "PySTEMM: K-12 STEM Education Tool"
+      , role = "Personal Project"
       , location = "Austin, TX"
       , dates = "2012 - 2014"
       , details =
@@ -209,8 +265,8 @@ projects =
       , repo = Just "http://github.com/kdz/pystemm"
       , demo = Nothing
       }
-    , { role = "Project and CS Lead"
-      , name = "MIT/SeaGrant Ocean Engineering Experience"
+    , { name = "MIT/SeaGrant Ocean Engineering Experience"
+      , role = "Project and CS Lead"
       , location = "Cambridge, MA"
       , dates = "Summer 2012"
       , details =
@@ -224,53 +280,18 @@ projects =
     ]
 
 
-publications : List Item
-publications =
-    [ { name = "PySTEMM: Executable Concept Modeling for K-12 Learning"
-      , role = "Sole author"
-      , location = "Brussels, Belgium"
-      , dates = "August 2013"
-      , details =
-            [ "Proceedings of the 6th European Conference on Python in Science (EuroSciPy 2013)"
-            , "Independently developed Python-based concept modeling tool to assist STEM learning"
-            ]
-      , more = Nothing
-      , repo = Nothing
-      , demo = Nothing
-      }
-    , { name = "Delphix Technology Scholarship for Women"
-      , role = ""
-      , location = "USA"
-      , dates = "Dec 2015"
-      , details =
-            [ "Winner of Delphix 2015 Annual Technology Scholarship for Women (for EboHub project)"
-            ]
-      , more = Just "http://goo.gl/UFN80c"
-      , repo = Nothing
-      , demo = Nothing
-      }
-    ]
-
-
-activities : List Activity
+activities : List FlatItem
 activities =
-    [ Activity "Girls who Code" "Teaching Assistant" "Fall 2015-present"
-    , Activity "Society of Women Engineers" "Family member and house member" "2014-present"
-    , Activity "Women in Computer Science" "Member" "2014-present"
-    , Activity "Application Development Initiative (ADI)" "Member" "2014-present"
-    , Activity "Engineers Without Borders: Uganda Chapter" "Board Financial Chair, Engineering team" "2014-2015"
-    , Activity "Varsity Tennis" "Captain, player, assistant coach of middle school team" "2011-2014"
-    , Activity "DECA Business Competition" "Team Leader, International finalist" "May 2014"
+    [ FlatItem "Girls who Code: Teaching Assistant" "Fall 2015-present"
+    , FlatItem "Society of Women Engineers: Family member and house member" "2014-present"
+    , FlatItem "Women in Computer Science: Member" "2014-present"
+    , FlatItem "Application Development Initiative (ADI): Member" "2014-present"
+    , FlatItem "Engineers Without Borders, Uganda Chapter: Board Financial Chair, Engineering team" "2014-2015"
+    , FlatItem "Varsity Tennis: Captain, player, assistant coach of middle school team" "2011-2014"
+    , FlatItem "DECA Business Competition: Team Leader, International finalist" "May 2014"
     ]
 
 
-skills : List Skill
-skills =
-    [ Skill "Python, Elm" "highly proficient"
-    , Skill "C, C++, Java, SQL, Matlab, HTML, CSS, Javascript" "basic usage"
-    ]
-
-
-traits : List Trait
+traits : List String
 traits =
     [ "Love Computing", "Critical Thinking", "Self-starter", "Teamwork", "Communication", "Hard Working" ]
