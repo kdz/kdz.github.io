@@ -81,7 +81,8 @@ view model =
                         [ Resume.viewHeader model.resume.header
                         , section
                             [ id "blog_repos" ]
-                            [ h2 [ class "sectionHeader" ] [ text "Blog" ]
+                            [ hr [] []
+                            , h2 [ class "sectionHeader" ] [ text "Blog" ]
                             , h4 [ class "itemName" ] [ text "Someday I will find the time to blog ... " ]
                             ]
                         ]
@@ -94,7 +95,8 @@ view model =
                             [ Resume.viewHeader model.resume.header
                             , section
                                 [ id "about" ]
-                                [ h2 [ class "sectionHeader" ] [ text "About" ]
+                                [ hr [] []
+                                , h2 [ class "sectionHeader" ] [ text "About" ]
                                 , h4
                                     [ class "itemName" ]
                                     [ text "This site is written entirely in "

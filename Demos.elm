@@ -37,7 +37,8 @@ view model =
     div []
         [ Resume.viewHeader model.header
         , section [ id "demos_repos" ]
-            (h2 [ class "sectionHeader" ] [ text "Demos, Repos, More" ]
+            (hr [] []
+                :: h2 [ class "sectionHeader" ] [ text "Demos, Repos, More" ]
                 :: List.map Resume.viewItem (demos model)
             )
         ]

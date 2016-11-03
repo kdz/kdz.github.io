@@ -8565,19 +8565,27 @@ var _user$project$Demos$view = function (model) {
 				A2(
 					_elm_lang$core$List_ops['::'],
 					A2(
-						_elm_lang$html$Html$h2,
+						_elm_lang$html$Html$hr,
 						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('sectionHeader')
-							]),
+							[]),
 						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Demos, Repos, More')
-							])),
+							[])),
 					A2(
-						_elm_lang$core$List$map,
-						_user$project$Resume$viewItem,
-						_user$project$Demos$demos(model))))
+						_elm_lang$core$List_ops['::'],
+						A2(
+							_elm_lang$html$Html$h2,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Attributes$class('sectionHeader')
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text('Demos, Repos, More')
+								])),
+						A2(
+							_elm_lang$core$List$map,
+							_user$project$Resume$viewItem,
+							_user$project$Demos$demos(model)))))
 			]));
 };
 var _user$project$Menu$update = function (_p0) {
@@ -8736,6 +8744,12 @@ var _user$project$HomePage$view = function (model) {
 											_elm_lang$core$Native_List.fromArray(
 												[
 													A2(
+													_elm_lang$html$Html$hr,
+													_elm_lang$core$Native_List.fromArray(
+														[]),
+													_elm_lang$core$Native_List.fromArray(
+														[])),
+													A2(
 													_elm_lang$html$Html$h2,
 													_elm_lang$core$Native_List.fromArray(
 														[
@@ -8779,6 +8793,12 @@ var _user$project$HomePage$view = function (model) {
 														]),
 													_elm_lang$core$Native_List.fromArray(
 														[
+															A2(
+															_elm_lang$html$Html$hr,
+															_elm_lang$core$Native_List.fromArray(
+																[]),
+															_elm_lang$core$Native_List.fromArray(
+																[])),
 															A2(
 															_elm_lang$html$Html$h2,
 															_elm_lang$core$Native_List.fromArray(
