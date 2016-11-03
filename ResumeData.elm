@@ -118,7 +118,7 @@ awards =
       , location = "Menlo Park, CA"
       , dates = "December 2015"
       , details =
-            [ "Winner of Delphix 2015 Annual Technology Scholarship for Women (for EboHub project)"
+            [ "Winner of Delphix 2015 Annual Technology Scholarship for Women"
             ]
       , more = Just "http://goo.gl/UFN80c"
       , repo = Nothing
@@ -132,7 +132,7 @@ awards =
             [ "Proceedings of the 6th European Conference on Python in Science (EuroSciPy 2013)"
             , "Independently developed Python-based concept modeling tool to assist STEM learning"
             ]
-      , more = Nothing
+      , more = Just "https://arxiv.org/pdf/1404.6387.pdf"
       , repo = Nothing
       , demo = Nothing
       }
