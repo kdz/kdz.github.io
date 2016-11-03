@@ -36,7 +36,8 @@ body {
 }
 
 .bullet:before {
-    content: "\25A0";
+    content:  "\2022"; /* "\25A0"; */
+    /*font-size: 60%;*/
     margin-right: 3px;
     margin-left: 3px;
 }
