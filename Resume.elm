@@ -58,26 +58,16 @@ viewItem item =
             [ div [ class "itemLeft" ]
                 [ h3 [ class "itemName" ]
                     [ text name
+                    , span [ class "itemRole" ] [ text role ]
                     , span [] [ srcLink, demoLink, moreLink ]
                     ]
                 , ul [ class "itemDetails" ]
                     (List.map (\x -> li [ class "detail" ] [ text x ]) details)
                 ]
             , div [ class "itemAttrs" ]
-                [ div [ class "itemDates" ] [ text dates ]
-                , div []
-                    [ span [ class "itemLocation" ]
-                        [ text
-                            (location
-                                ++ (if (role == "") then
-                                        ""
-                                    else
-                                        ": "
-                                   )
-                            )
-                        ]
-                    , span [ class "itemRole" ] [ text role ]
-                    ]
+                [ div [ class "itemLocation" ] [ text location ]
+                , div [ class "itemDates" ] [ text dates ]
+                  -- , div [ class "itemRole" ] [ text role ]
                 ]
             ]
 

@@ -33,10 +33,11 @@ type Section
 
 type alias Item =
     { name : String
-    , role : String
+    , details : List String
     , location : String
     , dates : String
-    , details : List String
+    , role : String
+    , dates : String
     , more : Maybe Url
     , repo : Maybe Url
     , demo : Maybe Url
@@ -64,7 +65,7 @@ theResume =
         , NestedSection "Publications & Awards" awards
         , NestedSection "Work Experience" work
         , NestedSection "Project Experience" projects
-        , FlatSection "Clubs & Organizations" activities
+        , FlatSection "Activities" activities
         , InlineSection "Personal Traits" traits
         ]
     }
@@ -92,7 +93,7 @@ education =
       , dates = "Expected May 2018"
       , role = ""
       , details =
-            [ "BS in Computer Science (Intelligent Systems), Minor in Applied Math"
+            [ "BS in Computer Science / Intelligent Systems, Minor in Applied Math"
             , "Cumulative GPA: 3.6, Major GPA: 3.7"
             ]
       , more = Nothing
@@ -115,7 +116,7 @@ awards =
     [ { name = "Delphix Technology Scholarship for Women"
       , role = ""
       , location = "Menlo Park, CA"
-      , dates = "Dec 2015"
+      , dates = "December 2015"
       , details =
             [ "Winner of Delphix 2015 Annual Technology Scholarship for Women (for EboHub project)"
             ]
@@ -146,16 +147,16 @@ work =
       , dates = "Summer 2016"
       , details =
             [ "Worked with Core and Cloud team on streamlined collaborative version control and testing system"
-            , "Developed desktop and browser app for system from scratch in Elm (FP) and Javascript"
+            , "Developed desktop and browser app for the system from scratch in Elm (FP) and Javascript"
             ]
       , more = Nothing
       , repo = Nothing
       , demo = Nothing
       }
-    , { name = "Computation in Python, COMS1006, Columbia University"
+    , { name = "Columbia University, Computation in Python: COMS1006"
       , role = "Teaching Assistant"
       , location = "New York, NY"
-      , dates = "Fall 2015"
+      , dates = "Fall 2015 - present"
       , details =
             [ "Weekly office-hours, guide recitations, design problem sets, under Dr. Adam Cannon"
             ]
@@ -163,10 +164,10 @@ work =
       , repo = Nothing
       , demo = Nothing
       }
-    , { name = "Dicrete Mathematics, COMS3203, Columbia University"
+    , { name = "Columbia University, Dicrete Mathematics: COMS3203"
       , role = "Teaching Assistant"
       , location = "New York, NY"
-      , dates = "Sprint 2016"
+      , dates = "Spring 2016"
       , details =
             [ "Weekly office hours, debug program submissions, and guide recitations under Dr. Salleb-Aouissi"
             ]
@@ -175,7 +176,7 @@ work =
       , demo = Nothing
       }
     , { name = "Enthought Scientific Computing"
-      , role = "Summer intern"
+      , role = "Software summer intern"
       , location = "Austin, TX"
       , dates = "Summer 2015"
       , details =
@@ -208,33 +209,31 @@ projects =
       , location = "New York, NY"
       , dates = "Fall 2015"
       , details =
-            [ "A single-page application for an interactive Assembly Language Simulator"
-            , "Project implemented in Elm, a pure functional programming language"
+            [ "A single-page Elm application for an interactive Assembly Language Simulator"
             ]
       , more = Nothing
       , repo = Just "http://github.com/kdz/elmassembly"
       , demo = Just "http://kdz.github.io/demos/elmassembly/build/Main.html"
       }
     , { name = "Executable domain models"
-      , role = "Sole Modeler"
+      , role = "Personal Project"
       , location = "New York, NY"
       , dates = "Fall 2015"
       , details =
-            [ "Models of concepts in different domains to improve my own understanding"
-            , "Models implemented using Elm, a pure functional programming language"
+            [ "Model and simulate course concepts using Elm to solidify understanding"
             ]
       , more = Nothing
       , repo = Nothing
       , demo = Nothing
       }
     , { name = "EboHub: Ebola/Infectious Disease Surveillance System"
-      , role = "Lead Developer"
+      , role = "Sole Developer"
       , location = "New York, NY"
       , dates = "2014 - 2015"
       , details =
             [ "Led team of 5, built system for mobile healthcare workers doing disease surveillance"
-            , "Python/Postgresql web service with 2-way SMS-based mobile and web interfaces"
-            , "Columbia Ebola Design Challenge finalist, worked with Guinea-based NGO"
+            , "Used Python/Postgresql web service with 2-way SMS-based mobile and web interfaces"
+            , "Columbia Ebola Design Challenge finalist, worked with There Is No Limit Foundation in Guinea"
             ]
       , more = Nothing
       , repo = Just "http://github.com/kdz/ebohub"
@@ -246,15 +245,15 @@ projects =
       , dates = "2014 - 2015"
       , details =
             [ "Built stroller-attachable baby monitor with 2-way SMS communication with parent"
-            , "Arduino - sensors, Python/Raspberry-Pi - communication, Python - SMS and web server"
-            , "Serial port (Arduino-to-Pi), HTTP (Pi-to-server), and SMS (server-to-phones)"
+            , "Arduino for sensors, Python/Raspberry-Pi for communication, Python for SMS and web server"
+            , "Used serial port (Arduino-to-Pi), HTTP (Pi-to-server), and SMS (server-to-phones)"
             ]
       , more = Nothing
       , repo = Just "http://github.com/kdz/BME_monitor_kdz"
       , demo = Nothing
       }
     , { name = "PySTEMM: K-12 STEM Education Tool"
-      , role = "Personal Project"
+      , role = "Sole Developer"
       , location = "Austin, TX"
       , dates = "2012 - 2014"
       , details =
@@ -282,7 +281,7 @@ projects =
 
 activities : List FlatItem
 activities =
-    [ FlatItem "Girls who Code: Teaching Assistant" "Fall 2015-present"
+    [ FlatItem "Girls who Code: Teaching Assistant" "2015-present"
     , FlatItem "Society of Women Engineers: Family member and house member" "2014-present"
     , FlatItem "Women in Computer Science: Member" "2014-present"
     , FlatItem "Application Development Initiative (ADI): Member" "2014-present"
