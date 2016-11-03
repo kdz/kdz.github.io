@@ -134,7 +134,7 @@ printmediaCss : Html a
 printmediaCss =
     node "style"
         [ type' "text/css" ]
-        [ text "@media print {\n            .link { display: none; }\n          }"
+        [ text "@media print {\n            .link { display: none; }\n   hr { display: none}\n       }"
         ]
 
 
@@ -142,6 +142,7 @@ viewNestedSection : String -> List Item -> Html a
 viewNestedSection name items =
     section []
         (h2 [ class "sectionHeader" ] [ text name ]
+            :: hr [] []
             :: List.map viewItem items
         )
 
@@ -150,6 +151,7 @@ viewFlatSection : String -> List FlatItem -> Html a
 viewFlatSection name items =
     section []
         [ h2 [ class "sectionHeader" ] [ text name ]
+        , hr [] []
         , ul []
             (List.map
                 (\{ name, attrs } ->
@@ -167,6 +169,7 @@ viewInlineSection : String -> List String -> Html a
 viewInlineSection name items =
     section []
         [ h2 [ class "sectionHeader" ] [ text name ]
+        , hr [] []
         , div [ class "bulletSepList" ]
             (List.map
                 (\item -> span [] [ bullet, text item ])
