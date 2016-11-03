@@ -187,18 +187,18 @@ work =
       , repo = Nothing
       , demo = Nothing
       }
-    , { name = "UT Austin Iyer Lab, Functional Genomics"
-      , role = "Research Intern"
-      , location = "Austin, TX"
-      , dates = "Summer 2014"
-      , details =
-            [ "Assisted Dr. Gregory Hatlestad in researching coloration enzymes in plant DNA"
-            , "Performed PCR, gel electrophoresis, bacterial transformations and DNA analysis"
-            ]
-      , more = Nothing
-      , repo = Nothing
-      , demo = Nothing
-      }
+      -- , { name = "UT Austin Iyer Lab, Functional Genomics"
+      --   , role = "Research Intern"
+      --   , location = "Austin, TX"
+      --   , dates = "Summer 2014"
+      --   , details =
+      --         [ "Assisted Dr. Gregory Hatlestad in researching coloration enzymes in plant DNA"
+      --         , "Performed PCR, gel electrophoresis, bacterial transformations and DNA analysis"
+      --         ]
+      --   , more = Nothing
+      --   , repo = Nothing
+      --   , demo = Nothing
+      --   }
     ]
 
 
@@ -286,8 +286,8 @@ activities =
     , FlatItem "Women in Computer Science: Member" "2014-present"
     , FlatItem "Application Development Initiative (ADI): Member" "2014-present"
     , FlatItem "Engineers Without Borders, Uganda Chapter: Board Financial Chair, Engineering team" "2014-2015"
-    , FlatItem "Varsity Tennis: Captain, player, assistant coach of middle school team" "2011-2014"
-    , FlatItem "DECA Business Competition: Team Leader, International finalist" "May 2014"
+      -- , FlatItem "Varsity Tennis: Captain, player, assistant coach of middle school team" "2011-2014"
+      -- , FlatItem "DECA Business Competition: Team Leader, International finalist" "May 2014"
     ]
 
 

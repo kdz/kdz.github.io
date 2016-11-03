@@ -20,7 +20,7 @@ type Mode
 
 menu : List ( String, Mode )
 menu =
-    [ ( "Resume", CV ), ( "Demos and Source", Demos ), ( "Blog", Blog ), ( "About", About ) ]
+    [ ( "Resume", CV ), ( "Demos & More", Demos ), ( "Blog", Blog ), ( "About", About ) ]
 
 
 type alias Model =
