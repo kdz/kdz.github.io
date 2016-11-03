@@ -34,7 +34,8 @@ body {
 hr {
     border: 0;
     height: 1px;
-    margin-top: -3px;
+    margin-top: 10px;
+    margin-bottom: -5px;
     background: #333;
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,hsla(0,0%,0%,0)), color-stop(50%,hsla(0,0%,0%,.75)), color-stop(100%,hsla(0,0%,0%,0)));
     background: -webkit-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.75) 50%, hsla(0,0%,0%,0) 100%);

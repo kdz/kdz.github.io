@@ -94,8 +94,7 @@ viewHeader header =
                     )
                 ]
             , div [ class "myContactInfo" ]
-                [ -- div [] [ text header.home ]
-                  div []
+                [ div []
                     [ bullet
                     , text header.email
                     , bullet
@@ -138,57 +137,64 @@ printmediaCss =
         ]
 
 
-viewNestedSection : String -> List Item -> Html a
-viewNestedSection name items =
-    section []
-        (h2 [ class "sectionHeader" ] [ text name ]
-            :: hr [] []
-            :: List.map viewItem items
+viewNestedItems : List Item -> List (Html a)
+viewNestedItems items =
+    List.map viewItem items
+
+
+viewFlatItems : List FlatItem -> List (Html a)
+viewFlatItems items =
+    [ ul []
+        (List.map
+            (\{ name, attrs } ->
+                li [ class "split-l-r" ]
+                    [ span [ class "left" ] [ text name ]
+                    , span [ class "right" ] [ text attrs ]
+                    ]
+            )
+            items
         )
+    ]
 
 
-viewFlatSection : String -> List FlatItem -> Html a
-viewFlatSection name items =
-    section []
-        [ h2 [ class "sectionHeader" ] [ text name ]
-        , hr [] []
-        , ul []
-            (List.map
-                (\{ name, attrs } ->
-                    li [ class "split-l-r" ]
-                        [ span [ class "left" ] [ text name ]
-                        , span [ class "right" ] [ text attrs ]
-                        ]
-                )
-                items
-            )
-        ]
-
-
-viewInlineSection : String -> List String -> Html a
-viewInlineSection name items =
-    section []
-        [ h2 [ class "sectionHeader" ] [ text name ]
-        , hr [] []
-        , div [ class "bulletSepList" ]
-            (List.map
-                (\item -> span [] [ bullet, text item ])
-                items
-            )
-        ]
+viewInlineItems : List String -> List (Html a)
+viewInlineItems items =
+    [ div [ class "bulletSepList" ]
+        (List.map
+            (\item -> span [] [ bullet, text item ])
+            items
+        )
+    ]
 
 
 viewSection : Section -> Html a
 viewSection s =
-    case s of
-        NestedSection name items ->
-            viewNestedSection name items
+    let
+        name =
+            case s of
+                NestedSection n _ ->
+                    n
 
-        FlatSection name items ->
-            viewFlatSection name items
+                FlatSection n _ ->
+                    n
 
-        InlineSection name items ->
-            viewInlineSection name items
+                InlineSection n _ ->
+                    n
+    in
+        section []
+            (hr [] []
+                :: h2 [ class "sectionHeader" ] [ text name ]
+                :: (case s of
+                        NestedSection _ items ->
+                            viewNestedItems items
+
+                        FlatSection _ items ->
+                            viewFlatItems items
+
+                        InlineSection _ items ->
+                            viewInlineItems items
+                   )
+            )
 
 
 view : Model -> Html a
