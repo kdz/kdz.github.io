@@ -147,7 +147,7 @@ viewFlatItems items =
     [ ul []
         (List.map
             (\{ name, attrs } ->
-                li [ class "split-l-r" ]
+                li [ class "split-l-r flat-item" ]
                     [ span [ class "left" ] [ text name ]
                     , span [ class "right" ] [ text attrs ]
                     ]
