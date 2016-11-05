@@ -27,11 +27,12 @@ body {
     margin-top: 0px;
 }
 
-/*.sectionHeader {
+.sectionHeader {
     border-bottom: 1px solid black;
-}*/
+}
 
 hr {
+    display: none;
     border: 0;
     height: 1px;
     margin-top: 10px;
