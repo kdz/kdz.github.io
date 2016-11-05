@@ -209,7 +209,7 @@ projects =
       , location = "New York, NY"
       , dates = "2014 - 2015"
       , details =
-            [ "Led team of 5, built system for mobile healthcare workers doing disease surveillance"
+            [ "Led diverse team of 5, built system for mobile healthcare workers doing disease surveillance"
             , "Used Python/Postgresql web service with 2-way SMS-based mobile and web interfaces"
             , "Columbia Ebola Design Challenge finalist, worked with There Is No Limit Foundation in Guinea"
             ]
