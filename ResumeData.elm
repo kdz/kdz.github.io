@@ -204,7 +204,20 @@ work =
 
 projects : List Item
 projects =
-    [ { name = "Assembly Language Simulator in Elm"
+    [ { name = "EboHub: Ebola/Infectious Disease Surveillance System"
+      , role = "Sole Developer"
+      , location = "New York, NY"
+      , dates = "2014 - 2015"
+      , details =
+            [ "Led team of 5, built system for mobile healthcare workers doing disease surveillance"
+            , "Used Python/Postgresql web service with 2-way SMS-based mobile and web interfaces"
+            , "Columbia Ebola Design Challenge finalist, worked with There Is No Limit Foundation in Guinea"
+            ]
+      , more = Just "https://www.youtube.com/watch?v=OvI7ufNF1fw"
+      , repo = Just "http://github.com/kdz/ebohub"
+      , demo = Just "http://ebohub.herokuapp.com "
+      }
+    , { name = "Assembly Language Simulator in Elm"
       , role = "Sole Developer"
       , location = "New York, NY"
       , dates = "Fall 2015"
@@ -225,19 +238,6 @@ projects =
       , more = Nothing
       , repo = Nothing
       , demo = Nothing
-      }
-    , { name = "EboHub: Ebola/Infectious Disease Surveillance System"
-      , role = "Sole Developer"
-      , location = "New York, NY"
-      , dates = "2014 - 2015"
-      , details =
-            [ "Led team of 5, built system for mobile healthcare workers doing disease surveillance"
-            , "Used Python/Postgresql web service with 2-way SMS-based mobile and web interfaces"
-            , "Columbia Ebola Design Challenge finalist, worked with There Is No Limit Foundation in Guinea"
-            ]
-      , more = Nothing
-      , repo = Just "http://github.com/kdz/ebohub"
-      , demo = Just "http://ebohub.herokuapp.com "
       }
     , { name = "Adaptive ‘Smart’ Stroller"
       , role = "Lead Developer"
