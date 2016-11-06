@@ -137,9 +137,9 @@ awards =
       , demo = Nothing
       }
     , { name = "Columbia Ebola Design Challenge Finalist"
-      , role = "Lead programmer"
+      , role = "Sole Developer"
       , location = "New York, NY"
-      , dates = "September 2014 - December 2015"
+      , dates = "Sept - Dec 2014"
       , details =
             [ "Finalist (fourth and final round) of a four-month long hackathon addressing the Ebola outbreak" ]
       , repo = Nothing
@@ -221,7 +221,7 @@ projects =
       , details =
             [ "Led diverse team of 5, built system for mobile healthcare workers doing disease surveillance"
             , "Used Python/Postgresql web service with 2-way SMS-based mobile and web interfaces"
-            , "Columbia Ebola Design Challenge finalist, worked with There Is No Limit Foundation in Guinea"
+            , "Columbia Ebola Design Challenge finalist, partnered with There Is No Limit Foundation in Guinea"
             ]
       , more = Just "https://www.youtube.com/watch?v=OvI7ufNF1fw"
       , repo = Just "http://github.com/kdz/ebohub"

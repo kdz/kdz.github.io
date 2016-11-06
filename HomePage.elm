@@ -64,7 +64,7 @@ view model =
         [ Resume.purecss
         , Resume.localcss
         , Resume.printcss
-        , Resume.printmediaCss
+        , Resume.printMediaCss
         , div
             [ id "layout" ]
             [ Html.map MenuAct (Menu.view menu model.mode)
