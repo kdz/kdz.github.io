@@ -129,12 +129,15 @@ printcss =
     node "style" [ type' "text/css" ] [ text "@import 'css/print-style.css';" ]
 
 
-printmediaCss : Html a
-printmediaCss =
-    node "style"
-        [ type' "text/css" ]
-        [ text "@media print {\n            .link { display: none; }\n   hr { display: none}\n       }"
+printMediaCss : Html a
+printMediaCss =
+    node "link"
+        [ rel "stylesheet"
+        , type' "text/css"
+        , media "print"
+        , href "css/printMedia.css"
         ]
+        []
 
 
 viewNestedItems : List Item -> List (Html a)
@@ -203,7 +206,7 @@ view model =
         ([ purecss
          , localcss
          , printcss
-         , printmediaCss
+         , printMediaCss
          , viewHeader model.header
          ]
             ++ List.map viewSection model.body

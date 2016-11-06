@@ -1,0 +1,11 @@
+body {
+  font-size: 9pt;
+}
+
+hr, .link {
+  display: none;
+}
+
+.sectionHeader {
+  border-bottom: thin solid black;
+}

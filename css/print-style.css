@@ -1,7 +1,10 @@
 body {
 	font-size: 10pt;
 	margin-bottom: 5px;
-	margin-top: 5px;
+	margin-top: 25px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 25px;
 }
 
 #header {

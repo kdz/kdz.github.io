@@ -136,6 +136,16 @@ awards =
       , repo = Nothing
       , demo = Nothing
       }
+    , { name = "Columbia Ebola Design Challenge Finalist"
+      , role = "Lead programmer"
+      , location = "New York, NY"
+      , dates = "September 2014 - December 2015"
+      , details =
+            [ "Finalist (fourth and final round) of a four-month long hackathon addressing the Ebola outbreak" ]
+      , repo = Nothing
+      , demo = Nothing
+      , more = Nothing
+      }
     ]
 
 
