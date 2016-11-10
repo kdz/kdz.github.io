@@ -4,8 +4,8 @@ import Resume
 import Menu
 import Demos
 import Html exposing (..)
-import Html.Attributes exposing (..)
 import Html.App as Html
+import Html.Attributes exposing (..)
 
 
 -- ----- MODEL
@@ -102,7 +102,7 @@ view model =
                                     [ text "This site is written entirely in "
                                     , a [ href "http://www.elm-lang.org", target "_blank" ] [ text "Elm" ]
                                     , text ". Here is the "
-                                    , a [ href "http://www.github.com/ashdza/ashdza.github.io.git", target "_blank" ] [ text "repo." ]
+                                    , a [ href "http://www.github.com/kdz/kdz.github.io.git", target "_blank" ] [ text "repo." ]
                                     ]
                                 ]
                             ]
