@@ -174,7 +174,7 @@ work =
       , repo = Nothing
       , demo = Nothing
       }
-    , { name = "Columbia University, Dicrete Mathematics: COMS3203"
+    , { name = "Columbia University, Discrete Mathematics: COMS3203"
       , role = "Teaching Assistant"
       , location = "New York, NY"
       , dates = "Spring 2016"
