@@ -1,5 +1,24 @@
+@page
+{
+    size: auto;   /* auto is the initial value */
+
+    /* this affects the margin in the printer settings */
+    margin: 0.3in;
+    /*25mm 25mm 25mm 25mm;*/
+}
+
 body {
-  font-size: 9pt;
+	font-size: 9pt;
+	margin-bottom: 0.4in;
+	margin-top: 0.7in;
+	padding-left: 0.6in;
+	padding-right: 0.4in;
+	padding-bottom: 0.4in;
+}
+
+
+section {
+  page-break-inside: avoid;
 }
 
 hr, .link {

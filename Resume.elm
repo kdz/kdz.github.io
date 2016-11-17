@@ -124,9 +124,9 @@ localcss =
     node "link" [ rel "stylesheet", type' "text/css", href "css/style.css" ] []
 
 
-printcss : Html a
-printcss =
-    node "style" [ type' "text/css" ] [ text "@import 'css/print-style.css';" ]
+localcssOverride : Html a
+localcssOverride =
+    node "style" [ type' "text/css" ] [ text "@import 'css/styleOverride.css';" ]
 
 
 printMediaCss : Html a
@@ -205,7 +205,7 @@ view model =
     div []
         ([ purecss
          , localcss
-         , printcss
+         , localcssOverride
          , printMediaCss
          , viewHeader model.header
          ]
