@@ -1,6 +1,6 @@
 # Kelsey DSouza's github-based home page
 
-Given time, I hope to use [Elm](http://elm-lang.org) to make this landing page more interactive, include some more demos, etc. 
+In time, I hope to use [Elm](http://elm-lang.org) to make this landing page more interactive, include some more demos, etc. 
 
 Some initial notes to future-me:
 - The repo name **has** to be kdz.github.io (same as public URL)
