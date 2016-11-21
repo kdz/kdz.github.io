@@ -1,20 +1,54 @@
 @page
 {
     size: auto;   /* auto is the initial value */
-    margin: 0.2in;
+    margin-left: 0.3in;
+}
+
+.myName {
+  font-size: 18pt;
+  margin-bottom: 1em;
+}
+
+.myContactInfo {
+  margin-top: 0.4em;
+}
+
+.sectionHeader {
+  margin-bottom: 0.3em;
+  padding-bottom: 0.1em;
+}
+
+.bulletSepList {
+  margin-bottom: 0.1em;
+}
+
+.itemDetails {
+  margin-bottom: 0.1em;
+}
+
+.detail {
+  margin-bottom: 0.1em;
+}
+
+.item {
+  margin-bottom: 0.2em;
+}
+
+.flat-item {
+  margin-bottom: 0.2em;
 }
 
 body {
 	font-size: 9pt;
-	margin-bottom: 0.3in;
-	margin-top: 0.1in;
-	margin-left: 0.4in;
-	padding-right: 0.2in;
-	padding-bottom: 0.4in;
+	margin-bottom: 0.0in;
+	margin-top: 0.0in;
+	margin-left: 0.6in;
+	padding-right: 0.0in;
+	padding-bottom: 0.0in;
 }
 
 section {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
 
 .item {

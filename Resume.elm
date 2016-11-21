@@ -89,8 +89,8 @@ viewHeader header =
             String.dropLeft 8 url
     in
         section [ id "header pure-g" ]
-            [ div [ class "myName pure-u-2-5" ] [ text header.name ]
-            , div [ class "myContactInfo pure-u-3-5" ]
+            [ div [ class "myName pure-u-8-24" ] [ text header.name ]
+            , div [ class "myContactInfo pure-u-16-24" ]
                 [ div []
                     [ hdrBullet
                     , text header.email

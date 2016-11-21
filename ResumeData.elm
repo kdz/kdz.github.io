@@ -212,7 +212,7 @@ work =
 
 projects : List Item
 projects =
-    [ { name = "EboHub: Ebola/Infectious Disease Surveillance System"
+    [ { name = "EboHub: Ebola Disease Surveillance System"
       , role = "Sole Developer"
       , location = "New York, NY"
       , dates = "2014 - 2015"
