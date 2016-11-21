@@ -17,7 +17,6 @@ type alias Resume =
 
 type alias Header =
     { name : String
-    , affils : List String
     , home : String
     , email : String
     , phone : String
@@ -74,14 +73,13 @@ theResume =
 header : Header
 header =
     { name = "Kelsey D'Souza"
-    , affils = []
     , home = "9901 Spicewood Mesa, Austin, TX 78759"
     , email = "kad2185@columbia.edu"
     , phone = "512-363-9556"
     , links =
-        [ { name = "Home page:", url = "https://github.com/kdz" }
-        , { name = "Github:", url = "https://kdz.github.io" }
-        , { name = "LinkedIn:", url = "https://goo.gl/xcSDtb" }
+        [ { name = "Home page: ", url = "https://kdz.github.io" }
+        , { name = "Github: ", url = "https://github.com/kdz" }
+        , { name = "LinkedIn: ", url = "https://goo.gl/xcSDtb" }
         ]
     }
 

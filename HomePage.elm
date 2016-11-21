@@ -63,7 +63,6 @@ view model =
         []
         [ Resume.purecss
         , Resume.localcss
-        , Resume.localcssOverride
         , Resume.printMediaCss
         , div
             [ id "layout" ]

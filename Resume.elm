@@ -56,7 +56,7 @@ viewItem item =
     in
         div [ class "item" ]
             [ div [ class "itemLeft" ]
-                [ h3 [ class "itemName" ]
+                [ div [ class "itemName" ]
                     [ text name
                     , span [ class "itemRole" ] [ text role ]
                     , span [] [ srcLink, demoLink, moreLink ]
@@ -77,6 +77,11 @@ bullet =
     span [ class "bullet" ] []
 
 
+hdrBullet : Html a
+hdrBullet =
+    span [ class "hdr-bullet" ] []
+
+
 viewHeader : Header -> Html a
 viewHeader header =
     let
@@ -84,26 +89,18 @@ viewHeader header =
             String.dropLeft 8 url
     in
         section [ id "header" ]
-            [ div [ id "namePhoto" ]
-                [ div [ id "nameAffil" ]
-                    (h1 [ class "myName" ] [ text header.name ]
-                        :: (List.map
-                                (\affil -> div [ class "affil" ] [ text affil ])
-                                header.affils
-                           )
-                    )
-                ]
+            [ div [ class "myName" ] [ text header.name ]
             , div [ class "myContactInfo" ]
                 [ div []
-                    [ bullet
+                    [ hdrBullet
                     , text header.email
-                    , bullet
+                    , hdrBullet
                     , text header.phone
                     ]
                 , div [ id "urls" ]
                     (List.concatMap
                         (\{ name, url } ->
-                            [ bullet
+                            [ hdrBullet
                             , text name
                             , a [ href url, target "_blank" ] [ text (short url) ]
                             ]
@@ -114,32 +111,6 @@ viewHeader header =
             ]
 
 
-purecss : Html a
-purecss =
-    node "link" [ rel "stylesheet", type' "text/css", href "http://yui.yahooapis.com/pure/0.6.0/pure-min.css" ] []
-
-
-localcss : Html a
-localcss =
-    node "link" [ rel "stylesheet", type' "text/css", href "css/style.css" ] []
-
-
-localcssOverride : Html a
-localcssOverride =
-    node "style" [ type' "text/css" ] [ text "@import 'css/styleOverride.css';" ]
-
-
-printMediaCss : Html a
-printMediaCss =
-    node "link"
-        [ rel "stylesheet"
-        , type' "text/css"
-        , media "print"
-        , href "css/printMedia.css"
-        ]
-        []
-
-
 viewNestedItems : List Item -> List (Html a)
 viewNestedItems items =
     List.map viewItem items
@@ -147,7 +118,7 @@ viewNestedItems items =
 
 viewFlatItems : List FlatItem -> List (Html a)
 viewFlatItems items =
-    [ ul []
+    [ ul [ class "flat-list" ]
         (List.map
             (\{ name, attrs } ->
                 li [ class "split-l-r flat-item" ]
@@ -186,7 +157,7 @@ viewSection s =
     in
         section []
             (hr [] []
-                :: h2 [ class "sectionHeader" ] [ text name ]
+                :: div [ class "sectionHeader" ] [ text name ]
                 :: (case s of
                         NestedSection _ items ->
                             viewNestedItems items
@@ -205,12 +176,32 @@ view model =
     div []
         ([ purecss
          , localcss
-         , localcssOverride
          , printMediaCss
          , viewHeader model.header
          ]
             ++ List.map viewSection model.body
         )
+
+
+purecss : Html a
+purecss =
+    node "link" [ rel "stylesheet", type' "text/css", href "http://yui.yahooapis.com/pure/0.6.0/pure-min.css" ] []
+
+
+localcss : Html a
+localcss =
+    node "link" [ rel "stylesheet", type' "text/css", href "css/style.css" ] []
+
+
+printMediaCss : Html a
+printMediaCss =
+    node "link"
+        [ rel "stylesheet"
+        , type' "text/css"
+        , media "print"
+        , href "css/printMedia.css"
+        ]
+        []
 
 
 

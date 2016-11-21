@@ -1,43 +1,32 @@
-.item {
-    page-break-inside: avoid;
-}
+/* See http://csswizardry.com/2012/06/single-direction-margin-declarations/ */
+
+/* TODO: Get rid of "px" units */
 
 body {
-    font-size: 11pt;
-}
-
-#header {
-    margin-bottom: 30px;
-    margin-top: 20px;
+	font-size: 10pt;
+	margin-bottom: 1em;
+	margin-top: 2em;
+  margin-left: 3em;
+  margin-right: 2em;
 }
 
 .myName {
     font-size: 22pt;
-    margin-top: 5px;
+    font-weight: bold;
 }
 
 .sectionHeader {
-    color: darkslategrey; /* was darkgreen */
-    margin-bottom: 5px;
-    margin-top: 10px;
-    font-size: 16pt;
+    color: darkslategrey;
+    margin-bottom: 0.3em;
+  	font-size: 12pt;
+    font-weight: bold;
 }
-
-.itemName {
-    font-size: 14pt;
-    margin-top: 0px;
-}
-
-/*.sectionHeader {
-    border-bottom: 1px solid black;
-}*/
 
 hr {
-    /*display: none;*/
     border: 0;
     height: 1px;
-    margin-top: 10px;
-    margin-bottom: -5px;
+    /*margin-top: 10px;*/
+    margin-bottom: 0.4em;
     background: #333;
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,hsla(0,0%,0%,0)), color-stop(30%,hsla(0,0%,0%,.75)), color-stop(100%,hsla(0,0%,0%,0)));
     background: -webkit-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.75) 30%, hsla(0,0%,0%,0) 100%);
@@ -45,76 +34,95 @@ hr {
     background:     -ms-linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,0%,.75) 30%, hsla(0,0%,0%,0) 100%);
 }
 
-
 .bulletSepList {
-    margin-left: 10px;
+    margin-left: 0.6em;
+    margin-bottom: 0.4em;
 }
 
 .bullet:before {
     content:  "\2022"; /* "\25A0"; */
-    /*font-size: 60%;*/
-    margin-right: 3px;
-    margin-left: 3px;
+    margin-right: 0.7em;
+    margin-left: 0.7em;
 }
 
-body {
-	margin: 20px;
+.hdr-bullet:before {
+    content:  "\2022"; /* "\25A0"; */
+    margin-right: 0.3em;
+    margin-left: 0.3em;
 }
+
 
 .itemDetails {
-    margin-top: 0px;
-    margin-bottom: 5px;
-    margin-left: -10px;
+    margin-bottom: 0.4em;
+    margin-left: -0.6em;
 }
 
-#photo {
-    height: 100px;
-    flex: none;
-    box-shadow: 1px 2px 3px rgba(0,0,0,.5);
-}
-
-.affil {
-    margin-top: -15px;
+.detail {
+  margin-left: 0em;
+	margin-bottom: 2px;
 }
 
 .affil, .myContactInfo, .itemAttrs, .right {
-    font-size: 10pt;
+    font-size: 9pt;
 }
 
-.item {
-    margin-top: 3px;
+.link {
+    font-weight: lighter;
+    font-size: 9pt;
+    margin-left: 20px;
+    background: bisque;
+}
+
+.flat-list {
+	margin-top: 0em;
+}
+
+.flat-item {
+
+}
+
+.flat-item {
+	/*margin-top: 2px;*/
+	margin-bottom: 2px;
 }
 
 .itemName {
-    color: darkcyan; /* was brown; */
+    color: darkcyan;
     margin-left: 10px;
-    margin-bottom: 8px;
-    margin-top: 12px;
+    margin-bottom: -0.6em;
+    font-size: 11pt;
+    font-weight: bold;
 }
 
 .itemAttrs, .myContactInfo, .right {
     text-align: right;
 }
 
+.itemAttrs {
+    margin-bottom: -10px;
+}
+
 .itemRole {
+		font-size: 90%;
     font-style: italic;
     font-weight: normal;
     padding-left: 20pt;
 }
 
 #urls a {
-    padding-left: 5px;
+    /*padding-left: 5px;*/
 }
 
 #nameAffil {
-    margin-top: -10px;
+    /*margin-top: -10px;*/
     margin-left: 0px;
 }
 
 .split-l-r>.left:before {
     content: "\2022";
-    margin-right: 10px;
-    margin-left: 3px;
+    /*margin-right: 10px;*/
+    margin-left: 0.7em;
+		margin-right: 0.7em;
 }
 
 .split-l-r {

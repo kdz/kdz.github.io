@@ -10,12 +10,19 @@
 body {
 	font-size: 9pt;
 	margin-bottom: 0.4in;
-	margin-top: 0.7in;
-	padding-left: 0.6in;
-	padding-right: 0.4in;
+	margin-top: 0.2in;
+	margin-left: 0.4in;
+	padding-right: 0.3in;
 	padding-bottom: 0.4in;
 }
 
+section {
+  margin-bottom: 1em;
+}
+
+.item {
+    page-break-inside: avoid;
+}
 
 section {
   page-break-inside: avoid;
