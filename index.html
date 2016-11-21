@@ -8040,25 +8040,23 @@ var _user$project$ResumeData$education = _elm_lang$core$Native_List.fromArray(
 	]);
 var _user$project$ResumeData$header = {
 	name: 'Kelsey D\'Souza',
-	affils: _elm_lang$core$Native_List.fromArray(
-		[]),
 	home: '9901 Spicewood Mesa, Austin, TX 78759',
 	email: 'kad2185@columbia.edu',
 	phone: '512-363-9556',
 	links: _elm_lang$core$Native_List.fromArray(
 		[
-			{name: 'Home page:', url: 'https://github.com/kdz'},
-			{name: 'Github:', url: 'https://kdz.github.io'},
-			{name: 'LinkedIn:', url: 'https://goo.gl/xcSDtb'}
+			{name: 'Home page: ', url: 'https://kdz.github.io'},
+			{name: 'Github: ', url: 'https://github.com/kdz'},
+			{name: 'LinkedIn: ', url: 'https://goo.gl/xcSDtb'}
 		])
 };
 var _user$project$ResumeData$Resume = F2(
 	function (a, b) {
 		return {header: a, body: b};
 	});
-var _user$project$ResumeData$Header = F6(
-	function (a, b, c, d, e, f) {
-		return {name: a, affils: b, home: c, email: d, phone: e, links: f};
+var _user$project$ResumeData$Header = F5(
+	function (a, b, c, d, e) {
+		return {name: a, home: b, email: c, phone: d, links: e};
 	});
 var _user$project$ResumeData$Item = F9(
 	function (a, b, c, d, e, f, g, h, i) {
@@ -8101,13 +8099,49 @@ var _user$project$ResumeData$theResume = {
 			A2(_user$project$ResumeData$InlineSection, 'Personal Traits', _user$project$ResumeData$traits)
 		])
 };
+var _user$project$Resume$printMediaCss = A3(
+	_elm_lang$html$Html$node,
+	'link',
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html_Attributes$rel('stylesheet'),
+			_elm_lang$html$Html_Attributes$type$('text/css'),
+			_elm_lang$html$Html_Attributes$media('print'),
+			_elm_lang$html$Html_Attributes$href('css/printMedia.css')
+		]),
+	_elm_lang$core$Native_List.fromArray(
+		[]));
+var _user$project$Resume$localcss = A3(
+	_elm_lang$html$Html$node,
+	'link',
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html_Attributes$rel('stylesheet'),
+			_elm_lang$html$Html_Attributes$type$('text/css'),
+			_elm_lang$html$Html_Attributes$href('css/style.css')
+		]),
+	_elm_lang$core$Native_List.fromArray(
+		[]));
+var _user$project$Resume$purecss = A3(
+	_elm_lang$html$Html$node,
+	'link',
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html_Attributes$rel('stylesheet'),
+			_elm_lang$html$Html_Attributes$type$('text/css'),
+			_elm_lang$html$Html_Attributes$href('http://yui.yahooapis.com/pure/0.6.0/pure-min.css')
+		]),
+	_elm_lang$core$Native_List.fromArray(
+		[]));
 var _user$project$Resume$viewFlatItems = function (items) {
 	return _elm_lang$core$Native_List.fromArray(
 		[
 			A2(
 			_elm_lang$html$Html$ul,
 			_elm_lang$core$Native_List.fromArray(
-				[]),
+				[
+					_elm_lang$html$Html_Attributes$class('flat-list')
+				]),
 			A2(
 				_elm_lang$core$List$map,
 				function (_p0) {
@@ -8145,56 +8179,11 @@ var _user$project$Resume$viewFlatItems = function (items) {
 				items))
 		]);
 };
-var _user$project$Resume$printMediaCss = A3(
-	_elm_lang$html$Html$node,
-	'link',
-	_elm_lang$core$Native_List.fromArray(
-		[
-			_elm_lang$html$Html_Attributes$rel('stylesheet'),
-			_elm_lang$html$Html_Attributes$type$('text/css'),
-			_elm_lang$html$Html_Attributes$media('print'),
-			_elm_lang$html$Html_Attributes$href('css/printMedia.css')
-		]),
-	_elm_lang$core$Native_List.fromArray(
-		[]));
-var _user$project$Resume$localcssOverride = A3(
-	_elm_lang$html$Html$node,
-	'style',
-	_elm_lang$core$Native_List.fromArray(
-		[
-			_elm_lang$html$Html_Attributes$type$('text/css')
-		]),
-	_elm_lang$core$Native_List.fromArray(
-		[
-			_elm_lang$html$Html$text('@import \'css/styleOverride.css\';')
-		]));
-var _user$project$Resume$localcss = A3(
-	_elm_lang$html$Html$node,
-	'link',
-	_elm_lang$core$Native_List.fromArray(
-		[
-			_elm_lang$html$Html_Attributes$rel('stylesheet'),
-			_elm_lang$html$Html_Attributes$type$('text/css'),
-			_elm_lang$html$Html_Attributes$href('css/style.css')
-		]),
-	_elm_lang$core$Native_List.fromArray(
-		[]));
-var _user$project$Resume$purecss = A3(
-	_elm_lang$html$Html$node,
-	'link',
-	_elm_lang$core$Native_List.fromArray(
-		[
-			_elm_lang$html$Html_Attributes$rel('stylesheet'),
-			_elm_lang$html$Html_Attributes$type$('text/css'),
-			_elm_lang$html$Html_Attributes$href('http://yui.yahooapis.com/pure/0.6.0/pure-min.css')
-		]),
-	_elm_lang$core$Native_List.fromArray(
-		[]));
-var _user$project$Resume$bullet = A2(
+var _user$project$Resume$hdrBullet = A2(
 	_elm_lang$html$Html$span,
 	_elm_lang$core$Native_List.fromArray(
 		[
-			_elm_lang$html$Html_Attributes$class('bullet')
+			_elm_lang$html$Html_Attributes$class('hdr-bullet')
 		]),
 	_elm_lang$core$Native_List.fromArray(
 		[]));
@@ -8214,43 +8203,11 @@ var _user$project$Resume$viewHeader = function (header) {
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Attributes$id('namePhoto')
+						_elm_lang$html$Html_Attributes$class('myName')
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						A2(
-						_elm_lang$html$Html$div,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$id('nameAffil')
-							]),
-						A2(
-							_elm_lang$core$List_ops['::'],
-							A2(
-								_elm_lang$html$Html$h1,
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html_Attributes$class('myName')
-									]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html$text(header.name)
-									])),
-							A2(
-								_elm_lang$core$List$map,
-								function (affil) {
-									return A2(
-										_elm_lang$html$Html$div,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class('affil')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text(affil)
-											]));
-								},
-								header.affils)))
+						_elm_lang$html$Html$text(header.name)
 					])),
 				A2(
 				_elm_lang$html$Html$div,
@@ -8266,9 +8223,9 @@ var _user$project$Resume$viewHeader = function (header) {
 							[]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_user$project$Resume$bullet,
+								_user$project$Resume$hdrBullet,
 								_elm_lang$html$Html$text(header.email),
-								_user$project$Resume$bullet,
+								_user$project$Resume$hdrBullet,
 								_elm_lang$html$Html$text(header.phone)
 							])),
 						A2(
@@ -8284,7 +8241,7 @@ var _user$project$Resume$viewHeader = function (header) {
 								var _p4 = _p3.url;
 								return _elm_lang$core$Native_List.fromArray(
 									[
-										_user$project$Resume$bullet,
+										_user$project$Resume$hdrBullet,
 										_elm_lang$html$Html$text(_p3.name),
 										A2(
 										_elm_lang$html$Html$a,
@@ -8304,6 +8261,14 @@ var _user$project$Resume$viewHeader = function (header) {
 					]))
 			]));
 };
+var _user$project$Resume$bullet = A2(
+	_elm_lang$html$Html$span,
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html_Attributes$class('bullet')
+		]),
+	_elm_lang$core$Native_List.fromArray(
+		[]));
 var _user$project$Resume$viewInlineItems = function (items) {
 	return _elm_lang$core$Native_List.fromArray(
 		[
@@ -8386,7 +8351,7 @@ var _user$project$Resume$viewItem = function (item) {
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
-						_elm_lang$html$Html$h3,
+						_elm_lang$html$Html$div,
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_elm_lang$html$Html_Attributes$class('itemName')
@@ -8494,7 +8459,7 @@ var _user$project$Resume$viewSection = function (s) {
 			A2(
 				_elm_lang$core$List_ops['::'],
 				A2(
-					_elm_lang$html$Html$h2,
+					_elm_lang$html$Html$div,
 					_elm_lang$core$Native_List.fromArray(
 						[
 							_elm_lang$html$Html_Attributes$class('sectionHeader')
@@ -8526,7 +8491,6 @@ var _user$project$Resume$view = function (model) {
 				[
 					_user$project$Resume$purecss,
 					_user$project$Resume$localcss,
-					_user$project$Resume$localcssOverride,
 					_user$project$Resume$printMediaCss,
 					_user$project$Resume$viewHeader(model.header)
 				]),
@@ -8718,7 +8682,6 @@ var _user$project$HomePage$view = function (model) {
 			[
 				_user$project$Resume$purecss,
 				_user$project$Resume$localcss,
-				_user$project$Resume$localcssOverride,
 				_user$project$Resume$printMediaCss,
 				A2(
 				_elm_lang$html$Html$div,
