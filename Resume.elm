@@ -54,8 +54,8 @@ viewItem item =
         moreLink =
             linkFor "more" more
     in
-        div [ class "item" ]
-            [ div [ class "itemLeft" ]
+        div [ class "item pure-g" ]
+            [ div [ class "itemLeft pure-u-21-24" ]
                 [ div [ class "itemName" ]
                     [ text name
                     , span [ class "itemRole" ] [ text role ]
@@ -64,7 +64,7 @@ viewItem item =
                 , ul [ class "itemDetails" ]
                     (List.map (\x -> li [ class "detail" ] [ text x ]) details)
                 ]
-            , div [ class "itemAttrs" ]
+            , div [ class "itemAttrs pure-u-3-24" ]
                 [ div [ class "itemLocation" ] [ text location ]
                 , div [ class "itemDates" ] [ text dates ]
                   -- , div [ class "itemRole" ] [ text role ]
@@ -88,9 +88,9 @@ viewHeader header =
         short url =
             String.dropLeft 8 url
     in
-        section [ id "header" ]
-            [ div [ class "myName" ] [ text header.name ]
-            , div [ class "myContactInfo" ]
+        section [ id "header pure-g" ]
+            [ div [ class "myName pure-u-2-5" ] [ text header.name ]
+            , div [ class "myContactInfo pure-u-3-5" ]
                 [ div []
                     [ hdrBullet
                     , text header.email
@@ -121,9 +121,9 @@ viewFlatItems items =
     [ ul [ class "flat-list" ]
         (List.map
             (\{ name, attrs } ->
-                li [ class "split-l-r flat-item" ]
-                    [ span [ class "left" ] [ text name ]
-                    , span [ class "right" ] [ text attrs ]
+                li [ class "split-l-r flat-item  pure-g" ]
+                    [ span [ class "left pure-u-21-24" ] [ text name ]
+                    , span [ class "right pure-u-3-24" ] [ text attrs ]
                     ]
             )
             items

@@ -1,6 +1,11 @@
 /* See http://csswizardry.com/2012/06/single-direction-margin-declarations/ */
 
-/* TODO: Get rid of "px" units */
+body, html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+    /* Otherwise pure-g will set its own fonts inside grid */
+    font-family: calibri, helvetica, arial, sans-serif;
+}
+
 
 body {
 	font-size: 10pt;
@@ -13,6 +18,11 @@ body {
 .myName {
     font-size: 22pt;
     font-weight: bold;
+		margin-bottom: 0.3em;
+}
+
+.myContactInfo {
+	margin-top: 0.6em;
 }
 
 .sectionHeader {
@@ -25,7 +35,6 @@ body {
 hr {
     border: 0;
     height: 1px;
-    /*margin-top: 10px;*/
     margin-bottom: 0.4em;
     background: #333;
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,hsla(0,0%,0%,0)), color-stop(30%,hsla(0,0%,0%,.75)), color-stop(100%,hsla(0,0%,0%,0)));
@@ -40,17 +49,16 @@ hr {
 }
 
 .bullet:before {
-    content:  "\2022"; /* "\25A0"; */
+    content:  "\2022";
     margin-right: 0.7em;
     margin-left: 0.7em;
 }
 
 .hdr-bullet:before {
-    content:  "\2022"; /* "\25A0"; */
+    content:  "\2022";
     margin-right: 0.3em;
     margin-left: 0.3em;
 }
-
 
 .itemDetails {
     margin-bottom: 0.4em;
@@ -78,11 +86,6 @@ hr {
 }
 
 .flat-item {
-
-}
-
-.flat-item {
-	/*margin-top: 2px;*/
 	margin-bottom: 2px;
 }
 
@@ -109,18 +112,8 @@ hr {
     padding-left: 20pt;
 }
 
-#urls a {
-    /*padding-left: 5px;*/
-}
-
-#nameAffil {
-    /*margin-top: -10px;*/
-    margin-left: 0px;
-}
-
 .split-l-r>.left:before {
     content: "\2022";
-    /*margin-right: 10px;*/
     margin-left: 0.7em;
 		margin-right: 0.7em;
 }
@@ -137,6 +130,7 @@ hr {
     flex-basis: none;
 }
 
+/* TODO: layout & menu css can be in menu.css, separate from resume.css */
 #layout {
     padding-left: 160px;
     left: 0;
@@ -152,7 +146,6 @@ hr {
     background: #191818;
     color: lightgrey;
     font-family: sans-serif;
-    /*margin-left: 10px;*/
 }
 
 .pure-menu-item {
@@ -166,118 +159,4 @@ hr {
     background-color: darkcyan;
     padding: 3px;
     margin-right: -4px;
-}
-
-/* ***** flexbox ***** */
-
-/* *** MINIMIZE EDITS TO THIS SECTION !!! *** */
-
-/* ***** hand-written flexbox styles here **** */
-
-/*
-.item {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-}
-
-.split-l-r {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
-}
-
-#header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-#namePhoto {
-    display: flex;
-    flex-direction: row;
-    align-items: initial;
-}
-
-*/
-
-/* ***** pleeease.io/play auto-generated cross-browser flexbox version here **** */
-
-.item {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-align: baseline;
-    -webkit-align-items: baseline;
-        -ms-flex-align: baseline;
-            align-items: baseline;
-}
-
-.split-l-r {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-align: baseline;
-    -webkit-align-items: baseline;
-        -ms-flex-align: baseline;
-            align-items: baseline;
-}
-
-#header {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-}
-
-#namePhoto {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-align: initial;
-    -webkit-align-items: initial;
-        -ms-flex-align: initial;
-            align-items: initial;
 }
