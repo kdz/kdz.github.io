@@ -782,6 +782,645 @@ Elm.Color.make = function (_elm) {
                        ,gray: gray
                        ,darkGray: darkGray};
    return _elm.Color.values;
+};Elm.Cpu = Elm.Cpu || {};
+Elm.Cpu.make = function (_elm) {
+   "use strict";
+   _elm.Cpu = _elm.Cpu || {};
+   if (_elm.Cpu.values)
+   return _elm.Cpu.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Cpu",
+   $Array = Elm.Array.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Effects = Elm.Effects.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Html$Events = Elm.Html.Events.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $String = Elm.String.make(_elm),
+   $Task = Elm.Task.make(_elm),
+   $Wrapper = Elm.Wrapper.make(_elm);
+   var initRAM = A2($Array.repeat,
+   32,
+   0);
+   var initRegs = A2($Array.repeat,
+   16,
+   0);
+   var inNColumns = function (listOfLists) {
+      return function () {
+         var len = $List.length(listOfLists);
+         var colClass = A2($Basics._op["++"],
+         "pure-u-1-",
+         $Basics.toString(len));
+         var aCol = function (list) {
+            return A2($Html.div,
+            _L.fromArray([$Html$Attributes.$class(colClass)]),
+            list);
+         };
+         return A2($Html.div,
+         _L.fromArray([$Html$Attributes.$class("pure-g")]),
+         A2($List.map,aCol,listOfLists));
+      }();
+   };
+   var leftMenu = A2($Html.div,
+   _L.fromArray([$Html$Attributes.id("menu")]),
+   _L.fromArray([A2($Html.div,
+   _L.fromArray([$Html$Attributes.$class("pure-menu")]),
+   _L.fromArray([A2($Html.span,
+                _L.fromArray([$Html$Attributes.$class("pure-menu-heading")]),
+                _L.fromArray([$Html.text("Pure")]))
+                ,A2($Html.ul,
+                _L.fromArray([$Html$Attributes.$class("pure-menu-list")]),
+                _L.fromArray([A2($Html.li,
+                             _L.fromArray([$Html$Attributes.$class("pure-menu-item")]),
+                             _L.fromArray([$Html.text("Item 1")]))
+                             ,A2($Html.li,
+                             _L.fromArray([$Html$Attributes.$class("pure-menu-item")]),
+                             _L.fromArray([$Html.text("Item 2")]))
+                             ,A2($Html.li,
+                             _L.fromArray([$Html$Attributes.$class("pure-menu-item")]),
+                             _L.fromArray([$Html.text("Item 3")]))]))]))]));
+   var table_hdr_row = F2(function (txt1,
+   txt2) {
+      return A2($Html.thead,
+      _L.fromArray([]),
+      _L.fromArray([A2($Html.tr,
+      _L.fromArray([]),
+      _L.fromArray([A2($Html.th,
+                   _L.fromArray([$Html$Attributes.align("right")]),
+                   _L.fromArray([$Html.text(txt1)]))
+                   ,A2($Html.th,
+                   _L.fromArray([$Html$Attributes.align("right")]),
+                   _L.fromArray([$Html.text(txt2)]))]))]));
+   });
+   var tableCell = function (s) {
+      return A2($Html.td,
+      _L.fromArray([$Html$Attributes.align("right")]),
+      _L.fromArray([$Html.text(s)]));
+   };
+   var viewArray = F3(function (showInd,
+   showVal,
+   arr) {
+      return function () {
+         var viewOne = F2(function (i,
+         val) {
+            return A2($Html.tr,
+            _L.fromArray([]),
+            _L.fromArray([tableCell(showInd(i))
+                         ,tableCell(showVal(val))]));
+         });
+         return $Array.toList(A2($Array.indexedMap,
+         viewOne,
+         arr));
+      }();
+   });
+   var view_program = function (program) {
+      return A3(viewArray,
+      $Basics.toString,
+      $Basics.toString,
+      program);
+   };
+   var view_registers = function (regBank) {
+      return A3(viewArray,
+      function ($) {
+         return F2(function (x,y) {
+            return A2($Basics._op["++"],
+            x,
+            y);
+         })("R")($Basics.toString($));
+      },
+      $Basics.toString,
+      regBank);
+   };
+   var interpret = F2(function (model,
+   instr) {
+      return function () {
+         var set_reg = F2(function (n,
+         v) {
+            return A3($Array.set,
+            n,
+            v,
+            model.regs);
+         });
+         var get_reg = function (n) {
+            return function () {
+               var _v0 = A2($Array.get,
+               n,
+               model.regs);
+               switch (_v0.ctor)
+               {case "Just": return _v0._0;}
+               return 99;
+            }();
+         };
+         return function () {
+            switch (instr.ctor)
+            {case "Add":
+               switch (instr._0.ctor)
+                 {case "R":
+                    switch (instr._1.ctor)
+                      {case "R":
+                         switch (instr._2.ctor)
+                           {case "R":
+                              return _U.replace([["regs"
+                                                 ,A2(set_reg,
+                                                 instr._0._0,
+                                                 get_reg(instr._1._0) + get_reg(instr._2._0))]],
+                                model);}
+                           break;}
+                      break;}
+                 break;
+               case "INVALID_INSTR":
+               return model;
+               case "JumpN":
+               return _U.replace([["pc"
+                                  ,instr._0]],
+                 model);
+               case "NoOp": return model;
+               case "Read":
+               switch (instr._0.ctor)
+                 {case "R":
+                    return _U.replace([["wrapper"
+                                       ,A2($Wrapper.init,"",true)]],
+                      model);}
+                 break;
+               case "SetN":
+               switch (instr._0.ctor)
+                 {case "R":
+                    return _U.replace([["regs"
+                                       ,A2(set_reg,
+                                       instr._0._0,
+                                       instr._1)]],
+                      model);}
+                 break;
+               case "Write":
+               switch (instr._0.ctor)
+                 {case "R":
+                    return _U.replace([["output"
+                                       ,A2($List._op["::"],
+                                       $Basics.toString(get_reg(instr._0._0)),
+                                       model.output)]],
+                      model);}
+                 break;}
+            return A2($Debug.log,
+            A2($Basics._op["++"],
+            "Aargh!! Instruction Not Handled: ",
+            $Basics.toString(instr)),
+            model);
+         }();
+      }();
+   });
+   var intFromString = function (s) {
+      return function () {
+         var _v17 = $String.toInt(s);
+         switch (_v17.ctor)
+         {case "Err":
+            return A2($Debug.log,
+              $Basics.toString(_v17._0),
+              999);
+            case "Ok": return _v17._0;}
+         _U.badCase($moduleName,
+         "between lines 111 and 113");
+      }();
+   };
+   var processInput = F2(function (model,
+   s) {
+      return function () {
+         var value = intFromString(s);
+         return function () {
+            var _v20 = model.ir;
+            switch (_v20.ctor)
+            {case "Read":
+               switch (_v20._0.ctor)
+                 {case "R":
+                    return _U.replace([["regs"
+                                       ,A3($Array.set,
+                                       _v20._0._0,
+                                       value,
+                                       model.regs)]],
+                      model);}
+                 break;}
+            return $Debug.crash("Invalid");
+         }();
+      }();
+   });
+   var effectFromTask = $Effects.task;
+   var Snapshot = F3(function (a,
+   b,
+   c) {
+      return {_: {}
+             ,effects: b
+             ,events: c
+             ,model: a};
+   });
+   var NullAction = {ctor: "NullAction"};
+   var TakeInput = function (a) {
+      return {ctor: "TakeInput"
+             ,_0: a};
+   };
+   var Wrapper = function (a) {
+      return {ctor: "Wrapper"
+             ,_0: a};
+   };
+   var Reset = {ctor: "Reset"};
+   var Step = {ctor: "Step"};
+   var view = F2(function (addr,
+   model) {
+      return function () {
+         var inputting = function () {
+            var _v23 = model.ir;
+            switch (_v23.ctor)
+            {case "Read":
+               return $Wrapper.awaitingInput(model.wrapper) ? true : false;}
+            return false;
+         }();
+         return A2($Html.div,
+         _L.fromArray([]),
+         _L.fromArray([A3($Html.node,
+                      "link",
+                      _L.fromArray([$Html$Attributes.rel("stylesheet")
+                                   ,$Html$Attributes.type$("text/css")
+                                   ,$Html$Attributes.href("http://yui.yahooapis.com/pure/0.6.0/pure-min.css")]),
+                      _L.fromArray([]))
+                      ,A3($Html.node,
+                      "link",
+                      _L.fromArray([$Html$Attributes.rel("stylesheet")
+                                   ,$Html$Attributes.type$("text/css")
+                                   ,$Html$Attributes.href("../css/style.css")]),
+                      _L.fromArray([]))
+                      ,A2($Html.div,
+                      _L.fromArray([$Html$Attributes.id("layout")]),
+                      _L.fromArray([leftMenu
+                                   ,A2($Html.div,
+                                   _L.fromArray([]),
+                                   _L.fromArray([$Html.text("Interpreter for ")
+                                                ,A2($Html.a,
+                                                _L.fromArray([$Html$Attributes.href("https://www.cs.hmc.edu/~cs5grad/cs5/hmmm/documentation/documentation.html")]),
+                                                _L.fromArray([$Html.text("The Hmmmm machine.")]))
+                                                ,$Html.text(" Source code ")
+                                                ,A2($Html.a,
+                                                _L.fromArray([$Html$Attributes.href("https://github.com/kdz/pystemm/elmassembly")]),
+                                                _L.fromArray([$Html.text("here.")]))]))
+                                   ,inNColumns(_L.fromArray([_L.fromArray([A2($Html.h2,
+                                                                          _L.fromArray([]),
+                                                                          _L.fromArray([$Html.text("Registers")]))
+                                                                          ,A2($Html.table,
+                                                                          _L.fromArray([$Html$Attributes.$class("pure-table")
+                                                                                       ,$Html$Attributes.id("all_regs")]),
+                                                                          A2($List._op["::"],
+                                                                          A2(table_hdr_row,
+                                                                          "PC/IR",
+                                                                          "Value"),
+                                                                          A2($List._op["::"],
+                                                                          A2($Html.tr,
+                                                                          _L.fromArray([]),
+                                                                          _L.fromArray([tableCell("PC")
+                                                                                       ,tableCell($Basics.toString(model.pc))])),
+                                                                          A2($List._op["::"],
+                                                                          A2($Html.tr,
+                                                                          _L.fromArray([]),
+                                                                          _L.fromArray([tableCell("IR")
+                                                                                       ,tableCell($Basics.toString(model.ir))])),
+                                                                          A2($List._op["::"],
+                                                                          A2(table_hdr_row,
+                                                                          "Reg",
+                                                                          "Value"),
+                                                                          view_registers(model.regs))))))])
+                                                            ,_L.fromArray([A2($Html.h2,
+                                                                          _L.fromArray([]),
+                                                                          _L.fromArray([$Html.text("Program RAM")]))
+                                                                          ,A2($Html.table,
+                                                                          _L.fromArray([$Html$Attributes.$class("pure-table")
+                                                                                       ,$Html$Attributes.id("program")]),
+                                                                          A2($List._op["::"],
+                                                                          A2(table_hdr_row,
+                                                                          "Instr",
+                                                                          "Operation"),
+                                                                          view_program(model.program)))])
+                                                            ,_L.fromArray([A2($Html.h2,
+                                                            _L.fromArray([]),
+                                                            _L.fromArray([$Html.text("Data RAM")]))])]))
+                                   ,A2($Html.button,
+                                   _L.fromArray([$Html$Attributes.$class("pure-button")
+                                                ,A2($Html$Events.onClick,
+                                                addr,
+                                                Step)
+                                                ,$Html$Attributes.disabled(inputting ? true : false)]),
+                                   _L.fromArray([$Html.text("Step")]))
+                                   ,A2($Html.button,
+                                   _L.fromArray([$Html$Attributes.$class("pure-button")
+                                                ,A2($Html$Events.onClick,
+                                                addr,
+                                                Reset)]),
+                                   _L.fromArray([$Html.text("Reset")]))
+                                   ,A2($Wrapper.view,
+                                   A2($Signal.forwardTo,
+                                   addr,
+                                   Wrapper),
+                                   model.wrapper)
+                                   ,A2($Html.div,
+                                   _L.fromArray([]),
+                                   A2($List._op["::"],
+                                   $Html.text("Output: "),
+                                   A2($List.map,
+                                   function (x) {
+                                      return A2($Html.div,
+                                      _L.fromArray([]),
+                                      _L.fromArray([$Html.text(x)]));
+                                   },
+                                   model.output)))]))]));
+      }();
+   });
+   var defaultEvent = {_: {}};
+   var Events = {_: {}};
+   var R = function (a) {
+      return {ctor: "R",_0: a};
+   };
+   var INVALID_INSTR = {ctor: "INVALID_INSTR"};
+   var step = function (model) {
+      return function () {
+         var instr = function () {
+            var _v25 = A2($Array.get,
+            model.pc,
+            model.program);
+            switch (_v25.ctor)
+            {case "Just": return _v25._0;}
+            return INVALID_INSTR;
+         }();
+         var model$ = _U.replace([["pc"
+                                  ,model.pc + 1]
+                                 ,["ir",instr]],
+         model);
+         var model$$ = A2(interpret,
+         model$,
+         model$.ir);
+         return model$$;
+      }();
+   };
+   var Call = F2(function (a,b) {
+      return {ctor: "Call"
+             ,_0: a
+             ,_1: b};
+   });
+   var JleZ = F2(function (a,b) {
+      return {ctor: "JleZ"
+             ,_0: a
+             ,_1: b};
+   });
+   var JgtZ = F2(function (a,b) {
+      return {ctor: "JgtZ"
+             ,_0: a
+             ,_1: b};
+   });
+   var JneZ = F2(function (a,b) {
+      return {ctor: "JneZ"
+             ,_0: a
+             ,_1: b};
+   });
+   var JeqZ = F2(function (a,b) {
+      return {ctor: "JeqZ"
+             ,_0: a
+             ,_1: b};
+   });
+   var JumpN = function (a) {
+      return {ctor: "JumpN",_0: a};
+   };
+   var Jump = function (a) {
+      return {ctor: "Jump",_0: a};
+   };
+   var StoreN = F2(function (a,b) {
+      return {ctor: "StoreN"
+             ,_0: a
+             ,_1: b};
+   });
+   var LoadN = F2(function (a,b) {
+      return {ctor: "LoadN"
+             ,_0: a
+             ,_1: b};
+   });
+   var Store = F2(function (a,b) {
+      return {ctor: "Store"
+             ,_0: a
+             ,_1: b};
+   });
+   var Load = F2(function (a,b) {
+      return {ctor: "Load"
+             ,_0: a
+             ,_1: b};
+   });
+   var Mod = F3(function (a,b,c) {
+      return {ctor: "Mod"
+             ,_0: a
+             ,_1: b
+             ,_2: c};
+   });
+   var Div = F3(function (a,b,c) {
+      return {ctor: "Div"
+             ,_0: a
+             ,_1: b
+             ,_2: c};
+   });
+   var Mul = F3(function (a,b,c) {
+      return {ctor: "Mul"
+             ,_0: a
+             ,_1: b
+             ,_2: c};
+   });
+   var Neg = F2(function (a,b) {
+      return {ctor: "Neg"
+             ,_0: a
+             ,_1: b};
+   });
+   var Sub = F3(function (a,b,c) {
+      return {ctor: "Sub"
+             ,_0: a
+             ,_1: b
+             ,_2: c};
+   });
+   var Add = F3(function (a,b,c) {
+      return {ctor: "Add"
+             ,_0: a
+             ,_1: b
+             ,_2: c};
+   });
+   var Copy = F2(function (a,b) {
+      return {ctor: "Copy"
+             ,_0: a
+             ,_1: b};
+   });
+   var AddN = F2(function (a,b) {
+      return {ctor: "AddN"
+             ,_0: a
+             ,_1: b};
+   });
+   var SetN = F2(function (a,b) {
+      return {ctor: "SetN"
+             ,_0: a
+             ,_1: b};
+   });
+   var Write = function (a) {
+      return {ctor: "Write",_0: a};
+   };
+   var Read = function (a) {
+      return {ctor: "Read",_0: a};
+   };
+   var NoOp = {ctor: "NoOp"};
+   var Halt = {ctor: "Halt"};
+   var initModel = {_: {}
+                   ,ir: NoOp
+                   ,output: _L.fromArray([])
+                   ,pc: 0
+                   ,program: $Array.fromList(_L.fromArray([Read(R(1))
+                                                          ,Read(R(2))
+                                                          ,A3(Add,
+                                                          R(3),
+                                                          R(1),
+                                                          R(2))
+                                                          ,Write(R(3))
+                                                          ,JumpN(0)
+                                                          ,Halt
+                                                          ,Halt]))
+                   ,ram: initRAM
+                   ,regs: initRegs
+                   ,wrapper: A2($Wrapper.init,
+                   "",
+                   false)};
+   var init = A3(Snapshot,
+   initModel,
+   $Effects.none,
+   defaultEvent);
+   var update = F2(function (action,
+   model) {
+      return function () {
+         var _v27 = A2($Debug.log,
+         "Action: ",
+         action);
+         switch (_v27.ctor)
+         {case "Reset": return init;
+            case "Step": return A3(Snapshot,
+              step(model),
+              $Effects.none,
+              defaultEvent);
+            case "TakeInput":
+            return A3(Snapshot,
+              A2(processInput,model,_v27._0),
+              $Effects.none,
+              defaultEvent);
+            case "Wrapper":
+            return function () {
+                 var $ = A2($Wrapper.update,
+                 _v27._0,
+                 model.wrapper),
+                 wrapper$ = $._0,
+                 events$ = $._1;
+                 var eff = function () {
+                    var _v30 = events$.done;
+                    switch (_v30.ctor)
+                    {case "Just":
+                       return effectFromTask($Task.succeed(TakeInput(_v30._0)));
+                       case "Nothing":
+                       return $Effects.none;}
+                    _U.badCase($moduleName,
+                    "between lines 91 and 94");
+                 }();
+                 var _ = A2($Debug.log,
+                 "Handler Effs",
+                 eff);
+                 var _ = A2($Debug.log,
+                 A2($Basics._op["++"],
+                 "Events",
+                 $Basics.toString(events$)),
+                 {ctor: "_Tuple0"});
+                 return A3(Snapshot,
+                 _U.replace([["wrapper"
+                             ,wrapper$]],
+                 model),
+                 eff,
+                 defaultEvent);
+              }();}
+         return A3(Snapshot,
+         model,
+         $Effects.none,
+         defaultEvent);
+      }();
+   });
+   var Model = F7(function (a,
+   b,
+   c,
+   d,
+   e,
+   f,
+   g) {
+      return {_: {}
+             ,ir: b
+             ,output: g
+             ,pc: a
+             ,program: e
+             ,ram: d
+             ,regs: c
+             ,wrapper: f};
+   });
+   _elm.Cpu.values = {_op: _op
+                     ,Model: Model
+                     ,Halt: Halt
+                     ,NoOp: NoOp
+                     ,Read: Read
+                     ,Write: Write
+                     ,SetN: SetN
+                     ,AddN: AddN
+                     ,Copy: Copy
+                     ,Add: Add
+                     ,Sub: Sub
+                     ,Neg: Neg
+                     ,Mul: Mul
+                     ,Div: Div
+                     ,Mod: Mod
+                     ,Load: Load
+                     ,Store: Store
+                     ,LoadN: LoadN
+                     ,StoreN: StoreN
+                     ,Jump: Jump
+                     ,JumpN: JumpN
+                     ,JeqZ: JeqZ
+                     ,JneZ: JneZ
+                     ,JgtZ: JgtZ
+                     ,JleZ: JleZ
+                     ,Call: Call
+                     ,INVALID_INSTR: INVALID_INSTR
+                     ,R: R
+                     ,Events: Events
+                     ,defaultEvent: defaultEvent
+                     ,Step: Step
+                     ,Reset: Reset
+                     ,Wrapper: Wrapper
+                     ,TakeInput: TakeInput
+                     ,NullAction: NullAction
+                     ,Snapshot: Snapshot
+                     ,effectFromTask: effectFromTask
+                     ,update: update
+                     ,processInput: processInput
+                     ,intFromString: intFromString
+                     ,step: step
+                     ,interpret: interpret
+                     ,tableCell: tableCell
+                     ,table_hdr_row: table_hdr_row
+                     ,leftMenu: leftMenu
+                     ,inNColumns: inNColumns
+                     ,view: view
+                     ,viewArray: viewArray
+                     ,view_program: view_program
+                     ,view_registers: view_registers
+                     ,init: init
+                     ,initModel: initModel
+                     ,initRegs: initRegs
+                     ,initRAM: initRAM};
+   return _elm.Cpu.values;
 };Elm.Debug = Elm.Debug || {};
 Elm.Debug.make = function (_elm) {
    "use strict";
@@ -1795,6 +2434,147 @@ Elm.Dict.make = function (_elm) {
                       ,toList: toList
                       ,fromList: fromList};
    return _elm.Dict.values;
+};Elm.Effects = Elm.Effects || {};
+Elm.Effects.make = function (_elm) {
+   "use strict";
+   _elm.Effects = _elm.Effects || {};
+   if (_elm.Effects.values)
+   return _elm.Effects.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Effects",
+   $Basics = Elm.Basics.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Native$Effects = Elm.Native.Effects.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Task = Elm.Task.make(_elm);
+   var ignore = function (task) {
+      return A2($Task.andThen,
+      task,
+      $Basics.always($Task.succeed({ctor: "_Tuple0"})));
+   };
+   var sequence_ = function (tasks) {
+      return ignore($Task.sequence(tasks));
+   };
+   var requestAnimationFrame = $Native$Effects.requestAnimationFrame;
+   var toTaskHelp = F3(function (address,
+   _v0,
+   effect) {
+      return function () {
+         switch (_v0.ctor)
+         {case "_Tuple2":
+            return function () {
+                 switch (effect.ctor)
+                 {case "Batch":
+                    return function () {
+                         var $ = $List.unzip(A2($List.map,
+                         A2(toTaskHelp,address,_v0),
+                         effect._0)),
+                         tasks = $._0,
+                         toMsgLists = $._1;
+                         return {ctor: "_Tuple2"
+                                ,_0: sequence_(tasks)
+                                ,_1: $List.concat(toMsgLists)};
+                      }();
+                    case "None": return _v0;
+                    case "Task":
+                    return function () {
+                         var reporter = A2($Task.andThen,
+                         effect._0,
+                         $Signal.send(address));
+                         return {ctor: "_Tuple2"
+                                ,_0: A2($Task.andThen,
+                                _v0._0,
+                                $Basics.always(ignore($Task.spawn(reporter))))
+                                ,_1: _v0._1};
+                      }();
+                    case "Tick":
+                    return {ctor: "_Tuple2"
+                           ,_0: _v0._0
+                           ,_1: A2($List._op["::"],
+                           effect._0,
+                           _v0._1)};}
+                 _U.badCase($moduleName,
+                 "between lines 184 and 209");
+              }();}
+         _U.badCase($moduleName,
+         "between lines 184 and 209");
+      }();
+   });
+   var toTask = F2(function (address,
+   effect) {
+      return function () {
+         var $ = A3(toTaskHelp,
+         address,
+         {ctor: "_Tuple2"
+         ,_0: $Task.succeed({ctor: "_Tuple0"})
+         ,_1: _L.fromArray([])},
+         effect),
+         combinedTask = $._0,
+         tickMessages = $._1;
+         var animationReport = function (time) {
+            return sequence_($List.map(function (f) {
+               return A2($Signal.send,
+               address,
+               f(time));
+            })(tickMessages));
+         };
+         var animationRequests = requestAnimationFrame(animationReport);
+         return A2($Task.andThen,
+         combinedTask,
+         $Basics.always(animationRequests));
+      }();
+   });
+   var Never = function (a) {
+      return {ctor: "Never",_0: a};
+   };
+   var Batch = function (a) {
+      return {ctor: "Batch",_0: a};
+   };
+   var batch = Batch;
+   var None = {ctor: "None"};
+   var none = None;
+   var Tick = function (a) {
+      return {ctor: "Tick",_0: a};
+   };
+   var tick = Tick;
+   var Task = function (a) {
+      return {ctor: "Task",_0: a};
+   };
+   var task = Task;
+   var map = F2(function (func,
+   effect) {
+      return function () {
+         switch (effect.ctor)
+         {case "Batch":
+            return Batch(A2($List.map,
+              map(func),
+              effect._0));
+            case "None": return None;
+            case "Task":
+            return Task(A2($Task.map,
+              func,
+              effect._0));
+            case "Tick":
+            return Tick(function ($) {
+                 return func(effect._0($));
+              });}
+         _U.badCase($moduleName,
+         "between lines 136 and 147");
+      }();
+   });
+   _elm.Effects.values = {_op: _op
+                         ,none: none
+                         ,task: task
+                         ,tick: tick
+                         ,map: map
+                         ,batch: batch
+                         ,toTask: toTask};
+   return _elm.Effects.values;
 };Elm.Graphics = Elm.Graphics || {};
 Elm.Graphics.Collage = Elm.Graphics.Collage || {};
 Elm.Graphics.Collage.make = function (_elm) {
@@ -3535,6 +4315,249 @@ Elm.Html.Attributes.make = function (_elm) {
                                  ,property: property
                                  ,attribute: attribute};
    return _elm.Html.Attributes.values;
+};Elm.Html = Elm.Html || {};
+Elm.Html.Events = Elm.Html.Events || {};
+Elm.Html.Events.make = function (_elm) {
+   "use strict";
+   _elm.Html = _elm.Html || {};
+   _elm.Html.Events = _elm.Html.Events || {};
+   if (_elm.Html.Events.values)
+   return _elm.Html.Events.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Html.Events",
+   $Basics = Elm.Basics.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Json$Decode = Elm.Json.Decode.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $VirtualDom = Elm.VirtualDom.make(_elm);
+   var keyCode = A2($Json$Decode._op[":="],
+   "keyCode",
+   $Json$Decode.$int);
+   var targetChecked = A2($Json$Decode.at,
+   _L.fromArray(["target"
+                ,"checked"]),
+   $Json$Decode.bool);
+   var targetValue = A2($Json$Decode.at,
+   _L.fromArray(["target"
+                ,"value"]),
+   $Json$Decode.string);
+   var defaultOptions = $VirtualDom.defaultOptions;
+   var Options = F2(function (a,
+   b) {
+      return {_: {}
+             ,preventDefault: b
+             ,stopPropagation: a};
+   });
+   var onWithOptions = $VirtualDom.onWithOptions;
+   var on = $VirtualDom.on;
+   var messageOn = F3(function (name,
+   addr,
+   msg) {
+      return A3(on,
+      name,
+      $Json$Decode.value,
+      function (_v0) {
+         return function () {
+            return A2($Signal.message,
+            addr,
+            msg);
+         }();
+      });
+   });
+   var onClick = messageOn("click");
+   var onDoubleClick = messageOn("dblclick");
+   var onMouseMove = messageOn("mousemove");
+   var onMouseDown = messageOn("mousedown");
+   var onMouseUp = messageOn("mouseup");
+   var onMouseEnter = messageOn("mouseenter");
+   var onMouseLeave = messageOn("mouseleave");
+   var onMouseOver = messageOn("mouseover");
+   var onMouseOut = messageOn("mouseout");
+   var onBlur = messageOn("blur");
+   var onFocus = messageOn("focus");
+   var onSubmit = messageOn("submit");
+   var onKey = F3(function (name,
+   addr,
+   handler) {
+      return A3(on,
+      name,
+      keyCode,
+      function (code) {
+         return A2($Signal.message,
+         addr,
+         handler(code));
+      });
+   });
+   var onKeyUp = onKey("keyup");
+   var onKeyDown = onKey("keydown");
+   var onKeyPress = onKey("keypress");
+   _elm.Html.Events.values = {_op: _op
+                             ,onBlur: onBlur
+                             ,onFocus: onFocus
+                             ,onSubmit: onSubmit
+                             ,onKeyUp: onKeyUp
+                             ,onKeyDown: onKeyDown
+                             ,onKeyPress: onKeyPress
+                             ,onClick: onClick
+                             ,onDoubleClick: onDoubleClick
+                             ,onMouseMove: onMouseMove
+                             ,onMouseDown: onMouseDown
+                             ,onMouseUp: onMouseUp
+                             ,onMouseEnter: onMouseEnter
+                             ,onMouseLeave: onMouseLeave
+                             ,onMouseOver: onMouseOver
+                             ,onMouseOut: onMouseOut
+                             ,on: on
+                             ,onWithOptions: onWithOptions
+                             ,defaultOptions: defaultOptions
+                             ,targetValue: targetValue
+                             ,targetChecked: targetChecked
+                             ,keyCode: keyCode
+                             ,Options: Options};
+   return _elm.Html.Events.values;
+};Elm.Input = Elm.Input || {};
+Elm.Input.make = function (_elm) {
+   "use strict";
+   _elm.Input = _elm.Input || {};
+   if (_elm.Input.values)
+   return _elm.Input.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Input",
+   $Basics = Elm.Basics.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Html$Events = Elm.Html.Events.make(_elm),
+   $Json$Decode = Elm.Json.Decode.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var onEnter = F2(function (address,
+   value) {
+      return function () {
+         var is13 = function (code) {
+            return _U.eq(code,
+            13) ? $Result.Ok({ctor: "_Tuple0"}) : $Result.Err("wrong key code");
+         };
+         return A3($Html$Events.on,
+         "keydown",
+         A2($Json$Decode.customDecoder,
+         $Html$Events.keyCode,
+         is13),
+         function (_v0) {
+            return function () {
+               return A2($Signal.message,
+               address,
+               value);
+            }();
+         });
+      }();
+   });
+   var Done = {ctor: "Done"};
+   var Edit = function (a) {
+      return {ctor: "Edit",_0: a};
+   };
+   var view = F2(function (addr,
+   _v2) {
+      return function () {
+         switch (_v2.ctor)
+         {case "Model":
+            return function () {
+                 var hilite = _v2._0.awaitingInput ? _L.fromArray([$Html$Attributes.$class("attention")]) : _L.fromArray([]);
+                 return A2($Html.div,
+                 _L.fromArray([]),
+                 _L.fromArray([A2($Html.span,
+                              hilite,
+                              _L.fromArray([$Html.text("Input: ")]))
+                              ,A2($Html.input,
+                              _L.fromArray([$Html$Attributes.$class("pure-input-1-2")
+                                           ,$Html$Attributes.value(_v2._0.val)
+                                           ,$Html$Attributes.placeholder("Enter Value")
+                                           ,$Html$Attributes.autofocus(true)
+                                           ,A3($Html$Events.on,
+                                           "input",
+                                           $Html$Events.targetValue,
+                                           function ($) {
+                                              return $Signal.message(addr)(Edit($));
+                                           })
+                                           ,A2(onEnter,addr,Done)
+                                           ,$Html$Attributes.disabled(_v2._0.awaitingInput ? false : true)]),
+                              _L.fromArray([]))]));
+              }();}
+         _U.badCase($moduleName,
+         "between lines 40 and 50");
+      }();
+   });
+   var awaiting = function (_v5) {
+      return function () {
+         switch (_v5.ctor)
+         {case "Model":
+            return _v5._0.awaitingInput;}
+         _U.badCase($moduleName,
+         "on line 22, column 22 to 37");
+      }();
+   };
+   var event = {_: {}
+               ,done: $Maybe.Nothing
+               ,edited: $Maybe.Nothing};
+   var Events = F2(function (a,b) {
+      return {_: {}
+             ,done: a
+             ,edited: b};
+   });
+   var Model = function (a) {
+      return {ctor: "Model",_0: a};
+   };
+   var init = F2(function (s,b) {
+      return Model({_: {}
+                   ,awaitingInput: b
+                   ,val: s});
+   });
+   var update = F2(function (action,
+   _v8) {
+      return function () {
+         switch (_v8.ctor)
+         {case "Model":
+            return function () {
+                 switch (action.ctor)
+                 {case "Done":
+                    return {ctor: "_Tuple2"
+                           ,_0: A2(init,"",false)
+                           ,_1: _U.replace([["done"
+                                            ,$Maybe.Just(_v8._0.val)]],
+                           event)};
+                    case "Edit":
+                    return {ctor: "_Tuple2"
+                           ,_0: Model(_U.replace([["val"
+                                                  ,action._0]
+                                                 ,["awaitingInput",true]],
+                           _v8._0))
+                           ,_1: _U.replace([["edited"
+                                            ,$Maybe.Just(action._0)]],
+                           event)};}
+                 _U.badCase($moduleName,
+                 "between lines 32 and 34");
+              }();}
+         _U.badCase($moduleName,
+         "between lines 32 and 34");
+      }();
+   });
+   _elm.Input.values = {_op: _op
+                       ,init: init
+                       ,update: update
+                       ,view: view
+                       ,awaiting: awaiting
+                       ,Events: Events};
+   return _elm.Input.values;
 };Elm.Json = Elm.Json || {};
 Elm.Json.Decode = Elm.Json.Decode || {};
 Elm.Json.Decode.make = function (_elm) {
@@ -4047,14 +5070,42 @@ Elm.Main.make = function (_elm) {
    _L = _N.List.make(_elm),
    $moduleName = "Main",
    $Basics = Elm.Basics.make(_elm),
+   $Cpu = Elm.Cpu.make(_elm),
+   $Effects = Elm.Effects.make(_elm),
    $Html = Elm.Html.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
-   $Program = Elm.Program.make(_elm),
    $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
-   var main = $Program.view($Program.p1);
+   $Signal = Elm.Signal.make(_elm),
+   $Task = Elm.Task.make(_elm);
+   var mbox = $Signal.mailbox($Cpu.NullAction);
+   var snapshotStream = A2($Signal.foldp,
+   F2(function (act,snap) {
+      return A2($Cpu.update,
+      act,
+      function (_) {
+         return _.model;
+      }(snap));
+   }),
+   $Cpu.init)(mbox.signal);
+   var modelStream = $Signal.map(function (_) {
+      return _.model;
+   })(snapshotStream);
+   var taskStream = $Signal.map(function ($) {
+      return $Effects.toTask(mbox.address)(function (_) {
+         return _.effects;
+      }($));
+   })(snapshotStream);
+   var tasks = Elm.Native.Task.make(_elm).performSignal("tasks",
+   taskStream);
+   var main = A2($Signal.map,
+   $Cpu.view(mbox.address),
+   modelStream);
    _elm.Main.values = {_op: _op
+                      ,mbox: mbox
+                      ,snapshotStream: snapshotStream
+                      ,modelStream: modelStream
+                      ,taskStream: taskStream
                       ,main: main};
    return _elm.Main.values;
 };Elm.Maybe = Elm.Maybe || {};
@@ -5372,6 +6423,35 @@ Elm.Native.Debug.make = function(localRuntime) {
 		watch: F2(watch),
 		watchSummary:F3(watchSummary),
 	};
+};
+Elm.Native.Effects = {};
+Elm.Native.Effects.make = function(localRuntime) {
+
+	localRuntime.Native = localRuntime.Native || {};
+	localRuntime.Native.Effects = localRuntime.Native.Effects || {};
+	if (localRuntime.Native.Effects.values)
+	{
+		return localRuntime.Native.Effects.values;
+	}
+
+	var Task = Elm.Native.Task.make(localRuntime);
+	var Utils = Elm.Native.Utils.make(localRuntime);
+
+
+	function raf(timeToTask)
+	{
+		return Task.asyncFunction(function(callback) {
+			requestAnimationFrame(function(time) {
+				Task.perform(timeToTask(time));
+			});
+			callback(Task.succeed(Utils.Tuple0));
+		});
+	}
+
+	return localRuntime.Native.Effects.values = {
+		requestAnimationFrame: raf
+	};
+
 };
 
 // setup
@@ -10219,9 +11299,12 @@ Elm.Native.Utils.make = function(localRuntime) {
 		badPort: badPort
 	};
 };
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var createElement = require("./vdom/create-element.js")
 
-},{}],2:[function(require,module,exports){
+module.exports = createElement
+
+},{"./vdom/create-element.js":6}],2:[function(require,module,exports){
 (function (global){
 var topLevel = typeof global !== 'undefined' ? global :
     typeof window !== 'undefined' ? window : {}
@@ -10239,8 +11322,8 @@ if (typeof document !== 'undefined') {
     module.exports = doccy;
 }
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"min-document":1}],3:[function(require,module,exports){
+}).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"min-document":24}],3:[function(require,module,exports){
 "use strict";
 
 module.exports = function isObject(x) {
@@ -11430,7 +12513,7 @@ var VNode = require('virtual-dom/vnode/vnode');
 var VText = require('virtual-dom/vnode/vtext');
 var diff = require('virtual-dom/vtree/diff');
 var patch = require('virtual-dom/vdom/patch');
-var createElement = require('virtual-dom/vdom/create-element');
+var createElement = require('virtual-dom/create-element');
 var isHook = require("virtual-dom/vnode/is-vhook");
 
 
@@ -11452,14 +12535,24 @@ Elm.Native.VirtualDom.make = function(elm)
 
 	var ATTRIBUTE_KEY = 'UniqueNameThatOthersAreVeryUnlikelyToUse';
 
-
-
-	// VIRTUAL DOM NODES
-
-
-	function text(string)
+	function listToProperties(list)
 	{
-		return new VText(string);
+		var object = {};
+		while (list.ctor !== '[]')
+		{
+			var entry = list._0;
+			if (entry.key === ATTRIBUTE_KEY)
+			{
+				object.attributes = object.attributes || {};
+				object.attributes[entry.value.attrKey] = entry.value.attrValue;
+			}
+			else
+			{
+				object[entry.key] = entry.value;
+			}
+			list = list._1;
+		}
+		return object;
 	}
 
 	function node(name)
@@ -11468,10 +12561,6 @@ Elm.Native.VirtualDom.make = function(elm)
 			return makeNode(name, propertyList, contents);
 		});
 	}
-
-
-	// BUILD VIRTUAL DOME NODES
-
 
 	function makeNode(name, propertyList, contents)
 	{
@@ -11494,7 +12583,7 @@ Elm.Native.VirtualDom.make = function(elm)
 
 		// ensure that setting text of an input does not move the cursor
 		var useSoftSet =
-			(name === 'input' || name === 'textarea')
+			name === 'input'
 			&& props.value !== undefined
 			&& !isHook(props.value);
 
@@ -11505,31 +12594,6 @@ Elm.Native.VirtualDom.make = function(elm)
 
 		return new VNode(name, props, List.toArray(contents), key, namespace);
 	}
-
-	function listToProperties(list)
-	{
-		var object = {};
-		while (list.ctor !== '[]')
-		{
-			var entry = list._0;
-			if (entry.key === ATTRIBUTE_KEY)
-			{
-				object.attributes = object.attributes || {};
-				object.attributes[entry.value.attrKey] = entry.value.attrValue;
-			}
-			else
-			{
-				object[entry.key] = entry.value;
-			}
-			list = list._1;
-		}
-		return object;
-	}
-
-
-
-	// PROPERTIES AND ATTRIBUTES
-
 
 	function property(key, value)
 	{
@@ -11549,63 +12613,6 @@ Elm.Native.VirtualDom.make = function(elm)
 			}
 		};
 	}
-
-
-
-	// NAMESPACED ATTRIBUTES
-
-
-	function attributeNS(namespace, key, value)
-	{
-		return {
-			key: key,
-			value: new AttributeHook(namespace, key, value)
-		};
-	}
-
-	function AttributeHook(namespace, key, value)
-	{
-		if (!(this instanceof AttributeHook))
-		{
-			return new AttributeHook(namespace, key, value);
-		}
-
-		this.namespace = namespace;
-		this.key = key;
-		this.value = value;
-	}
-
-	AttributeHook.prototype.hook = function (node, prop, prev)
-	{
-		if (prev
-			&& prev.type === 'AttributeHook'
-			&& prev.value === this.value
-			&& prev.namespace === this.namespace)
-		{
-			return;
-		}
-
-		node.setAttributeNS(this.namespace, prop, this.value);
-	};
-
-	AttributeHook.prototype.unhook = function (node, prop, next)
-	{
-		if (next
-			&& next.type === 'AttributeHook'
-			&& next.namespace === this.namespace)
-		{
-			return;
-		}
-
-		node.removeAttributeNS(this.namespace, this.key);
-	};
-
-	AttributeHook.prototype.type = 'AttributeHook';
-
-
-
-	// EVENTS
-
 
 	function on(name, options, decoder, createMessage)
 	{
@@ -11646,10 +12653,10 @@ Elm.Native.VirtualDom.make = function(elm)
 		}
 	};
 
-
-
-	// INTEGRATION WITH ELEMENTS
-
+	function text(string)
+	{
+		return new VText(string);
+	}
 
 	function ElementWidget(element)
 	{
@@ -11684,11 +12691,6 @@ Elm.Native.VirtualDom.make = function(elm)
 		});
 	}
 
-
-
-	// RENDER AND UPDATE
-
-
 	function render(model)
 	{
 		var element = Element.createNode('div');
@@ -11708,11 +12710,6 @@ Elm.Native.VirtualDom.make = function(elm)
 		var newNode = patch(node, patches);
 		return newNode;
 	}
-
-
-
-	// LAZINESS
-
 
 	function lazyRef(fn, a)
 	{
@@ -11743,17 +12740,15 @@ Elm.Native.VirtualDom.make = function(elm)
 
 	function Thunk(fn, args, thunk)
 	{
-		/* public (used by VirtualDom.js) */
-		this.vnode = null;
-		this.key = undefined;
-
-		/* private */
 		this.fn = fn;
 		this.args = args;
+		this.vnode = null;
+		this.key = undefined;
 		this.thunk = thunk;
 	}
 
 	Thunk.prototype.type = "Thunk";
+	Thunk.prototype.update = updateThunk;
 	Thunk.prototype.render = renderThunk;
 
 	function shouldUpdate(current, previous)
@@ -11778,27 +12773,35 @@ Elm.Native.VirtualDom.make = function(elm)
 		return false;
 	}
 
-	function renderThunk(previous)
+	function updateThunk(previous, domNode)
 	{
-		if (previous == null || shouldUpdate(this, previous))
+		if (!shouldUpdate(this, previous))
 		{
-			return this.thunk();
+			this.vnode = previous.vnode;
+			return;
 		}
-		else
+
+		if (!this.vnode)
 		{
-			return previous.vnode;
+			this.vnode = this.thunk();
 		}
+
+		var patches = diff(previous.vnode, this.vnode);
+		patch(domNode, patches);
 	}
 
+	function renderThunk()
+	{
+		return this.thunk();
+	}
 
-	return elm.Native.VirtualDom.values = Elm.Native.VirtualDom.values = {
+	return Elm.Native.VirtualDom.values = {
 		node: node,
 		text: text,
 		on: F4(on),
 
 		property: F2(property),
 		attribute: F2(attribute),
-		attributeNS: F3(attributeNS),
 
 		lazy: F2(lazyRef),
 		lazy2: F3(lazyRef2),
@@ -11812,130 +12815,10 @@ Elm.Native.VirtualDom.make = function(elm)
 	};
 };
 
-},{"virtual-dom/vdom/create-element":6,"virtual-dom/vdom/patch":9,"virtual-dom/vnode/is-vhook":13,"virtual-dom/vnode/vnode":18,"virtual-dom/vnode/vtext":20,"virtual-dom/vtree/diff":22}]},{},[23]);
-Elm.Program = Elm.Program || {};
-Elm.Program.make = function (_elm) {
-   "use strict";
-   _elm.Program = _elm.Program || {};
-   if (_elm.Program.values)
-   return _elm.Program.values;
-   var _op = {},
-   _N = Elm.Native,
-   _U = _N.Utils.make(_elm),
-   _L = _N.List.make(_elm),
-   $moduleName = "Program",
-   $Array = Elm.Array.make(_elm),
-   $Basics = Elm.Basics.make(_elm),
-   $Html = Elm.Html.make(_elm),
-   $Html$Attributes = Elm.Html.Attributes.make(_elm),
-   $List = Elm.List.make(_elm),
-   $Maybe = Elm.Maybe.make(_elm),
-   $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
-   var indexedInstrucToHtml = F2(function (i,
-   instr) {
-      return A2($Html.tr,
-      _L.fromArray([]),
-      _L.fromArray([A2($Html.td,
-                   _L.fromArray([]),
-                   _L.fromArray([$Html.text($Basics.toString(i))]))
-                   ,A2($Html.td,
-                   _L.fromArray([]),
-                   _L.fromArray([$Html.text($Basics.toString(instr))]))]));
-   });
-   var view = function (model) {
-      return function () {
-         var headers = A2($Html.thead,
-         _L.fromArray([]),
-         _L.fromArray([A2($Html.tr,
-         _L.fromArray([]),
-         _L.fromArray([A2($Html.td,
-                      _L.fromArray([]),
-                      _L.fromArray([$Html.text("Addr")]))
-                      ,A2($Html.td,
-                      _L.fromArray([]),
-                      _L.fromArray([$Html.text("Instruction")]))]))]));
-         var tableList = A2($List.indexedMap,
-         indexedInstrucToHtml,
-         model);
-         return A2($Html.div,
-         _L.fromArray([]),
-         _L.fromArray([A2($Html.h1,
-                      _L.fromArray([]),
-                      _L.fromArray([$Html.text("Assembly Language Simulator in Elm")]))
-                      ,$Html.text("Simulator for ")
-                      ,A2($Html.a,
-                      _L.fromArray([$Html$Attributes.href("https://www.cs.hmc.edu/~cs5grad/cs5/hmmm/documentation/documentation.html")]),
-                      _L.fromArray([$Html.text("The Harvey Mudd Miniature Machine.")]))
-                      ,A2($Html.h2,
-                      _L.fromArray([]),
-                      _L.fromArray([$Html.text("A work in progress: represent instruction set, represent RAM and registers, interpret instructions, ...")]))
-                      ,A3($Html.node,
-                      "link",
-                      _L.fromArray([$Html$Attributes.rel("stylesheet")
-                                   ,$Html$Attributes.href("http://yui.yahooapis.com/pure/0.6.0/pure-min.css")]),
-                      _L.fromArray([]))
-                      ,A3($Html.node,
-                      "link",
-                      _L.fromArray([$Html$Attributes.rel("stylesheet")
-                                   ,$Html$Attributes.href("../css/style.css")]),
-                      _L.fromArray([]))
-                      ,A2($Html.table,
-                      _L.fromArray([$Html$Attributes.$class("pure-table")
-                                   ,$Html$Attributes.id("assemblytable")]),
-                      A2($List._op["::"],
-                      headers,
-                      tableList))]));
-      }();
-   };
-   var R = function (a) {
-      return {ctor: "R",_0: a};
-   };
-   var Storen = F2(function (a,b) {
-      return {ctor: "Storen"
-             ,_0: a
-             ,_1: b};
-   });
-   var Loadn = F2(function (a,b) {
-      return {ctor: "Loadn"
-             ,_0: a
-             ,_1: b};
-   });
-   var Sub = F3(function (a,b,c) {
-      return {ctor: "Sub"
-             ,_0: a
-             ,_1: b
-             ,_2: c};
-   });
-   var Setn = F2(function (a,b) {
-      return {ctor: "Setn"
-             ,_0: a
-             ,_1: b};
-   });
-   var i1 = A2(Setn,R(5),1);
-   var p1 = _L.fromArray([A2(Setn,
-                         R(3),
-                         10)
-                         ,A2(Setn,R(5),25)
-                         ,A3(Sub,R(7),R(5),R(3))
-                         ,A2(Loadn,R(7),100)]);
-   var p2 = _L.fromArray([A2(Setn,
-                         R(5),
-                         10)
-                         ,A3(Sub,R(5),R(3),R(2))]);
-   _elm.Program.values = {_op: _op
-                         ,Setn: Setn
-                         ,Sub: Sub
-                         ,Loadn: Loadn
-                         ,Storen: Storen
-                         ,R: R
-                         ,i1: i1
-                         ,p1: p1
-                         ,p2: p2
-                         ,indexedInstrucToHtml: indexedInstrucToHtml
-                         ,view: view};
-   return _elm.Program.values;
-};Elm.Result = Elm.Result || {};
+},{"virtual-dom/create-element":1,"virtual-dom/vdom/patch":9,"virtual-dom/vnode/is-vhook":13,"virtual-dom/vnode/vnode":18,"virtual-dom/vnode/vtext":20,"virtual-dom/vtree/diff":22}],24:[function(require,module,exports){
+
+},{}]},{},[23]);
+Elm.Result = Elm.Result || {};
 Elm.Result.make = function (_elm) {
    "use strict";
    _elm.Result = _elm.Result || {};
@@ -12835,7 +13718,6 @@ Elm.VirtualDom.make = function (_elm) {
       decoder,
       toMessage);
    });
-   var attributeNS = $Native$VirtualDom.attributeNS;
    var attribute = $Native$VirtualDom.attribute;
    var property = $Native$VirtualDom.property;
    var Property = {ctor: "Property"};
@@ -12851,7 +13733,6 @@ Elm.VirtualDom.make = function (_elm) {
                             ,fromElement: fromElement
                             ,property: property
                             ,attribute: attribute
-                            ,attributeNS: attributeNS
                             ,on: on
                             ,onWithOptions: onWithOptions
                             ,defaultOptions: defaultOptions
@@ -12860,4 +13741,85 @@ Elm.VirtualDom.make = function (_elm) {
                             ,lazy3: lazy3
                             ,Options: Options};
    return _elm.VirtualDom.values;
+};Elm.Wrapper = Elm.Wrapper || {};
+Elm.Wrapper.make = function (_elm) {
+   "use strict";
+   _elm.Wrapper = _elm.Wrapper || {};
+   if (_elm.Wrapper.values)
+   return _elm.Wrapper.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Wrapper",
+   $Basics = Elm.Basics.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Input = Elm.Input.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var awaitingInput = function (_v0) {
+      return function () {
+         switch (_v0.ctor)
+         {case "Model":
+            return $Input.awaiting(_v0._0.input);}
+         _U.badCase($moduleName,
+         "on line 25, column 27 to 49");
+      }();
+   };
+   var Input = function (a) {
+      return {ctor: "Input",_0: a};
+   };
+   var view = F2(function (a,_v3) {
+      return function () {
+         switch (_v3.ctor)
+         {case "Model":
+            return A2($Input.view,
+              A2($Signal.forwardTo,a,Input),
+              _v3._0.input);}
+         _U.badCase($moduleName,
+         "on line 15, column 22 to 69");
+      }();
+   });
+   var Model = function (a) {
+      return {ctor: "Model",_0: a};
+   };
+   var init = F2(function (s,b) {
+      return Model({_: {}
+                   ,input: A2($Input.init,s,b)});
+   });
+   var update = F2(function (a,
+   _v6) {
+      return function () {
+         switch (_v6.ctor)
+         {case "Model":
+            return function () {
+                 switch (a.ctor)
+                 {case "Input":
+                    return function () {
+                         var $ = A2($Input.update,
+                         a._0,
+                         _v6._0.input),
+                         rec$ = $._0,
+                         ev$ = $._1;
+                         return {ctor: "_Tuple2"
+                                ,_0: Model(_U.replace([["input"
+                                                       ,rec$]],
+                                _v6._0))
+                                ,_1: ev$};
+                      }();}
+                 _U.badCase($moduleName,
+                 "between lines 18 and 22");
+              }();}
+         _U.badCase($moduleName,
+         "between lines 18 and 22");
+      }();
+   });
+   _elm.Wrapper.values = {_op: _op
+                         ,init: init
+                         ,view: view
+                         ,update: update
+                         ,awaitingInput: awaitingInput};
+   return _elm.Wrapper.values;
 };</script></head><body><script type="text/javascript">Elm.fullscreen(Elm.Main)</script></body></html>

@@ -217,8 +217,8 @@ projects =
       , location = "New York, NY"
       , dates = "2014 - 2015"
       , details =
-            [ "Led diverse team of 5, built system for mobile healthcare workers doing disease surveillance"
-            , "Used Python/Postgresql web service with 2-way SMS-based mobile and web interfaces"
+            [ "Led diverse team of 5, conceived and built system for mobile healthcare workers doing disease surveillance"
+            , "Used Python/Postgres web service with 2-way SMS-based mobile and web interfaces"
             , "Columbia Ebola Design Challenge finalist, partnered with There Is No Limit Foundation in Guinea"
             ]
       , more = Just "https://www.youtube.com/watch?v=OvI7ufNF1fw"
@@ -301,4 +301,4 @@ activities =
 
 traits : List String
 traits =
-    [ "Love Computing", "Critical Thinking", "Self-starter", "Teamwork", "Communication", "Hard Working" ]
+    [ "Love Computing", "Love Wrestling with Problems", "Self-starter", "Teamwork", "Communication", "Hard Working" ]
