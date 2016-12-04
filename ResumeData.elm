@@ -289,7 +289,7 @@ projects =
 
 activities : List FlatItem
 activities =
-    [ FlatItem "Girls who Code: Teaching Assistant" "2015-present"
+    [ FlatItem "Girls who Code: Teaching Assistant, Mentor, pushing Elm in the curriculum" "2015-present"
     , FlatItem "Society of Women Engineers: Family member and house member" "2014-present"
     , FlatItem "Women in Computer Science: Member" "2014-present"
     , FlatItem "Application Development Initiative (ADI): Member" "2014-present"

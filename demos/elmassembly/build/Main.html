@@ -1065,7 +1065,7 @@ Elm.Cpu.make = function (_elm) {
                                                 _L.fromArray([$Html.text("The Hmmmm machine.")]))
                                                 ,$Html.text(" Source code ")
                                                 ,A2($Html.a,
-                                                _L.fromArray([$Html$Attributes.href("https://github.com/kdz/elmassembly")]),
+                                                _L.fromArray([$Html$Attributes.href("https://github.com/kdz/pystemm/elmassembly")]),
                                                 _L.fromArray([$Html.text("here.")]))]))
                                    ,inNColumns(_L.fromArray([_L.fromArray([A2($Html.h2,
                                                                           _L.fromArray([]),
@@ -1107,14 +1107,14 @@ Elm.Cpu.make = function (_elm) {
                                                             _L.fromArray([]),
                                                             _L.fromArray([$Html.text("Data RAM")]))])]))
                                    ,A2($Html.button,
-                                   _L.fromArray([$Html$Attributes.$class("pure-button pure-button-primary")
+                                   _L.fromArray([$Html$Attributes.$class("pure-button")
                                                 ,A2($Html$Events.onClick,
                                                 addr,
                                                 Step)
                                                 ,$Html$Attributes.disabled(inputting ? true : false)]),
                                    _L.fromArray([$Html.text("Step")]))
                                    ,A2($Html.button,
-                                   _L.fromArray([$Html$Attributes.$class("pure-button pure-button-primary")
+                                   _L.fromArray([$Html$Attributes.$class("pure-button")
                                                 ,A2($Html$Events.onClick,
                                                 addr,
                                                 Reset)]),

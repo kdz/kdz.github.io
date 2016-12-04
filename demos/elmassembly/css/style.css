@@ -2,17 +2,32 @@
     background-color: aliceblue;
 }
 
+#all_regs > thead:nth-child(1) > tr > th:nth-child(2) {
+  width: 75%;
+}
+
+table {
+  margin: 10px;
+}
+
 #program {
     background-color: beige;
 }
 
-.pure-button {
+button.pure-button {
 	margin: 2px;
+  background-color: lightcoral;
+  font-weight: bold;
 }
 
 .attention {
 	font-size: x-large;
-	background-color: darkorange;
+	background-color: lightcoral;
+}
+
+
+#layout > div:nth-child(7) div {
+  background-color: peachpuff;
 }
 
 table, tr {
@@ -34,12 +49,17 @@ Can use Font Awesome icons on buttons e.g. bottom of http://purecss.io/buttons/
 */
 
 #layout {
-    padding-left: 160px;
-    left: 0;
+    /*padding-left: 160px;
+    left: 0;*/
+}
+
+body {
+  margin-left: 20px;
 }
 
 #menu {
     /*margin-left: -160px;*/
+    display: none;
     width: 160px;
     position: fixed;
     top: 0;
