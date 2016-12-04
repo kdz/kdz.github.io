@@ -7,7 +7,7 @@
 }
 
 table {
-  margin: 10px;
+  margin-right: 10px;
 }
 
 #program {
@@ -55,6 +55,7 @@ Can use Font Awesome icons on buttons e.g. bottom of http://purecss.io/buttons/
 
 body {
   margin-left: 20px;
+  margin-top: 20px;
 }
 
 #menu {
