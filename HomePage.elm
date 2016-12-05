@@ -4,7 +4,6 @@ import Resume
 import Menu
 import Demos
 import Html exposing (..)
-import Html.App as Html
 import Html.Attributes exposing (..)
 
 
@@ -110,7 +109,7 @@ view model =
         ]
 
 
-main : Program Never
+main : Program Never Model Msg
 main =
     Html.program
         { init = init

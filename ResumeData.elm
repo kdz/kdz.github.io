@@ -233,8 +233,8 @@ projects =
             [ "A single-page Elm application for an interactive Assembly Language Simulator"
             ]
       , more = Nothing
-      , repo = Just "http://github.com/kdz/elmassembly"
-      , demo = Just "http://kdz.github.io/demos/elmassembly/build/Main.html"
+      , repo = Nothing
+      , demo = Just "demos/elmassembly/index.html"
       }
     , { name = "Executable domain models"
       , role = "Personal Project"

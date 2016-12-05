@@ -2,7 +2,7 @@
     background-color: aliceblue;
 }
 
-#all_regs > thead:nth-child(1) > tr > th:nth-child(2) {
+.instr {
   width: 75%;
 }
 
@@ -20,63 +20,26 @@ button.pure-button {
   font-weight: bold;
 }
 
+input, .output {
+  font-size: x-large;
+}
+
 .attention {
-	font-size: x-large;
 	background-color: lightcoral;
 }
 
 
-#layout > div:nth-child(7) div {
+.output {
   background-color: peachpuff;
 }
 
 table, tr {
     vertical-align: top;
 }
-/*
 
-Further customize by #id, element, or class
-e.g. table {
-    border: black;
-    border-width: 1px;
-    table-layout: fixed;  // to control topmost row cell widths
-    margin: 20px;
-    padding: 20px;
-}
-
-Can use Font Awesome icons on buttons e.g. bottom of http://purecss.io/buttons/
-
-*/
-
-#layout {
-    /*padding-left: 160px;
-    left: 0;*/
-}
 
 body {
   margin-left: 20px;
   margin-top: 20px;
-}
-
-#menu {
-    /*margin-left: -160px;*/
-    display: none;
-    width: 160px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 1000;
-    background: #191818;
-/*    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;*/
-    color: aqua;
-}
-
-#layout, #menu, .menu-link {
-    -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;
-    -ms-transition: all 0.2s ease-out;
-    -o-transition: all 0.2s ease-out;
-    transition: all 0.2s ease-out;
+  font-size: 1.1em;
 }

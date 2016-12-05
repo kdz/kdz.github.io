@@ -185,19 +185,19 @@ view model =
 
 purecss : Html a
 purecss =
-    node "link" [ rel "stylesheet", type' "text/css", href "http://yui.yahooapis.com/pure/0.6.0/pure-min.css" ] []
+    node "link" [ rel "stylesheet", type_ "text/css", href "http://yui.yahooapis.com/pure/0.6.0/pure-min.css" ] []
 
 
 localcss : Html a
 localcss =
-    node "link" [ rel "stylesheet", type' "text/css", href "css/style.css" ] []
+    node "link" [ rel "stylesheet", type_ "text/css", href "css/style.css" ] []
 
 
 printMediaCss : Html a
 printMediaCss =
     node "link"
         [ rel "stylesheet"
-        , type' "text/css"
+        , type_ "text/css"
         , media "print"
         , href "css/printMedia.css"
         ]
