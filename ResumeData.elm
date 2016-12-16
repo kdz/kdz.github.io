@@ -141,7 +141,7 @@ awards =
       , details =
             [ "Finalist (fourth and final round) of a four-month long hackathon addressing the Ebola outbreak" ]
       , repo = Just "http://github.com/kdz/ebohub"
-      , demo = Just "http://ebohub.herokuapp.com"
+      , demo = Just "http://ebohub.7insights.com"
       , more = Nothing
       }
     ]
@@ -223,7 +223,7 @@ projects =
             ]
       , more = Just "https://www.youtube.com/watch?v=OvI7ufNF1fw"
       , repo = Just "http://github.com/kdz/ebohub"
-      , demo = Just "http://ebohub.herokuapp.com"
+      , demo = Just "http://ebohub.7insights.com"
       }
     , { name = "Assembly Language Simulator in Elm"
       , role = "Sole Developer"
