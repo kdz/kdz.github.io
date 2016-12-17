@@ -14,6 +14,6 @@ ifeq ($(COMMIT),)
 else
 	mv HomePage.html index.html
 	git add .
-	git commit -m $(COMMIT)
+	git commit -m "$(COMMIT)"
 	git push
 endif
