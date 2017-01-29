@@ -164,7 +164,7 @@ work =
     , { name = "Columbia University, Computation in Python: COMS1006"
       , role = "Teaching Assistant"
       , location = "New York, NY"
-      , dates = "Fall 2015 - present"
+      , dates = "Fall 2015 - 2016"
       , details =
             [ "Weekly office-hours, guide recitations, design problem sets, under Dr. Adam Cannon"
             ]
@@ -234,7 +234,7 @@ projects =
             ]
       , more = Nothing
       , repo = Nothing
-      , demo = Just "demos/elmassembly/index.html"
+      , demo = Just "http://kdz.github.io/demos/elmassembly/index.html"
       }
     , { name = "Executable domain models"
       , role = "Personal Project"
