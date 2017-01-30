@@ -118,7 +118,9 @@ awards =
       , details =
             [ "Winner of Delphix 2015 Annual Technology Scholarship for Women"
             ]
-      , more = Just "http://goo.gl/UFN80c"
+      , more =
+            Nothing
+            -- Just "http://goo.gl/UFN80c" --
       , repo = Nothing
       , demo = Nothing
       }
